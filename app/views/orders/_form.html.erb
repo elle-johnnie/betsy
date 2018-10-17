@@ -1,0 +1,62 @@
+<%= form_with(model: order, local: true) do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cust_name %>
+    <%= form.text_field :cust_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cust_email %>
+    <%= form.text_field :cust_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mailing_address %>
+    <%= form.number_field :mailing_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cc_name %>
+    <%= form.text_field :cc_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cc_digit %>
+    <%= form.number_field :cc_digit %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cc_expiration %>
+    <%= form.date_select :cc_expiration %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cc_cvv %>
+    <%= form.number_field :cc_cvv %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cc_zip %>
+    <%= form.number_field :cc_zip %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
