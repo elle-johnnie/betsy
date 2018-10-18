@@ -12,7 +12,7 @@ require 'csv'
 # doesn't currently check for if titles are unique against each other
 
 CSV.open('db/product_seeds.csv', "w", :write_headers=> true,
-         :headers => ["category", "prod_name", "description", "price", "inv_qty"]) do |csv|
+         :headers => ["category", "prod_name", "description", "price", "inv_qty", "active", "image"]) do |csv|
 
   30.times do
     category = %w(birthday wedding chocolate vanilla buttercream).sample
@@ -20,8 +20,10 @@ CSV.open('db/product_seeds.csv', "w", :write_headers=> true,
     description = Faker::Coffee.notes
     price = Faker::Number.decimal(2, 2)
     inv_qty = Faker::Number.between(0, 30)
+    active = Faker::Boolean.boolean
+    image = Faker::LoremPixel.image("50x60", false, 'food')
 
-    csv << [category, prod_name, description, price, inv_qty]
+    csv << [category, prod_name, description, price, inv_qty, active, image]
   end
 end
 
