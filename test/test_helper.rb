@@ -1,7 +1,10 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
-require "minitest/rails"require "minitest/reporters"  # for Colorized output
+require "minitest/rails"
+require "minitest/reporters" # for Colorized output
+require 'faker'
+
 #  For colorful output!
 Minitest::Reporters.use!(
   Minitest::Reporters::SpecReporter.new,
@@ -22,3 +25,8 @@ class ActiveSupport::TestCase
   fixtures :all
   # Add more helper methods to be used by all tests here...
 end
+
+class ActiveSupport::TestCase
+  include FactoryBot::Syntax::Methods
+end
+

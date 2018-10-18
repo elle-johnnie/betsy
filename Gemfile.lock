@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/stympy/faker
+  revision: 069817eb06825b10f8e74f83ef2c50a001b72d96
+  specs:
+    faker (1.9.1)
+      i18n (>= 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -88,8 +95,6 @@ GEM
     factory_bot_rails (4.11.1)
       factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
-    faker (1.9.1)
-      i18n (>= 0.7)
     ffi (1.9.25)
     formatador (0.2.5)
     globalid (0.4.1)
@@ -257,7 +262,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   factory_bot_rails
-  faker
+  faker!
   guard
   guard-minitest
   jbuilder (~> 2.5)
