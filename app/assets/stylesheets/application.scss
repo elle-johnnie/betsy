@@ -16,3 +16,21 @@
 @import "bootstrap";
 /* Import scss content */
 @import "**/*";
+
+body {
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.fa-github-square {
+    font-size: 3em;
+    color: white;
+}
+
+
+.right {
+    padding-right: 10px;
+}
