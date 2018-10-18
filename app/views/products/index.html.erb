@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-
-
+<h3 class="h3">Products</h3>
+<div class="parent">
 <% @products.each do |product| %>
-<div class="container">
-    <h3 class="h3">Products</h3>
+<div class="child">
+
     <div class="row">
-        <div class="col-md-3 col-sm-6">
+        <div >
             <div class="product-grid3">
                 <div class="product-image3">
                     <img src="<%= product.image  %>" class="pic-1">
@@ -33,10 +33,15 @@
                         <li class="fa fa-star disable"></li>
                         <li class="fa fa-star disable"></li>
                     </ul>
-                    <% end %>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<% end %>
+</div>
+
+
+
 <hr>

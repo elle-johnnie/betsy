@@ -70,6 +70,8 @@ group :test do
 
   # Bakesy installed test gems
   gem 'factory_bot_rails'
+  gem 'factory_bot'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

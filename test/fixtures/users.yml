@@ -2,10 +2,10 @@
 
 one:
   uid: 1
-  username: MyString
-  email: MyString
+  username: Lady Bird
+  email: lbird@ada.
 
 two:
-  uid: 1
+  uid: 2
   username: MyString
   email: MyString
