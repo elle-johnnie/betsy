@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+<<<<<<< HEAD
   has_many :order_items
 
 
@@ -17,4 +18,7 @@ class Order < ApplicationRecord
     # clears current cart ()
 
   end
+=======
+  has_many :products
+>>>>>>> 7c43e0f5f0607301dda2104e44013f217f0a8853
 end

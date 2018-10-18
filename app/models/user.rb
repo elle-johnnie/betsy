@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+<<<<<<< HEAD
 
 
 
@@ -31,4 +32,8 @@ class User < ApplicationRecord
   end
 
   
+=======
+  validates :username, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+>>>>>>> 7c43e0f5f0607301dda2104e44013f217f0a8853
 end
