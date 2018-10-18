@@ -19,6 +19,7 @@
 
 body {
   padding-bottom: 20px;
+  margin-bottom: 60px;
 }
 
 .navbar {
@@ -26,11 +27,23 @@ body {
 }
 
 .fa-github-square {
-    font-size: 3em;
+    font-size: 2em;
+    color: lightgrey;
+}
+
+.fa-github-square:hover {
     color: white;
 }
 
+.fa-sign-in-alt {
+  font-size: 2em;
+  color: lightgrey;
+}
+
+.fa-sign-in-alt:hover {
+  color: white;
+}
 
 .right {
-    padding-right: 10px;
+    padding-right: 13px;
 }
