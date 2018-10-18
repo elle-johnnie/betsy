@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_17_234540) do
+ActiveRecord::Schema.define(version: 2018_10_18_174629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2018_10_17_234540) do
     t.integer "inv_qty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
+    t.boolean "active", default: true
   end
 
   create_table "reviews", force: :cascade do |t|

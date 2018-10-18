@@ -1,31 +1,31 @@
-category,prod_name,description,price,inv_qty
-birthday,Upside Down Pineapple Cake Peanuts Banana,"pointed, watery, barley, cherry, white pepper",88.62,1
-chocolate,Frozen Yogurt Berry Compote French Vanilla,"complex, full, mango, black currant, black cherry",36.46,27
-buttercream,Sundae Glaze Red Velvet,"juicy, slick, bakers chocolate, soil, snow pea",57.67,10
-wedding,Key Lime Pie Chocolate Sprinkles Chocolate Chip Cookie Dough,"dry, silky, ginger, cocoa powder, passion fruit",51.81,7
-buttercream,Brownie Butterscotch Syrup Rocky Road,"complex, watery, papaya, mango, graham cracker",88.19,20
-buttercream,Pudding Chocolate Syrup Red Velvet,"soft, syrupy, peach, meyer lemon, nutmeg",76.01,14
-buttercream,Trifle Cheesecake Bites Blondie,"wild, silky, maple syrup, cashew, mango",41.72,30
-wedding,Cake Pop Bacon Oatmeal,"mild, velvety, meyer lemon, lemonade, sweet pea",42.66,19
-vanilla,Cake Pop Chocolate Sprinkles Apple,"dull, silky, pineapple, nectarine, fresh wood",34.86,19
-buttercream,Cobbler Whipped Cream Butterscotch,"dense, syrupy, mango, dates, butter",70.22,18
-chocolate,Cake Cookie Dough Oatmeal,"tart, juicy, hazelnut, kiwi, kiwi",39.05,30
-birthday,Sweet Bread Caramel Butterscotch,"delicate, tea-like, musty, sage, clove",59.23,28
-vanilla,Fruit Cake Chocolate Syrup Apple,"crisp, syrupy, granola, snow pea, curry",73.23,22
-chocolate,Ice Cream Cake Peanut Butter Banana,"quick, round, carmel, fresh wood, cranberry",45.42,20
-birthday,Cake Chocolate Chips Pumpkin,"astringent, round, cream, graham cracker, tobacco",29.75,1
-wedding,Cupcake Granola Funfetti,"astringent, silky, raspberry, mango, cantaloupe",93.03,14
-vanilla,Frozen Yogurt Caramel Butterscotch,"complex, velvety, maple syrup, pineapple, cocoa powder",58.87,25
-buttercream,Pudding Chocolate Syrup Peanut Butter,"dirty, round, tobacco, ginger, curry",47.39,17
-buttercream,Sweet Bread Glaze Coconut,"faint, round, mango, mango, leafy greens",85.94,3
-buttercream,Parfait Granola Butterscotch,"complex, big, butter, cream, bittersweet chocolate",72.19,10
-vanilla,Sweet Bread Chocolate Sprinkles Chocolate Chip Cookie Dough,"deep, full, orange, nutella, concord grape",40.17,28
-vanilla,Brownie Caramel Espresso,"structured, silky, hops, rubber, raspberry",19.26,0
-birthday,Ice Cream Gummy Bears Oatmeal,"soft, syrupy, rose hips, blueberry, vanilla",10.66,6
-chocolate,Upside Down Pineapple Cake Caramel Rocky Road,"deep, smooth, green pepper, clove, leathery",96.82,11
-birthday,Sundae Granola Caramel,"dirty, round, orange creamsicle, meyer lemon, lemon verbena",88.94,24
-vanilla,Parfait Bacon Blondie,"pointed, creamy, nutmeg, walnut, corriander",63.12,0
-chocolate,Cobbler Marshmallows Banana,"mild, tea-like, passion fruit, walnut, potato defect!",95.57,26
-chocolate,Pie Bacon Mint Chocolate Chip,"astringent, watery, musty, mushroom, peanut",19.44,5
-buttercream,Cheesecake Chocolate Syrup French Vanilla,"complex, smooth, hops, cola, sundried tomato",60.83,9
-birthday,Cupcake Cinnamon Apple,"mild, watery, lemonade, maple syrup, white pepper",77.82,5
+category,prod_name,description,price,inv_qty,active,image
+buttercream,Cookie Toffee Bits Almond,"complex, slick, lemongrass, smokey, watermelon",43.57,0,true,https://lorempixel.com/50/60/food
+buttercream,Doughnut Gummy Bears Mint Chocolate Chip,"quick, velvety, hay, mandarin, coconut",81.33,5,true,https://lorempixel.com/50/60/food
+wedding,Upside Down Pineapple Cake Frosting Red Velvet,"mild, silky, butter, lychee, leafy greens",77.14,1,true,https://lorempixel.com/50/60/food
+vanilla,Trifle Powdered Sugar Vanilla,"complex, big, carmel, watermelon, potato defect!",73.02,27,false,https://lorempixel.com/50/60/food
+vanilla,Doughnut Bacon Cherry,"deep, syrupy, pecan, soy sauce, banana",34.88,29,true,https://lorempixel.com/50/60/food
+wedding,Doughnut Whipped Cream Cherry,"unbalanced, chewy, leafy greens, raisin, green apple",30.44,29,false,https://lorempixel.com/50/60/food
+chocolate,Cake Frosting Butter Pecan,"dense, big, mandarin, carbon, white grape",46.14,30,true,https://lorempixel.com/50/60/food
+vanilla,Cobbler Granola Chocolate Chip Cookie Dough,"unbalanced, full, honeydew, toast, clementine",67.49,22,true,https://lorempixel.com/50/60/food
+wedding,Cake Chocolate Syrup Red Velvet,"clean, velvety, cacao nibs, hay, lemon",35.27,21,true,https://lorempixel.com/50/60/food
+wedding,Frozen Yogurt Butterscotch Syrup Blondie,"juicy, big, tomato, barley, bergamot",59.86,4,true,https://lorempixel.com/50/60/food
+wedding,Pie Cinnamon Cheesecake,"clean, smooth, potato defect!, cola, carmel",72.07,22,true,https://lorempixel.com/50/60/food
+birthday,Cupcake Whipped Cream Apple,"pointed, silky, carbon, blueberry, banana",90.76,21,true,https://lorempixel.com/50/60/food
+chocolate,Key Lime Pie Berry Compote Oatmeal,"unbalanced, creamy, graham cracker, bittersweet chocolate, brown sugar",26.28,18,true,https://lorempixel.com/50/60/food
+birthday,Key Lime Pie Cookie Dough Strawberry,"complex, big, marshmallow, fresh bread, lime",27.37,27,false,https://lorempixel.com/50/60/food
+buttercream,Sweet Bread Chocolate Sprinkles Vanilla,"dry, tea-like, rubber, milk chocolate, fresh wood",74.26,23,false,https://lorempixel.com/50/60/food
+vanilla,Pie Chocolate Sprinkles Caramel,"clean, velvety, sage, tomato, squash",55.03,4,true,https://lorempixel.com/50/60/food
+vanilla,Pudding Butterscotch Syrup Espresso,"dirty, watery, grassy, potato defect!, musty",46.93,11,true,https://lorempixel.com/50/60/food
+vanilla,Parfait Peanuts Peanut Butter,"pointed, tea-like, mango, cedar, jasmine",61.43,6,false,https://lorempixel.com/50/60/food
+birthday,Coffee Cake Chocolate Syrup Mint Chocolate Chip,"sharp, tea-like, lemongrass, dates, coconut",21.51,4,true,https://lorempixel.com/50/60/food
+buttercream,Upside Down Pineapple Cake Toffee Bits Pistachio,"faint, round, clementine, nutmeg, medicinal",34.96,28,true,https://lorempixel.com/50/60/food
+birthday,Doughnut Chocolate Syrup Mint Chocolate Chip,"unbalanced, smooth, quakery, butter, cacao nibs",26.61,0,true,https://lorempixel.com/50/60/food
+wedding,Cake Chocolate Syrup Apple,"vibrant, chewy, rye, milk chocolate, smokey",18.21,22,true,https://lorempixel.com/50/60/food
+vanilla,Ice Cream Walnuts Apple,"soft, syrupy, fresh bread, honeydew, cashew",39.06,26,false,https://lorempixel.com/50/60/food
+birthday,Cheesecake Rainbow Sprinkles Cookies 'n Cream,"soft, creamy, bittersweet chocolate, tomato, vanilla",13.66,9,true,https://lorempixel.com/50/60/food
+vanilla,Pie Rainbow Sprinkles Almond,"dirty, round, honey, graham cracker, medicinal",77.43,23,false,https://lorempixel.com/50/60/food
+wedding,Parfait Chocolate Sprinkles Neapolitan,"dull, smooth, sweet pea, lemonade, vanilla",62.62,6,false,https://lorempixel.com/50/60/food
+chocolate,Cheesecake Peanuts Salted Caramel,"crisp, creamy, white pepper, granola, clementine",66.31,27,false,https://lorempixel.com/50/60/food
+birthday,Cheesecake Frosting Rocky Road,"lingering, tea-like, liquorice, cinnamon, cocoa powder",44.35,28,false,https://lorempixel.com/50/60/food
+vanilla,Fruit Cake Caramel Funfetti,"rounded, big, apricot, sweet pea, kiwi",65.43,29,false,https://lorempixel.com/50/60/food
+birthday,Cheesecake Chocolate Sprinkles Pistachio,"juicy, silky, lemon, granola, green apple",74.98,11,true,https://lorempixel.com/50/60/food
