@@ -25,5 +25,17 @@
   <%= @product.inv_qty %>
 </p>
 
+<%= form_with model: @order_item do |f| %>
+  <%= f.label :qty %>
+  <%= f.text_field :qty %>
+
+  <%= f.label :product_id %>
+  <%= f.text_field :product_id, :value => @product.id %>
+
+  <%= f.submit %>
+<% end %>
+
+<%= link_to 'Add to Cart', order_items_path, method: :post %>
+
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

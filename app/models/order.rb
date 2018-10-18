@@ -1,17 +1,10 @@
 class Order < ApplicationRecord
-
-
+  has_many :order_items
 
 
 
   def total_price
-    # self.products.each multiply price by qty
-
-    # sum
-
-    # apply tax?
-
-    # return total
+    order_items.collect { |order_item| order_item.quantity * order_item.unit_price }.sum
 
   end
 
