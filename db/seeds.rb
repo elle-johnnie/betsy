@@ -8,7 +8,7 @@
 require 'csv'
 
 ORDER_FILE = Rails.root.join('db', 'order_seeds.csv')
-puts "Loading raw driver data from #{ORDER_FILE}"
+puts "Loading raw order data from #{ORDER_FILE}"
 
 order_failures = []
 CSV.foreach(ORDER_FILE, :headers => true) do |row|
@@ -34,8 +34,10 @@ end
 puts "Added #{Order.count} order records"
 puts "#{order_failures.length} order failed to save"
 
+
+
 PRODUCT_FILE = Rails.root.join('db', 'product_seeds.csv')
-puts "Loading raw driver data from #{PRODUCT_FILE}"
+puts "Loading raw review data from #{PRODUCT_FILE}"
 
 product_failures = []
 CSV.foreach(PRODUCT_FILE, :headers => true) do |row|
@@ -45,6 +47,8 @@ CSV.foreach(PRODUCT_FILE, :headers => true) do |row|
   product.description = row['description']
   product.price =  row['price']
   product.inv_qty = row['inv_qty']
+  product.active = row['active']
+  product.image = row['image']
   successful = product.save
   if !successful
     product_failures << product
@@ -57,10 +61,10 @@ end
 puts "Added #{Product.count} product records"
 puts "#{product_failures.length} product failed to save"
 
-REVIEW_FILE = Rails.root.join('db', 'review_seeds.csv')
-puts "Loading raw driver data from #{REVIEW_FILE}"
+REVIEW_FILE = Rails.root.join('db','review_seeds.csv')
+puts "Loading raw review data from #{REVIEW_FILE}"
 
-product_failures = []
+review_failures = []
 CSV.foreach(REVIEW_FILE, :headers => true) do |row|
   review = Review.new
   review.rating = row['rating']
