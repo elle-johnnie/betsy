@@ -11,52 +11,52 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :status %>
-    <%= form.text_field :status %>
+    <%= form.text_field :status, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :cust_name %>
-    <%= form.text_field :cust_name %>
+  <div class="form-group">
+    <%= form.label "Name" %>
+    <%= form.text_field :cust_name, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :cust_email %>
-    <%= form.text_field :cust_email %>
+  <div class="form-group">
+    <%= form.label "Email" %>
+    <%= form.text_field :cust_email, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :mailing_address %>
-    <%= form.number_field :mailing_address %>
+    <%= form.number_field :mailing_address, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :cc_name %>
-    <%= form.text_field :cc_name %>
+  <div class="form-group">
+    <%= form.label "Name on Card" %>
+    <%= form.text_field :cc_name, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :cc_digit %>
-    <%= form.number_field :cc_digit %>
+  <div class="form-group">
+    <%= form.label "Credit Card Number" %>
+    <%= form.number_field :cc_digit, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :cc_expiration %>
-    <%= form.date_select :cc_expiration %>
+  <div class="form-group">
+    <%= form.label "Expiration Date" %>
+    <%= form.date_select :cc_expiration, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :cc_cvv %>
-    <%= form.number_field :cc_cvv %>
+  <div class="form-group">
+    <%= form.label "CVV" %>
+    <%= form.number_field :cc_cvv, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :cc_zip %>
-    <%= form.number_field :cc_zip %>
+  <div class="form-group">
+    <%= form.label "Zip Code" %>
+    <%= form.number_field :cc_zip, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit class: "btn btn-primary"   %>
   </div>
 <% end %>
