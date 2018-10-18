@@ -16,3 +16,34 @@
 @import "bootstrap";
 /* Import scss content */
 @import "**/*";
+
+body {
+  padding-bottom: 20px;
+  margin-bottom: 60px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.fa-github-square {
+    font-size: 2em;
+    color: lightgrey;
+}
+
+.fa-github-square:hover {
+    color: white;
+}
+
+.fa-sign-in-alt {
+  font-size: 2em;
+  color: lightgrey;
+}
+
+.fa-sign-in-alt:hover {
+  color: white;
+}
+
+.right {
+    padding-right: 13px;
+}
