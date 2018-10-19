@@ -27,7 +27,7 @@
 
 <%= form_with model: @order_item do |f| %>
   <%= f.label :qty %>
-  <%= f.text_field :qty %>
+  <%= f.select :qty, (1..@product.inv_qty).to_a %>
 
   <%= f.hidden_field :product_id, :value => @product.id %>
 
