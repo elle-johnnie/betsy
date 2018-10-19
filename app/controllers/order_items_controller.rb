@@ -17,11 +17,9 @@ class OrderItemsController < ApplicationController
     @order = current_order
     # check if item is in stock
     @order_item = @order.order_items.find(params[:id])
-
     @order_item.update_attributes(order_item_params)
     @order.save
-    session[:order_id] = @order.id
-
+    
     redirect_to cart_path(@order.id)
 
   end

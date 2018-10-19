@@ -5,6 +5,7 @@
       <th>Item</th>
       <th>Price</th>
       <th>Quantity</th>
+      <th></th>
       <th>Subtotal</th>
     </tr>
   </thead>
@@ -13,13 +14,15 @@
     <tr>
       <td><%= link_to "#{order_item.product.prod_name}", product_path(order_item.product.id) %></td>
       <td><%= order_item.product.price %></td>
+
       <%= form_with model: order_item do |f| %>
       <td><%= f.select :qty, (1..order_item.product.inv_qty).to_a %></td>
           <%= f.hidden_field :product_id, :value => order_item.product.id %>
-      <td><%= order_item.subtotal %></td>
-      <td><%= f.submit %>
-      <td><%= link_to "Update", order_item_path(order_item.id), method: :patch %></td>
+
+      <td><%= f.submit 'Update' %></td>
         <% end %>
+
+      <td><%= order_item.subtotal %></td>
       <td><%= link_to "Remove", order_item_path(order_item.id), method: :delete %></td>
     </tr>
     <% end %>
