@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
         render :new
       end
     end
-  end
+
 
   # PATCH/PUT /orders/1
   def update
