@@ -1,4 +1,16 @@
 rating,description,product_id
+<<<<<<< HEAD
+2,"Oddly it smelled like faint, smooth, sweet pea, black pepper, milk chocolate",9
+1,"Oddly it smelled like dirty, syrupy, mandarin, hazelnut, mushroom",8
+4,"Deliciously flavored sharp, big, bergamot, barley, red grape",1
+2,"Oddly it smelled like pointed, big, mushroom, mint, cinnamon",9
+5,"Tasted like tart, coating, sundried tomato, coconut, cashew",12
+3,"Tasted like wild, slick, cherry, rose hips, lemon verbena",4
+3,"Deliciously flavored pointed, silky, cashew, almond, almond",10
+2,"Tasted like dense, chewy, sage, hops, dill",5
+3,"Oddly it smelled like tart, chewy, dill, green grape, granola",6
+5,"Oddly it smelled like unbalanced, velvety, hops, golden raisin, musty",7
+=======
 3,"Oddly it smelled like deep, tea-like, clementine, sugar cane, passion fruit",3
 5,"Deliciously flavored pointed, juicy, grapefruit, marshmallow, squash",13
 4,"Oddly it smelled like sharp, full, bittersweet chocolate, green grape, quakery",11
@@ -9,3 +21,4 @@ rating,description,product_id
 1,"Oddly it smelled like rounded, juicy, maple syrup, honeysuckle, jasmine",12
 2,"Deliciously flavored rounded, velvety, corriander, lime, squash",11
 2,"Deliciously flavored pointed, velvety, red apple, lemon verbena, green apple",11
+>>>>>>> ae65e5f5cf0100ca77091dc42e417ddcf8b5f0c8

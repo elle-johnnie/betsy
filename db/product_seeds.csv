@@ -1,4 +1,36 @@
 prod_name,user_id,description,price,inv_qty,active,image
+<<<<<<< HEAD
+Cobbler Butterscotch Syrup Salted Caramel,1,"balanced, big, leathery, cashew, banana",17.93,14,false,https://lorempixel.com/200/300/food
+Cake Pop Mocha Drizzle Pistachio,4,"wild, full, clove, pecan, grapefruit",34.93,16,true,https://lorempixel.com/200/300/food
+Cake Mocha Drizzle French Vanilla,2,"dirty, big, black-tea, cream, quakery",99.04,15,true,https://lorempixel.com/200/300/food
+Brownie Gummy Bears Rocky Road,2,"dense, juicy, black cherry, fresh bread, coconut",85.48,22,true,https://lorempixel.com/200/300/food
+Fruit Cake Powdered Sugar Butterscotch,4,"complex, smooth, honey, corriander, green pepper",17.93,2,true,https://lorempixel.com/200/300/food
+Coffee Cake Cheesecake Bites Funfetti,4,"unbalanced, chewy, green apple, sundried tomato, black-tea",72.12,2,true,https://lorempixel.com/200/300/food
+Trifle Chocolate Syrup Vanilla,1,"muted, tea-like, honey, lemon, tomato",91.77,3,false,https://lorempixel.com/200/300/food
+Sweet Bread Powdered Sugar Lemon,2,"dry, velvety, green apple, hops, lime",26.16,23,false,https://lorempixel.com/200/300/food
+Cheesecake Berry Compote Blondie,4,"clean, creamy, dill, dates, jasmine",77.23,8,false,https://lorempixel.com/200/300/food
+Cupcake Marshmallows Butter Pecan,4,"dry, smooth, black-tea, honeysuckle, white pepper",21.23,21,true,https://lorempixel.com/200/300/food
+Pie Cookie Dough Caramel,3,"delicate, silky, toast, sundried tomato, milk chocolate",76.19,25,true,https://lorempixel.com/200/300/food
+Sundae Walnuts Butter Pecan,1,"muted, velvety, rose hips, magnolia, ginger",30.24,3,true,https://lorempixel.com/200/300/food
+Pie Butterscotch Syrup Butterscotch,3,"bright, coating, musty, grassy, dill",42.11,17,true,https://lorempixel.com/200/300/food
+Doughnut Granola Mint Chocolate Chip,2,"bright, creamy, milk chocolate, marzipan, bakers chocolate",42.14,30,true,https://lorempixel.com/200/300/food
+Ice Cream Chocolate Chips Butter Pecan,2,"muted, silky, mint, peach, cocoa powder",43.21,5,false,https://lorempixel.com/200/300/food
+Doughnut Berry Compote Apple,2,"wild, juicy, grapefruit, lavender, vanilla",90.84,12,false,https://lorempixel.com/200/300/food
+Cake Chocolate Chips Coconut,1,"clean, velvety, kiwi, figs, cedar",39.53,5,true,https://lorempixel.com/200/300/food
+Cupcake Glaze Apple,1,"clean, syrupy, lavender, barley, passion fruit",40.34,28,false,https://lorempixel.com/200/300/food
+Cobbler Bacon Cheesecake,4,"unbalanced, syrupy, musty, potato defect!, cocoa powder",25.75,20,true,https://lorempixel.com/200/300/food
+Trifle Powdered Sugar Vanilla,3,"delicate, silky, mint, cola, cantaloupe",46.87,18,false,https://lorempixel.com/200/300/food
+Cheesecake Walnuts Lemon,4,"muted, tea-like, nectarine, peanut, bergamot",72.66,30,false,https://lorempixel.com/200/300/food
+Frozen Yogurt Butterscotch Syrup Neapolitan,4,"dull, tea-like, rubber, marzipan, black currant",39.42,7,false,https://lorempixel.com/200/300/food
+Cheesecake Walnuts Mint Chocolate Chip,4,"bright, big, almond, maple syrup, bakers chocolate",30.68,7,true,https://lorempixel.com/200/300/food
+Trifle Butterscotch Syrup Cheesecake,3,"pointed, silky, peanut, milk chocolate, lime",35.69,11,false,https://lorempixel.com/200/300/food
+Cobbler Toffee Bits Rocky Road,2,"astringent, creamy, papaya, sweet pea, snow pea",26.22,7,false,https://lorempixel.com/200/300/food
+Cookie Berry Compote Cherry,2,"dirty, smooth, honeysuckle, green grape, red grape",68.57,9,true,https://lorempixel.com/200/300/food
+Cookie Bacon Vanilla,1,"rounded, full, bergamot, tamarind, cherry",74.82,10,true,https://lorempixel.com/200/300/food
+Coffee Cake Cheesecake Bites Mint Chocolate Chip,2,"dirty, tea-like, brown sugar, black pepper, tobacco",70.76,26,false,https://lorempixel.com/200/300/food
+Key Lime Pie Cookie Dough Red Velvet,4,"structured, velvety, black pepper, burnt sugar, lemonade",35.45,2,true,https://lorempixel.com/200/300/food
+Brownie Gummy Bears Neapolitan,2,"dry, syrupy, orange blossom, papaya, olive",84.08,10,false,https://lorempixel.com/200/300/food
+=======
 Fruit Cake Chocolate Sprinkles Butterscotch,3,"quick, syrupy, mushroom, burnt sugar, milk chocolate",61.17,21,true,https://lorempixel.com/200/300/food
 Trifle Chocolate Chips Cherry,1,"sharp, round, green grape, plum, marzipan",81.33,5,false,https://lorempixel.com/200/300/food
 Coffee Cake Caramel Chocolate Chip Cookie Dough,4,"dry, juicy, orange blossom, ginger, passion fruit",24.69,18,false,https://lorempixel.com/200/300/food
@@ -29,3 +61,4 @@ Cupcake Whipped Cream Peanut Butter,1,"structured, tea-like, maple syrup, carmel
 Ice Cream Cake Chocolate Syrup Cookies 'n Cream,2,"mild, full, molasses, clementine, magnolia",33.12,1,false,https://lorempixel.com/200/300/food
 Pudding Gummy Bears Almond,3,"balanced, smooth, molasses, honeysuckle, sage",80.17,11,false,https://lorempixel.com/200/300/food
 Frozen Yogurt Cookie Dough Banana,1,"crisp, syrupy, sage, honey, green grape",28.84,8,false,https://lorempixel.com/200/300/food
+>>>>>>> ae65e5f5cf0100ca77091dc42e417ddcf8b5f0c8
