@@ -6,20 +6,24 @@
       <th>Price</th>
       <th>Quantity</th>
       <th>Subtotal</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-    <% @order_items.each do |item| %>
+    <% @order_items.each do |order_item| %>
     <tr>
-      <td><%= item.product.prod_name %></td>
-      <td><%= item.product.price %></td>
-      <%= form_with model: @order_item do |f| %>
-      <td><%= f.select :qty, (1..item.product.inv_qty).to_a %></td>
-          <%= f.hidden_field :product_id, :value => item.product.id %>
-      <td><%= item.subtotal %></td>
-      <td><%= f.submit "Update" %></td>
+      <td><%= link_to "#{order_item.product.prod_name}", product_path(order_item.product.id) %></td>
+      <td><%= order_item.product.price %></td>
+
+      <%= form_with model: order_item do |f| %>
+      <td><%= f.select :qty, (1..order_item.product.inv_qty).to_a %>
+          <%= f.hidden_field :product_id, :value => order_item.product.id %>
+          <%= f.submit 'Update' %>
         <% end %>
-      <td><%= link_to "Remove", order_item_path(item.id), method: :delete %></td>
+      </td>
+
+      <td><%= order_item.subtotal %></td>
+      <td><%= link_to "Remove", order_item_path(order_item.id), method: :delete %></td>
     </tr>
     <% end %>
   </tbody>
