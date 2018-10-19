@@ -1,6 +1,10 @@
 class Product < ApplicationRecord
   has_many :order_items
 
+  validates :prod_name, presence: true, uniqueness: true
+  validates :prod_name, presence: true, numericality: { only_integer: true, greater_than: 0}
+  belongs_to :users
+
 
 
 
@@ -11,4 +15,7 @@ class Product < ApplicationRecord
 
     # return sum / num
   end
+
+
+
 end
