@@ -72,7 +72,7 @@ describe Product do
       product = products(:one)
       product2 = products(:one)
 
-      expect(product2.name.valid?).must_equal false
+      expect(product2.prod_name.valid?).must_equal false
     end
   end
 
