@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   has_many :products
   has_many :order_items
+  has_and_belongs_to_many :products
 
 
 
