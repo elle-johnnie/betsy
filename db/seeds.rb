@@ -120,8 +120,8 @@ puts "#{review_failures.length} review failed to save"
 # Order.first.order_items << Product.sample(3)
 # #
 # #Populate categories_products table
-# Product.all.each do
-#   Product.categories << Category.all.sample
-# end
-# # add 3 items to first order
-# Product.first.categories << Category.sample(2)
+Product.all.each do
+  Product.categories << Category.all.sample
+end
+# add 3 items to first order
+Product.first.categories << Category.sample(2)
