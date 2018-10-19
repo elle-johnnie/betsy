@@ -6,6 +6,55 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'csv'
+USER_FILE = Rails.root.join('db', 'user_seeds.csv')
+puts "Loading raw review data from #{USER_FILE}"
+
+user_failures = []
+CSV.foreach(USER_FILE, :headers => true) do |row|
+  user = User.new
+  user.uid = row['uid']
+  user.username = row['username']
+  user.email = row['email']
+  successful = user.save
+  if !successful
+    review_failures << user
+    puts "Failed to save user: #{user.inspect}"
+    puts "Error: #{user.errors}"
+  else
+    puts "Created user: #{user.inspect}"
+  end
+end
+
+puts "Added #{User.count} user records"
+puts "#{user_failures.length} user failed to save"
+
+
+
+PRODUCT_FILE = Rails.root.join('db', 'product_seeds.csv')
+puts "Loading raw review data from #{PRODUCT_FILE}"
+
+product_failures = []
+CSV.foreach(PRODUCT_FILE, :headers => true) do |row|
+  product = Product.new
+  product.prod_name = row['prod_name']
+  product.user_id = row['user_id']
+  product.description = row['description']
+  product.price =  row['price']
+  product.inv_qty = row['inv_qty']
+  product.active = row['active']
+  product.image = row['image']
+  successful = product.save
+  if !successful
+    product_failures << product
+    puts "Failed to save product: #{product.inspect}"
+    puts "Error: #{product.errors}"
+  else
+    puts "Created product: #{product.inspect}"
+  end
+end
+
+puts "Added #{Product.count} product records"
+puts "#{product_failures.length} product failed to save"
 
 ORDER_FILE = Rails.root.join('db', 'order_seeds.csv')
 puts "Loading raw order data from #{ORDER_FILE}"
@@ -16,7 +65,7 @@ CSV.foreach(ORDER_FILE, :headers => true) do |row|
   order.status = row['status']
   order.cust_name = row['cust_name']
   order.cust_email = row['cust_email']
-  order.mailing_address =  row['mailing_address']
+  order.mailing_address = row['mailing_address']
   order.cc_name = row['cc_name']
   order.cc_digit = row['cc_digit']
   order.cc_expiration = row['cc_expiration']
@@ -26,6 +75,7 @@ CSV.foreach(ORDER_FILE, :headers => true) do |row|
   if !successful
     order_failures << order
     puts "Failed to save order: #{order.inspect}"
+    puts "Error: #{order.errors}"
   else
     puts "Created order: #{order.inspect}"
   end
@@ -36,32 +86,9 @@ puts "#{order_failures.length} order failed to save"
 
 
 
-PRODUCT_FILE = Rails.root.join('db', 'product_seeds.csv')
-puts "Loading raw review data from #{PRODUCT_FILE}"
 
-product_failures = []
-CSV.foreach(PRODUCT_FILE, :headers => true) do |row|
-  product = Product.new
-  product.category = row['category']
-  product.prod_name = row['prod_name']
-  product.description = row['description']
-  product.price =  row['price']
-  product.inv_qty = row['inv_qty']
-  product.active = row['active']
-  product.image = row['image']
-  successful = product.save
-  if !successful
-    product_failures << product
-    puts "Failed to save product: #{product.inspect}"
-  else
-    puts "Created product: #{product.inspect}"
-  end
-end
 
-puts "Added #{Product.count} product records"
-puts "#{product_failures.length} product failed to save"
-
-REVIEW_FILE = Rails.root.join('db','review_seeds.csv')
+REVIEW_FILE = Rails.root.join('db', 'review_seeds.csv')
 puts "Loading raw review data from #{REVIEW_FILE}"
 
 review_failures = []
@@ -69,10 +96,12 @@ CSV.foreach(REVIEW_FILE, :headers => true) do |row|
   review = Review.new
   review.rating = row['rating']
   review.description = row['description']
+  review.product_id = row['product_id']
   successful = review.save
   if !successful
     review_failures << review
     puts "Failed to save review: #{review.inspect}"
+    puts "Error: #{review.errors}"
   else
     puts "Created review: #{review.inspect}"
   end
@@ -80,3 +109,19 @@ end
 
 puts "Added #{Review.count} review records"
 puts "#{review_failures.length} review failed to save"
+
+
+
+
+#Populate order_items table
+
+# OrderItem.create(order_id: 2, product_id: 1, qty: 1, shipped: false)
+# add 3 items to first order
+# Order.first.order_items << Product.sample(3)
+# #
+# #Populate categories_products table
+# Product.all.each do
+#   Product.categories << Category.all.sample
+# end
+# # add 3 items to first order
+# Product.first.categories << Category.sample(2)

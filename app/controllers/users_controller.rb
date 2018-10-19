@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    @user = User.find_by(id: params[:id])
+    render_404 unless @user
   end
 
   # GET /users/new
@@ -35,4 +37,10 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:uid, :username, :email, :id)
     end
+
+  # GET /users/1/edit
+  def edit
+  end
+
+
 end

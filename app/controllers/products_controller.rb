@@ -1,3 +1,5 @@
+require 'pry'
+
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
@@ -9,7 +11,12 @@ class ProductsController < ApplicationController
   # GET /products/1
 
   def show
-    @order_item = current_order.order_items.new
+    @order_item = current_order.order_items.find_by(product_id: params[:id])
+
+    if @order_item.nil?
+      @order_item = current_order.order_items.new
+    end
+  
   end
 
   # GET /products/new
@@ -61,6 +68,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:category, :prod_name, :description, :price, :inv_qty)
+      params.require(:product).permit(:prod_name, :description, :price, :inv_qty, category_ids: [])
     end
 end

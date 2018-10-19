@@ -1,42 +1,49 @@
 <p id="notice"><%= notice %></p>
 
+<h3 class="h3">Cakes for All Occassions</h3>
 
+<div class="parent">
+  <div class="child">
 
-<% @products.each do |product| %>
 <div class="container">
-    <h3 class="h3">Products</h3>
-    <div class="row">
-        <div class="col-md-3 col-sm-6">
-            <div class="product-grid3">
-                <div class="product-image3">
-                    <img src="<%= product.image  %>" class="pic-1">
 
-                        <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo4/images/img-2.jpg">
+
+    <div class="row">
+      <% @products.each do |product| %>
+        <div class="col-md-3 col-sm-6">
+
+            <div class="product-grid6">
+
+                <div class="product-image6">
+                    <a href="#">
+                        <img class="pic-1" src="https://www.sbs.com.au/food/sites/sbs.com.au.food/files/styles/full/public/zebra-bundt-cake.jpg?itok=GHK9-Xe3&mtime=1501816389">
                     </a>
-                    <ul class="social">
-                        <li><%= link_to raw('<i class="fa fa-shopping-bag"></i>'), product %>
-                        </li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>
-                    <span class="product-new-label">New</span>
                 </div>
                 <div class="product-content">
-                    <h3 class="title"><a href="#"><%= product.prod_name %></a></h3>
-                    <div class="price">
-                        <%= product.price %>
-                        <span><%= product.inv_qty %></span>
+                    <h3 class="title"><%= product.prod_name %></h3>
+                    <div class="price">$<%= product.price %>
+                        <sub><%= product.inv_qty %> in stock</sub>
                     </div>
-                    <ul class="rating">
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star disable"></li>
-                        <li class="fa fa-star disable"></li>
-                    </ul>
-                    <% end %>
+
                 </div>
+                <!-- <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star disable"></li>
+                    <li class="fa fa-star disable"></li>
+                </ul> -->
+                <ul class="social">
+                    <li><%= link_to '<i class="fa fa-shopping-bag"></i>'.html_safe, product, tip: "Detail Page"%></li>
+                    <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <% end %>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 <hr>

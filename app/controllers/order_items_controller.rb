@@ -19,7 +19,9 @@ class OrderItemsController < ApplicationController
     @order_item = @order.order_items.find(params[:id])
     @order_item.update_attributes(order_item_params)
     @order.save
-    session[:order_id] = @order.id
+    
+    redirect_to cart_path(@order.id)
+
   end
 
   def destroy
@@ -35,7 +37,7 @@ class OrderItemsController < ApplicationController
 
   def order_item_params
 
-    params.require(:order_item).permit(:product_id, :qty)
+    params.require(:order_item).permit(:qty, product_ids: [])
 
   end
 end

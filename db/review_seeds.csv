@@ -1,11 +1,11 @@
-rating,description
-4,"Oddly it smelled like unbalanced, silky, mango, sage, ginger"
-5,"Oddly it smelled like soft, chewy, green-tea, snow pea, corriander"
-5,"Oddly it smelled like tart, slick, sweet pea, tangerine, peach"
-2,"Oddly it smelled like faint, full, quakery, tomato, rose hips"
-2,"Oddly it smelled like tart, round, fresh wood, green apple, sugar cane"
-3,"Deliciously flavored structured, tea-like, hops, peach, strawberry"
-5,"Oddly it smelled like tart, smooth, tomato, rubber, nutella"
-2,"Oddly it smelled like dull, syrupy, rose hips, dates, liquorice"
-5,"Deliciously flavored mild, silky, grassy, kiwi, lavender"
-5,"Tasted like juicy, syrupy, nutella, orange blossom, cola"
+rating,description,product_id
+1,"Deliciously flavored deep, creamy, white grape, grapefruit, vanilla",13
+4,"Tasted like unbalanced, round, nutmeg, mushroom, blueberry",6
+2,"Deliciously flavored astringent, creamy, hazelnut, liquorice, grassy",6
+2,"Oddly it smelled like balanced, juicy, nougat, papaya, strawberry",15
+5,"Tasted like tart, creamy, white grape, molasses, clove",9
+3,"Tasted like mild, watery, lime, green pepper, dill",14
+5,"Oddly it smelled like balanced, juicy, cacao nibs, fresh bread, brown sugar",14
+4,"Tasted like vibrant, juicy, cinnamon, bakers chocolate, honeydew",7
+5,"Deliciously flavored lingering, watery, blueberry, green grape, watermelon",3
+5,"Tasted like sharp, chewy, lime, kiwi, tangerine",5
