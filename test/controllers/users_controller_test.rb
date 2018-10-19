@@ -3,44 +3,28 @@ require "test_helper"
 describe UsersController do
   let(:user) { users :one }
 
-  it "gets index" do
-    get users_url
-    value(response).must_be :success?
-  end
-
   it "gets new" do
     get new_user_url
     value(response).must_be :success?
   end
 
   it "creates user" do
+    user_hash= {
+      user: {
+      email: 'user3@gmail.com',
+      uid: 2,
+      username: 'newuser'
+      }
+    }
     expect {
-      post users_url, params: { user: { email: user.email, uid: user.uid, username: user.username } }
-    }.must_change "User.count"
+      post users_path, params: user_hash
+    }.must_change "User.count", 1
 
-    must_redirect_to user_path(User.last)
+    must_redirect_to root_path
   end
 
   it "shows user" do
     get user_url(user)
     value(response).must_be :success?
-  end
-
-  it "gets edit" do
-    get edit_user_url(user)
-    value(response).must_be :success?
-  end
-
-  it "updates user" do
-    patch user_url(user), params: { user: { email: user.email, uid: user.uid, username: user.username } }
-    must_redirect_to user_path(user)
-  end
-
-  it "destroys user" do
-    expect {
-      delete user_url(user)
-    }.must_change "User.count", -1
-
-    must_redirect_to users_path
   end
 end

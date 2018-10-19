@@ -11,31 +11,45 @@ require 'csv'
 # $ rails db:reset
 # doesn't currently check for if titles are unique against each other
 
+CSV.open('db/user_seeds.csv', "w", :write_headers=> true,
+         :headers => ["uid", "username", "email"]) do |csv|
+
+  5.times do
+    uid = Faker::Number.between(1, 5)
+    username = Faker::Internet.username
+    email= Faker::Internet.safe_email
+    csv << [uid, username, email]
+  end
+end
+
+
+
 CSV.open('db/product_seeds.csv', "w", :write_headers=> true,
-         :headers => ["category", "prod_name", "description", "price", "inv_qty", "active", "image"]) do |csv|
+         :headers => ["prod_name", "user_id", "description", "price", "inv_qty", "active", "image"]) do |csv|
 
   30.times do
-    category = %w(birthday wedding chocolate vanilla buttercream).sample
+    # category = %w(birthday wedding chocolate vanilla buttercream).sample
     prod_name = Faker::Dessert.variety + ' ' + Faker::Dessert.topping + ' ' + Faker::Dessert.flavor
+    user_id = Faker::Number.between(1, 4)
     description = Faker::Coffee.notes
     price = Faker::Number.decimal(2, 2)
     inv_qty = Faker::Number.between(0, 30)
     active = Faker::Boolean.boolean
-    image = Faker::LoremPixel.image("50x60", false, 'food')
+    image = Faker::LoremPixel.image("200x300", false, 'food')
 
-    csv << [category, prod_name, description, price, inv_qty, active, image]
+    csv << [prod_name, user_id, description, price, inv_qty, active, image]
   end
 end
 
 
 CSV.open('db/review_seeds.csv', "w", :write_headers=> true,
-         :headers => ["rating", "description"]) do |csv|
+         :headers => ["rating", "description", "product_id"]) do |csv|
 
   10.times do
     rating = Faker::Number.between(1, 5)
     description = ["Tasted like ", "Deliciously flavored ", "Oddly it smelled like "].sample + Faker::Coffee.notes
-
-    csv << [rating, description]
+    product_id = Faker::Number.between(1, 15)
+    csv << [rating, description, product_id]
   end
 end
 
