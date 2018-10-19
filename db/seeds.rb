@@ -17,7 +17,7 @@ CSV.foreach(USER_FILE, :headers => true) do |row|
   user.email = row['email']
   successful = user.save
   if !successful
-    review_failures << user
+    user_failures << user
     puts "Failed to save user: #{user.inspect}"
     puts "Error: #{user.errors}"
   else
@@ -119,9 +119,31 @@ puts "#{review_failures.length} review failed to save"
 # add 3 items to first order
 # Order.first.order_items << Product.sample(3)
 # #
-# #Populate categories_products table
-Product.all.each do
-  Product.categories << Category.all.sample
+
+
+CATEGORY_FILE = Rails.root.join('db', 'category_seeds.csv')
+puts "Loading raw review data from #{REVIEW_FILE}"
+
+category_failures = []
+CSV.foreach(CATEGORY_FILE, :headers => true) do |row|
+  category = Category.new
+  category.category = row['category']
+
+  successful = category.save
+  if !successful
+    category_failures << category
+    puts "Failed to save category: #{category.inspect}"
+    puts "Error: #{category.errors}"
+  else
+    puts "Created category: #{category.inspect}"
+  end
 end
-# add 3 items to first order
-Product.first.categories << Category.sample(2)
+
+puts "Added #{Category.count} category records"
+puts "#{category_failures.length} category failed to save"
+
+
+Product.all.each do |product|
+  product.categories << Category.all.sample
+end
+
