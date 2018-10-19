@@ -5,5 +5,13 @@ class User < ApplicationRecord
   # relationships
   has_many :products
 
+  def self.new_user(auth_hash)
+    new_user = User.new(email: auth_hash[:info][:email],
+                        username: auth_hash[:info][:nickname],
+                        uid: auth_hash[:uid],
+                        provider: 'github')
+
+    return new_user
+  end
 
 end
