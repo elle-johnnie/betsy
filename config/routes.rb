@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'products#home'
-  
+
   get "/auth/:provider/callback", to: "sessions#create"
 
   get 'sessions/login', to: "sessions#new" #page for a new session

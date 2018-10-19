@@ -45,17 +45,17 @@
                 <%= link_to "Log out", logout_path, method: "delete"   %></li>
             <% else %>
               <li class="nav-item app-header__nav_item">
-                <%= link_to "Login with Github", "/auth/github" %></li>
+                <li class="right"><%= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %></i>
+                </a></li>
             <% end %>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <!-- <ul class="nav navbar-nav navbar-right">
 
 
 
-             <li class="right"><%= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %></i>
-             </a></li>
+
              <li class="right"><a href="#"><i class="fas fa-sign-in-alt"></i></a></li>
-         </ul>
+         </ul> -->
         </div>
       </nav>
 
