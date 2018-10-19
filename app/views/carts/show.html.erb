@@ -17,8 +17,10 @@
       <td><%= f.select :qty, (1..item.product.inv_qty).to_a %></td>
           <%= f.hidden_field :product_id, :value => item.product.id %>
       <td><%= item.subtotal %></td>
-      <td><%= f.submit "Update" %></td>
-        <% end %>
+      <td><%= f.submit "Update" %>
+      <% end %>
+      <td><%#= link_to "Update", order_item_path(@order_item.product_id), method: :patch %></td>
+
       <td><%= link_to "Remove", order_item_path(item.id), method: :delete %></td>
     </tr>
     <% end %>
