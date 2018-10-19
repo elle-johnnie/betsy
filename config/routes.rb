@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root "products#index"
-
+  root 'products#home'
+  
   get "/auth/:provider/callback", to: "sessions#create"
 
   get 'sessions/login', to: "sessions#new" #page for a new session
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :carts, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
 
-  root 'products#home'
+
 
   resources :reviews
   resources :orders
