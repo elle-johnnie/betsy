@@ -1,15 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  category: Wedding Cake
-  prod_name: Vanilla Cake
-  description: "Frosted cake with sprinkles to highlight any celebration"
-  price: 250.50
-  inv_qty: 1
+cake1:
+  category: wedding
+  prod_name: a wedding cake
+  description: yum
+  price: 15.5
+  inv_qty: 5
 
-two:
-  category: Wedding Cake
-  prod_name: MyString
-  description: MyString
-  price: 1.5
-  inv_qty: 1
+cake2:
+  category: chocolate
+  prod_name: chocolate goodness
+  description: the best
+  price: 19.5
+  inv_qty: 0
+
+
+cake3:
+  category: vanilla
+  prod_name: vanilla plains
+  description: real vanilla
+  price: 20.5
+  inv_qty: 3

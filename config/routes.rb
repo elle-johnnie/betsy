@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
+  root "products#index"
 
+  get "/auth/:provider/callback", to: "sessions#create"
+
+  get 'sessions/login', to: "sessions#new" #page for a new session
+  delete "/logout", to: "sessions#destroy", as: "logout"
+
+  # get 'sessions/new', to: "sessions#create" #create a new session login
+  # get 'sessions/destroy', to: "sessions#destroy" #delete a session logout
   resources :carts, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
 
