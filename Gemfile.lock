@@ -1,10 +1,3 @@
-GIT
-  remote: https://github.com/stympy/faker
-  revision: 069817eb06825b10f8e74f83ef2c50a001b72d96
-  specs:
-    faker (1.9.1)
-      i18n (>= 0.7)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -99,6 +92,8 @@ GEM
     factory_bot_rails (4.11.1)
       factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
+    faker (1.9.1)
+      i18n (>= 0.7)
     faraday (0.15.3)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
@@ -289,7 +284,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot
   factory_bot_rails
-  faker!
+  faker
   guard
   guard-minitest
   jbuilder (~> 2.5)
@@ -317,4 +312,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.5
+   1.16.6
