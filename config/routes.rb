@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "products#index"
+  root 'products#home'
 
   get "/auth/:provider/callback", to: "sessions#create"
 
@@ -10,8 +10,6 @@ Rails.application.routes.draw do
   # get 'sessions/destroy', to: "sessions#destroy" #delete a session logout
   resources :carts, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
-
-  root 'products#home'
 
   resources :reviews
   resources :orders

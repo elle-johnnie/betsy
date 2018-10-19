@@ -73,4 +73,3 @@ CSV.open('db/order_seeds.csv', "w", :write_headers=> true,
     csv << [status, cust_name, cust_email, mailing_address, cc_name, cc_digit, cc_expiration, cc_cvv, cc_zip]
   end
 end
-
