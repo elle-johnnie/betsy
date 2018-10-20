@@ -3,8 +3,8 @@
 <p>
   <strong>Category:</strong>
   <% @product.categories.each do |cat| %>
-  <%= cat.category %><br>
-  <% end %>
+  <%= cat.category.capitalize %><br>
+    <% end %>
 </p>
 
 <p>

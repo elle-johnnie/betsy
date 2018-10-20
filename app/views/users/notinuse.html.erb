@@ -13,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
+    <% User.all.each do |user| %>
       <tr>
         <td><%= user.uid %></td>
         <td><%= user.username %></td>

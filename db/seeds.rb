@@ -119,7 +119,7 @@ puts "#{review_failures.length} review failed to save"
 # add 3 items to first order
 # Order.first.order_items << Product.sample(3)
 # #
-#Populate categories_products table
+
 
 CATEGORY_FILE = Rails.root.join('db', 'category_seeds.csv')
 puts "Loading raw review data from #{REVIEW_FILE}"
@@ -146,5 +146,4 @@ puts "#{category_failures.length} category failed to save"
 Product.all.each do |product|
   product.categories << Category.all.sample
 end
-# # add 3 items to first order
-# Product.first.categories << Category.sample(2)
+
