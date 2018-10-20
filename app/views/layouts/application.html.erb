@@ -45,6 +45,7 @@
                 <%= link_to "Log out", logout_path, method: "delete"   %></li>
             <% else %>
               <li class="nav-item app-header__nav_item">
+                <%= link_to "login with github", "/auth/github" , class: "right temp-ghub-link" %>
                 <li class="right"><%= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %></i>
                 </a></li>
             <% end %>
