@@ -2,7 +2,9 @@
 
 <p>
   <strong>Category:</strong>
-  <%= @product.category %>
+  <% @product.categories.each do |cat| %>
+  <%= cat.category %><br>
+  <% end %>
 </p>
 
 <p>
