@@ -2,7 +2,9 @@
 
 <p>
   <strong>Category:</strong>
-  <%= @product.category_ids %>
+  <% @product.categories.each do |cat| %>
+  <%= cat.category.capitalize %>
+  <% end %>
 </p>
 
 <p>
