@@ -1,4 +1,4 @@
 <section class="products">
-  <h3 class="h3">All Sweets</h3>
+  <h3 class="h3"><%= @category.category.pluralize %></h3>
   <%= render partial: "productslist", locals: { } %>
 </section>

@@ -1,5 +1,3 @@
-require 'pry'
-
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
@@ -59,6 +57,11 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
     end
+  end
+
+  def category
+    @category = Category.find_by(id: params[:id])
+    @products = Product.by_category(params[:id])
   end
 
   private

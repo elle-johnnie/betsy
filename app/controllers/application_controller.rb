@@ -1,8 +1,14 @@
 class ApplicationController < ActionController::Base
   before_action :find_user
+  before_action :list_categories
   # before_action :require_login, except: [:create, :root]
 
   helper_method :current_order
+
+  def list_categories
+    @categories = Category.all
+  end
+
 
   def current_order
     if !session[:order_id].nil?

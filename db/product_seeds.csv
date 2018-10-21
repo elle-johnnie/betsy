@@ -1,5 +1,4 @@
 prod_name,user_id,description,price,inv_qty,active,image
-<<<<<<< HEAD
 Cobbler Butterscotch Syrup Salted Caramel,1,"balanced, big, leathery, cashew, banana",17.93,14,false,https://lorempixel.com/200/300/food
 Cake Pop Mocha Drizzle Pistachio,4,"wild, full, clove, pecan, grapefruit",34.93,16,true,https://lorempixel.com/200/300/food
 Cake Mocha Drizzle French Vanilla,2,"dirty, big, black-tea, cream, quakery",99.04,15,true,https://lorempixel.com/200/300/food
@@ -61,4 +60,3 @@ Cupcake Whipped Cream Peanut Butter,1,"structured, tea-like, maple syrup, carmel
 Ice Cream Cake Chocolate Syrup Cookies 'n Cream,2,"mild, full, molasses, clementine, magnolia",33.12,1,false,https://lorempixel.com/200/300/food
 Pudding Gummy Bears Almond,3,"balanced, smooth, molasses, honeysuckle, sage",80.17,11,false,https://lorempixel.com/200/300/food
 Frozen Yogurt Cookie Dough Banana,1,"crisp, syrupy, sage, honey, green grape",28.84,8,false,https://lorempixel.com/200/300/food
->>>>>>> ae65e5f5cf0100ca77091dc42e417ddcf8b5f0c8
