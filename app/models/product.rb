@@ -14,12 +14,8 @@ class Product < ApplicationRecord
 
 
   def avg_rating
-    # sum = sum up self.reviews
-
-    # num = self.reviews.length
-
-    # return sum / num
+    average_rating = self.reviews.reduce(0) { |sum, review| sum + review.rating }
+    return average_rating
   end
-
 
 end

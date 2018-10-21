@@ -3,13 +3,8 @@
 <p>
   <strong>Category:</strong>
   <% @product.categories.each do |cat| %>
-<<<<<<< HEAD
-  <%= cat.category.capitalize %>
-  <% end %>
-=======
   <%= cat.category.capitalize %><br>
     <% end %>
->>>>>>> master
 </p>
 
 <p>
@@ -41,5 +36,18 @@
   <%= f.submit "Add to cart", class: "btn btn-primary" %>
 <% end %>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
+
+
+<button type="button" class="btn btn-warning"><%=link_to "Write a Review", new_product_review_path(@product.id)%></button>
+<div class="reviews">
+<h2>Reviews</h2>
+ <section class="rating">
+   <% @product.avg_rating.round.times do %>
+    <img src="https://cdn4.iconfinder.com/data/icons/pretty_office_3/256/Star-Full.png" alt="rating star" height="25" width="25">
+    <% end %>
+</section>
+  <% @product.reviews.each do |review|  %>
+  <p><%= review.description  %></p>
+  <% end %>
+</div>
