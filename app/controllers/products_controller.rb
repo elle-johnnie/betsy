@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :status]
 
   # GET /products
   def index
@@ -24,8 +24,7 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /products
   def create
@@ -44,9 +43,10 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        flash[:notice] = "#{@product.prod_name} was successfully updated."
+        redirect_to product_path
       else
-        format.html { render :edit }
+        render :edit
       end
     end
   end
@@ -62,6 +62,18 @@ class ProductsController < ApplicationController
   def category
     @category = Category.find_by(id: params[:id])
     @products = Product.by_category(params[:id])
+  end
+
+  def status
+    if @product.active
+      @product.update(active: false)
+      flash[:notice] = "#{@product.prod_name} status successfully updated."
+      redirect_back(fallback_location: root_path)
+    else
+      @product.update(active: true)
+      flash[:warning] = "Product could not updated."
+      redirect_back(fallback_location: products_path)
+    end
   end
 
   private

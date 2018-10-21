@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :orders
 
   get 'products/category/:id', to: "products#category", as: "category"
+  patch 'products/:id/retire', to: "products#status", as: "product_status"
   resources :products
   resources :users
   resources :categories

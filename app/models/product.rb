@@ -31,5 +31,13 @@ class Product < ApplicationRecord
     # return sum / num
   end
 
+  # def self.status(product)
+  #   if product.active
+  #     product.update(active: false)
+  #   else
+  #     product.update(active: true)
+  #   end
+  #
+  # end
 
 end
