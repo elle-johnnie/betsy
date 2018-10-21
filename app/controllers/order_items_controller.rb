@@ -1,5 +1,3 @@
-require 'pry'
-
 class OrderItemsController < ApplicationController
 
   def create
@@ -22,7 +20,16 @@ class OrderItemsController < ApplicationController
     @order.save
 
     redirect_to cart_path(@order.id)
+  end
 
+  def cart_direct
+    @order = current_order
+    @order_item = @order.order_items.new(product_id: params[:id], qty: 1)
+    @order_item.save
+    @order.save
+    session[:order_id] = @order.id
+
+    redirect_to cart_path(@order.id)
   end
 
   def destroy

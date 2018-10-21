@@ -1,5 +1,4 @@
 prod_name,user_id,description,price,inv_qty,active,image
-
 Cobbler Butterscotch Syrup Salted Caramel,1,"balanced, big, leathery, cashew, banana",17.93,14,false,https://lorempixel.com/200/300/food
 Cake Pop Mocha Drizzle Pistachio,4,"wild, full, clove, pecan, grapefruit",34.93,16,true,https://lorempixel.com/200/300/food
 Cake Mocha Drizzle French Vanilla,2,"dirty, big, black-tea, cream, quakery",99.04,15,true,https://lorempixel.com/200/300/food

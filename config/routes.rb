@@ -16,13 +16,15 @@ Rails.application.routes.draw do
   resources :reviews
 
   resources :carts, only: [:show]
+
+  post "order_items/cart_direct/:id", to: "order_items#cart_direct", as: "quick_shop"
   resources :order_items, only: [:create, :update, :destroy]
 
-  # post "/reviews/new/:id", to: "reviews#create", as: "create_review"
-  # get "/reviews/new/:id", to: "reviews#new", as: "new_review"
-
+  resources :reviews
   resources :orders
 
+  get 'products/category/:id', to: "products#category", as: "category"
+  resources :products
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
