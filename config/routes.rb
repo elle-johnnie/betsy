@@ -19,6 +19,6 @@ Rails.application.routes.draw do
   get 'products/category/:id', to: "products#category", as: "category"
   resources :products
   resources :users
-  resource :categories
+  resources :categories
 
 end
