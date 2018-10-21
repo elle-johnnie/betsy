@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  get 'categories/index'
+  get 'categories/new'
+  get 'categories/create'
   root 'products#home'
 
   get "/auth/:provider/callback", to: "sessions#create", as: "login"
 
-  get 'sessions/login', to: "sessions#new" #page for a new session
+  # get 'sessions/login', to: "sessions#new" #page for a new session
   delete "/logout", to: "sessions#destroy", as: "logout"
 
   # get 'sessions/new', to: "sessions#create" #create a new session login

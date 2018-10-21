@@ -1,0 +1,10 @@
+<h1>Categories#index</h1>
+
+
+<ul>
+<% @categories.each do |cat| %>
+  <li><%= cat.category %></li>
+<% end %>
+</ul>
+
+<%= link_to "Add a new category", categories_new_path %>

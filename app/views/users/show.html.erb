@@ -15,5 +15,46 @@
   <%= @user.email %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'List a Product', new_product_path, class: "sell-link" %>
+
+
+
+<%# create a method that allows merchant to create a new category%>
+
+<%= link_to 'View Categories', categories_index_path%>
+
+
+
+
+<%# list all products listed by this merchant allow them to edit%>
+<table class="show_table table">
+  <tr>
+    <th>NAME</th>
+    <th>PRICE</th>
+    <th>QUANTITY</th>
+    <th>RATING</th>
+  </tr>
+
+  <tbody>
+  <% if @user.products.empty? %>
+    <%= "No Products List to Sell" %>
+  <% else %>
+    <% @user.products.each do |product| %>
+      <tr>
+        <td> <%= link_to "#{product.prod_name}", edit_product_path(product.id)%></td>
+        <td> <%= format_price(product.price)%></td>
+        <td> <%= product.inv_qty %></td>
+        <td> <%= product.avg_rating %></td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+
 <%= link_to 'Back', users_path %>
+
+
+<%# view all orders that belong to this%>
+
+<%# view order fulfillment%>
