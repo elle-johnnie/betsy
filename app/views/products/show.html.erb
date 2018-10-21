@@ -45,9 +45,12 @@
  <section class="rating">
    <% @product.avg_rating.round.times do %>
     <img src="https://cdn4.iconfinder.com/data/icons/pretty_office_3/256/Star-Full.png" alt="rating star" height="25" width="25">
-    <% end %>
+<% end %>
 </section>
   <% @product.reviews.each do |review|  %>
+  <p>Rating: <%= review.rating %></p>
   <p><%= review.description  %></p>
   <% end %>
+
+
 </div>

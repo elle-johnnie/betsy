@@ -18,4 +18,12 @@ class Product < ApplicationRecord
     return average_rating
   end
 
+  # def avg_rating
+  #   total = 0
+  #   self.reviews.each do |review|
+  #     total += review.rating
+  #   end
+  #   return total/reviews.count.to_f
+  # end
+
 end
