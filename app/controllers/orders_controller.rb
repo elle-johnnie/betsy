@@ -23,17 +23,18 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-      if @order.save
-        flash[:success] = 'Order was successfully created.'
-        redirect_to order_path(@order.id)
+    if @order.save
+      flash[:success] = 'Order was successfully created.'
+      redirect_to order_path(@order.id)
 
-      else
-        flash.now[:warning] = 'Order not created'
-        @order.errors.messages.each do |field, msg|
-          flash.now[field] = messages
-        end
-        render :new
+    else
+      flash.now[:warning] = 'Order not created'
+
+      @order.errors.messages.each do |field, msg|
+        flash.now[field] = messages
       end
+
+      render :new
     end
   end
 
@@ -42,10 +43,8 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.update(order_params)
         format.html { redirect_to @order, notice: 'Order was successfully updated.' }
-
       else
         format.html { render :edit }
-
       end
     end
   end
@@ -56,7 +55,6 @@ class OrdersController < ApplicationController
     @order.destroy
     respond_to do |format|
       format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
-
     end
   end
 

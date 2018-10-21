@@ -59,6 +59,11 @@ class ProductsController < ApplicationController
     end
   end
 
+  def category
+    @category = Category.find_by(id: params[:id])
+    @products = Product.by_category(params[:id])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
