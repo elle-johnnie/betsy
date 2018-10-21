@@ -64,6 +64,12 @@ class ProductsController < ApplicationController
     @products = Product.by_category(params[:id])
   end
 
+  def merchant
+    @user = User.find_by(id: params[:id])
+    @products = Product.by_merchant(params[:id].to_i)
+  
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

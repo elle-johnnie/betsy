@@ -22,6 +22,18 @@ class Product < ApplicationRecord
     return category_products
   end
 
+  def self.by_merchant(id)
+    all_products = Product.all
+    merchant_products = []
+
+    all_products.each do |product|
+      if product.user.id == id
+        merchant_products << product
+      end
+    end
+    return merchant_products
+  end
+
 
   def avg_rating
     # sum = sum up self.reviews

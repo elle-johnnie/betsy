@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :orders
 
   get 'products/category/:id', to: "products#category", as: "category"
+  get 'products/merchant/:id', to: "products#merchant", as: "merchant"
   resources :products
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
