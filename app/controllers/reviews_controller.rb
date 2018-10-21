@@ -23,11 +23,11 @@ class ReviewsController < ApplicationController
     # @review = Review.new
     #post route to /review only
 
-    #can't find post route for this method
-    if params[:product_id]
-     @product = Product.find_by(id: params[:product_id])
-     @reviews = @product.reviews.new
-    end
+    # can't find post route for this method
+    # if params[:product_id]
+     @product = Product.find(params[:product_id])
+     @review = Review.new(product: @product)
+    # end
 
   end
 
@@ -37,15 +37,27 @@ class ReviewsController < ApplicationController
 
   # POST /reviews
   def create
-    @review = Review.new(review_params)
+    #@product = Product.find_by(id: params[:product_id])
+    # @reviews = @product.Reviews.new
+    # @review = Review.new(review_params)
 
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
-      else
-        format.html { render :new }
-      end
-    end
+    @product = Product.find(params[:product_id])
+    @review = @product.reviews.build(review_params)
+    @review.product = @product
+    @review.save
+    redirect_to @product
+
+
+    # @product = Product.find_by(id: params[:product_id])
+    # @review = @product.reviews.build(params[:review])
+
+    # respond_to do |format|
+    #   if @review.save
+    #     format.html { redirect_to @review, notice: 'Review was successfully created.' }
+    #   else
+    #     format.html { render :new }
+    #   end
+    # end
   end
 
 
@@ -79,6 +91,6 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:rating, :description, :product_id)
+      params.require(:review).permit(:rating, :description)
     end
 end

@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :products do
     resources :reviews, only: [:new, :create]
   end
-  
+
+
   get "/auth/:provider/callback", to: "sessions#create"
 
   get 'sessions/login', to: "sessions#new" #page for a new session

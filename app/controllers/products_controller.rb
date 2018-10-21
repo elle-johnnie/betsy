@@ -18,6 +18,9 @@ class ProductsController < ApplicationController
       @order_item = current_order.order_items.new
     end
 
+    @product = Product.find(params[:id])
+    @reviews = Review.where(product_id: @product)
+
   end
 
   # GET /products/new
