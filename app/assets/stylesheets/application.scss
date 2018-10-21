@@ -26,6 +26,10 @@ body {
   margin-bottom: 20px;
 }
 
+.navbar-brand {
+  color: hotpink;
+}
+
 .fa-github-square {
     font-size: 2em;
     color: lightgrey;
@@ -46,4 +50,15 @@ body {
 
 .right {
     padding-right: 13px;
+}
+
+.btn-primary {
+  background-color: #EC407A;
+  border: #F48FB1;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.5;
+  background-color: #EC407A;
 }
