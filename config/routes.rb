@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'categories/index'
-  get 'categories/new'
-  get 'categories/create'
   root 'products#home'
 
   get "/auth/:provider/callback", to: "sessions#create", as: "login"
@@ -22,5 +19,6 @@ Rails.application.routes.draw do
   get 'products/category/:id', to: "products#category", as: "category"
   resources :products
   resources :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resource :categories
+
 end
