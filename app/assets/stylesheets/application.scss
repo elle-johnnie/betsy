@@ -65,10 +65,21 @@ p {
   color: white;
 }
 
+.fa-sign-out-alt {
+    font-size: 1.5rem;
+    color: lightgrey;
+    padding-left: .5rem;
+}
+
+.fa-sign-out-alt:hover {
+    color: white;
+}
+
 .fa-shopping-cart {
   font-size: 1.25rem;
   color: lightgrey;
   padding-top: .25rem;
+  padding-left: .5rem;
 }
 
 .fa-shopping-cart:hover {
