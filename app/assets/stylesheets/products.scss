@@ -56,9 +56,12 @@
 -------------------------------------------------- */
 
 /* Carousel base class */
-.carousel {
-  margin-bottom: 4rem;
+
+#myCarousel {
+  margin: auto;
+  margin-bottom: 3rem;
 }
+
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   bottom: 3rem;
@@ -70,14 +73,29 @@
   height: 32rem;
   background-color: #777;
 }
-.carousel-item > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  height: 32rem;
+
+// .carousel-item > img {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   min-width: 100%;
+//   height: 32rem;
+// }
+
+.carousel-item img {
+  object-position: center; /* Center the image within the element */
+  width: 100%;
 }
 
+h4 {
+  font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+.rounded-circle {
+  width: 220px;
+  height: auto;
+  margin-bottom: 1rem;
+}
 
 /* MARKETING CONTENT
 -------------------------------------------------- */
