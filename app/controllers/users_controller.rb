@@ -5,6 +5,15 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
     render_404 unless @user
+
+    @order = current_order
+    @order_item = @order.order_items.find_by(product_id: params[:id])
+
+    if @order_item.nil?
+      @order_item = current_order.order_items.new
+    end
+
+    @products = Product.where(user_id: @user)
   end
 
   # GET /users/new

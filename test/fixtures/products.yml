@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 cake1:
-  category: wedding
+
   prod_name: a wedding cake
   description: yum
   price: 15.5
   inv_qty: 5
 
 cake2:
-  category: chocolate
+
   prod_name: chocolate goodness
   description: the best
   price: 19.5
@@ -16,7 +16,7 @@ cake2:
 
 
 cake3:
-  category: vanilla
+  
   prod_name: vanilla plains
   description: real vanilla
   price: 20.5

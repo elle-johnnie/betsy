@@ -83,9 +83,11 @@
 <div class="reviews">
 <h2>Reviews</h2>
  <section class="rating">Average Rating:
-   <% @product.avg_rating.round.times do %>
-    <img src="https://cdn4.iconfinder.com/data/icons/pretty_office_3/256/Star-Full.png" alt="rating star" height="25" width="25">
-<% end %>
+   <% if @product.reviews.length >= 1 %>
+     <% @product.avg_rating.round.times do %>
+     <img src="https://cdn4.iconfinder.com/data/icons/pretty_office_3/256/Star-Full.png" alt="rating star" height="25" width="25">
+    <% end %>
+    <% end %>
 </section>
 
 

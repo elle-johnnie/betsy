@@ -1,19 +1,59 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Uid:</strong>
-  <%= @user.uid %>
+  <%#= @user.uid %>
 </p>
 
 <p>
   <strong>Username:</strong>
-  <%= @user.username %>
+  <%#= @user.username %>
 </p>
 
 <p>
   <strong>Email:</strong>
-  <%= @user.email %>
+  <%#= @user.email %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<%#= link_to 'Edit', edit_user_path(@user) %> |
+<%#= link_to 'Back', users_path %>
+
+<section class="products">
+  <h3 class="h3">All Sweets</h3>
+  <%#= render partial: "productslist", locals: { } %>
+</section> -->
+
+<div class="container">
+  <div class="row">
+
+    <% @user.products.each do |product| %>
+    <div class="col-md-3 col-sm-6">
+        <div class="product-grid6">
+          <div class="product-image6">
+            <%=link_to image_tag("#{product.image}", alt: "#{product.description}"), product_path(product.id) %></a>
+          </div>
+          <div class="product-content">
+            <h3 class="title"><%= product.prod_name %></h3>
+          <div class="price">$<%= product.price %>
+            <sub><%= product.inv_qty %> in stock</sub>
+          </div>
+          </div>
+                <!-- <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star disable"></li>
+                    <li class="fa fa-star disable"></li>
+                </ul> -->
+          <ul class="social">
+            <li><a href="/products/<%=product.id%>" data-tip="Product Details"><i class="fa fa-shopping-bag"></i></a></li>
+            <li><a href="/order_items/cart_direct/<%=product.id%>" data-tip="Add to Cart" data-method="post"><i class="fa fa-shopping-cart"></i></a></li>
+          </ul>
+        </div>
+      </div>
+        <% end %>
+    </div>
+  </div>
+</div>
+
 <%= link_to 'Back', users_path %>
