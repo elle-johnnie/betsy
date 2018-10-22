@@ -4,6 +4,16 @@
 //
 // Base styles
 
+.products {
+  padding-bottom: 1rem;
+}
+
+.category {
+  object-position: center; /* Center the image within the element */
+  width: 100%;
+  height: auto;
+}
+
 .parent {
   display: flex;
   flex-wrap: wrap;
@@ -140,9 +150,12 @@ a.button:hover{
 -------------------------------------------------- */
 
 /* Carousel base class */
-.carousel {
-  margin-bottom: 4rem;
+
+#myCarousel {
+  margin: auto;
+  margin-bottom: 2rem;
 }
+
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   bottom: 3rem;
@@ -154,14 +167,25 @@ a.button:hover{
   height: 32rem;
   background-color: #777;
 }
-.carousel-item > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  height: 32rem;
+
+// .carousel-item > img {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   min-width: 100%;
+//   height: 32rem;
+// }
+
+.carousel-item img {
+  object-position: center; /* Center the image within the element */
+  width: 100%;
 }
 
+.rounded-circle {
+  width: 220px;
+  height: auto;
+  margin-bottom: 1rem;
+}
 
 /* MARKETING CONTENT
 -------------------------------------------------- */

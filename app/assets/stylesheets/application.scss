@@ -22,12 +22,33 @@ body {
   margin-bottom: 60px;
 }
 
+h1, h2, h3, h4 {
+  font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+p {
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
 .navbar {
-  margin-bottom: 20px;
+  font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+.navbar-brand {
+  color: #8ff9f6  !important;
+  font-weight: bold;
+}
+
+.navbar-brand:hover {
+  color: #0abab5  !important;
+  font-weight: bold;
 }
 
 .fa-github-square {
-    font-size: 2em;
+    font-size: 1.75em;
     color: lightgrey;
 }
 
@@ -36,7 +57,7 @@ body {
 }
 
 .fa-sign-in-alt {
-  font-size: 2em;
+  font-size: 1.5em;
   color: lightgrey;
 }
 
@@ -44,9 +65,20 @@ body {
   color: white;
 }
 
+.fa-shopping-cart {
+  font-size: 1.25rem;
+  color: lightgrey;
+  padding-top: .25rem;
+}
+
+.fa-shopping-cart:hover {
+  color: white;
+}
+
 .right {
     padding-right: 13px;
 }
+
 
 .form-group {
   margin-left: 20px;
@@ -57,4 +89,17 @@ body {
     font-size: 25px;
     color: gold;
     padding: 3px;
+  }
+
+.btn {
+  background-color: #0abab5;
+  border: #0abab5;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.75;
+  background-color: #0abab5;
+  border: #0abab5;
+
 }
