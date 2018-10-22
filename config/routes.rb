@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'products#home'
 
+
+  get "/auth/:provider/callback", to: "sessions#create", as: "login"
+
   resources :products do
     resources :reviews, only: [:new, :create]
   end
@@ -8,7 +11,8 @@ Rails.application.routes.draw do
 
   get "/auth/:provider/callback", to: "sessions#create"
 
-  get 'sessions/login', to: "sessions#new" #page for a new session
+
+  # get 'sessions/login', to: "sessions#new" #page for a new session
   delete "/logout", to: "sessions#destroy", as: "logout"
 
   # get 'sessions/new', to: "sessions#create" #create a new session login
@@ -24,8 +28,12 @@ Rails.application.routes.draw do
   resources :orders
 
   get 'products/category/:id', to: "products#category", as: "category"
+
+  patch 'products/:id/retire', to: "products#status", as: "product_status"
+
   get 'products/merchant/:id', to: "products#merchant", as: "merchant"
   resources :products
   resources :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :categories
+
 end
