@@ -21,6 +21,10 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  # GET /users/1/edit
+  def edit
+  end
+
   # POST /users
   def create
     @user = User.new(user_params)
@@ -49,9 +53,6 @@ class UsersController < ApplicationController
       params.require(:user).permit(:uid, :username, :email, :id)
     end
 
-  # GET /users/1/edit
-  def edit
-  end
 
 
 end
