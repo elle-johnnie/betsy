@@ -11,7 +11,8 @@ class OrdersController < ApplicationController
   #<td><%#= link_to "Checkout", new_order_path(@order_items.ids), class: "btn btn-primary" %></td>
 
   def show
-    @order = Order.find_by(id: session[:order_id]).order_items
+    @order = Order.find_by(id: session[:order_id])
+    @order_items = Order.find_by(id: session[:order_id]).order_items
   end
 
   # GET /orders/new
@@ -39,7 +40,7 @@ class OrdersController < ApplicationController
       @order.errors.messages.each do |field, msg|
         flash.now[field] = messages
         end
-        
+
       render :new
     end
   end

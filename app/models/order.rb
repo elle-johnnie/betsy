@@ -1,3 +1,4 @@
+require 'pry'
 class Order < ApplicationRecord
   #validations
 
@@ -9,8 +10,10 @@ class Order < ApplicationRecord
 
 
   def total_price
-    order_items.collect { |order_item| order_item.quantity * order_item.unit_price }.sum
-
+    self.order_items.sum do |order_item|
+      product_id = Product.find_by(id: order_item.product_id)
+      order_item.qty * product_id.price
+    end
   end
 
   def place_order

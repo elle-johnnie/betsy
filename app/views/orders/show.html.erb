@@ -11,7 +11,7 @@
   </thead>
    <%# link_to 'Description', product_path(@order) %>
   <tbody>
-    <% @order.each do |order_item| %>
+    <% @order_items.each do |order_item| %>
     <tr>
       <td><%= link_to "#{order_item.product.prod_name}", product_path(order_item.product.id) %></td>
       <td><%= order_item.qty %></td>
@@ -24,21 +24,17 @@
 
 <p>
   <strong>Status:</strong>
-  <%# @order.status %>
+  <%= @order.status %>
 </p>
 
 <p>
   <strong>Date:</strong>
-  <%# @order.date_of_order %>
+  <%= @order.date_of_order %>
 </p>
 
 <p>
   <strong>Total Price:</strong>
-  <%# @order.total_price %>
-</p>
-
-<p>
-  <strong>Item Description:</strong>
+  <%=@order.total_price %>
 </p>
 
 <%#= link_to 'Edit', edit_order_path(@order) %>
