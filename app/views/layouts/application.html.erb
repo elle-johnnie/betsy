@@ -50,16 +50,13 @@
                <%= link_to "Account Info: #{session[:username]}", user_path(session[:user_id]), class: "btn btn-primary" %>
               </li>
               <li class="nav-item app-header__nav_item">
-                <%= link_to raw('<i class="fa fa-sign-out-alt"></i>'), logout_path, method: "delete"   %></li>
+                <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-primary"   %></li>
             <% else %>
               <li class="nav-item app-header__nav_item">
-
-                <%= link_to "login with github", "/auth/github" , class: "btn btn_primary right" %>
-<!--              <li class="right"><%#= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %></i>-->
-<!--                </a></li>-->
-
-                <%= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %></li>
-
+                <%#= link_to "login with github", "/auth/github" , class: "right temp-ghub-link" %>
+                <%= link_to "login with github", "/auth/github" , class: "btn btn-primary" %>
+              <!-- <li class="right"><%#= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %></i> -->
+                <!-- </a></li> -->
             <% end %>
             <li class="nav-item app-header__nav_item">
               <a href="/carts/<%=session[:order_id]%>"><i class="fa fa-shopping-cart"></i></a></li>

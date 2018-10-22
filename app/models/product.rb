@@ -56,6 +56,7 @@ class Product < ApplicationRecord
       self.reviews.each do |review|
         total += review.rating
       end
+      avg = total/self.review.count
       return avg
 
     else

@@ -1,6 +1,9 @@
 class Order < ApplicationRecord
   #validations
-
+  validates :cc_digit, presence: true, numericality: { only_integer: true, is: 16}
+  validates :cc_expiration, presence: true, numericality: { only_integer: true, greater_than: 2018}
+  # validates :publication_year, presence: true, numericality: { only_integer: true, greater_than: 0,  less_than: 2019}
+  validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
   #relationships
 
   has_many :order_items
