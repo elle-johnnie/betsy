@@ -58,6 +58,43 @@
   </tbody>
 </table>
 
+<%# view all orders that belong to this%>
+<table class="show_table table">
+  <tr>
+    <th>ITEM</th>
+    <th>PRICE</th>
+    <th>QUANTITY</th>
+    <th>SUBTOTAL</th>
+    <th>STATUS</th>
+    <th>      </th>
+  </tr>
+
+  <tbody>
+  <% if @user.order_items.empty? %>
+    <%= "No Products Have Sold" %>
+  <% else %>
+    <% @user.order_items.each do |item| %>
+      <tr>
+        <% product = Product.find(item.id) %>
+        <td> <%= link_to "#{product.prod_name}", edit_product_path(product.id)%></td>
+        <td> <%= format_price(product.price)%></td>
+        <td> <%= item.qty %></td>
+        <td> <%= format_price(product.price * item.qtfy)  %></td>
+        <% if item.shipped%>
+          <td>PENDING</td>
+          <td><%# link_to "RETIRE", product_status_path(product), class: "btn btn-warning ", method: :patch%></td>
+        <% else %>
+          <td>SHIPPED</td>
+          <td><%# link_to "ACTIVATE", product_status_path(product), class: "btn btn-success", method: :patch%></td>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+<%# view order fulfillment%>
+<%= link_to 'Back', root_path %>
+
 
 <%= link_to 'Back', users_path %>
 

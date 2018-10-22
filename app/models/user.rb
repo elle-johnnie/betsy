@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
   # relationships
   has_many :products
+  has_many :order_items, through: :products
 
   def self.new_user(auth_hash)
     new_user = User.new(email: auth_hash[:info][:email],
