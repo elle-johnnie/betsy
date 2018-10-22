@@ -52,10 +52,15 @@ class Product < ApplicationRecord
 
   def avg_rating
     total = 0
-    self.reviews.each do |review|
-      total += review.rating
+    if self.reviews.count > 0
+      self.reviews.each do |review|
+        total += review.rating
+      end
+      return avg
+
+    else
+      return 0
     end
-    return total/reviews.count
   end
 
 

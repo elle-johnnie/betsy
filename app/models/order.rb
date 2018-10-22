@@ -25,16 +25,16 @@ class Order < ApplicationRecord
 
   end
 
-<<<<<<< HEAD
+
   def date_of_order
     return self.created_at.strftime("%B %d, %Y")
   end
-=======
+
   private
 
     def set_order_status
       self.order_status_id = 1
     end
 
->>>>>>> merchant_info
+
 end

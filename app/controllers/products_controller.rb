@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
     @product.user_id = session[:user_id]
     if @product.save(product_params)
       flash[:notice] = "#{@product.prod_name} was successfully created."
-      redirect_to users_show_path
+      redirect_to user_path(user_id)
     else
       render :new
     end

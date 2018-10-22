@@ -15,7 +15,7 @@ class User < ApplicationRecord
     return new_user
   end
 
-<<<<<<< HEAD
+
   def find_orders
     sold = []
     self.products.each do |product|
@@ -31,14 +31,15 @@ class User < ApplicationRecord
     # end
     # binding.pry
     return sold
-=======
+  end
+
+
   def revenue
     @pending = self.orders.where(status: 1)
     @paid = self.orders.where(status: 2)
     @shipped = self.orders.where(status: 3)
     @completed = self.orders.where(status: 4)
 
->>>>>>> merchant_info
   end
 
 
