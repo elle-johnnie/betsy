@@ -59,9 +59,44 @@
 </table>
 
 
-<%= link_to 'Back', users_path %>
-
-
 <%# view all orders that belong to this%>
+<table class="show_table table">
+  <tr>
+    <th>NAME</th>
+    <th>PRICE</th>
+    <th>QUANTITY</th>
+    <th>RATING</th>
+    <th>STATUS</th>
+    <th>      </th>
+  </tr>
+
+  <tbody>
+  <% if @user.order_items.empty? %>
+    <%= "No Products List to Sell" %>
+  <% else %>
+    <% @user.order_items.each do |product| %>
+      <tr>
+        <td> <%= link_to "#{product.prod_name}", edit_product_path(product.id)%></td>
+        <td> <%= format_price(product.price)%></td>
+        <td> <%= product.inv_qty %></td>
+        <td> <%= product.avg_rating %></td>
+        <% if product.active %>
+          <td>ACTIVE</td>
+          <td><%= link_to "RETIRE", product_status_path(product), class: "btn btn-warning ", method: :patch%></td>
+        <% else %>
+          <td>RETIRED</td>
+          <td><%= link_to "ACTIVATE", product_status_path(product), class: "btn btn-success", method: :patch%></td>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'Back', root_path %>
+
+
+
 
 <%# view order fulfillment%>
