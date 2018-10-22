@@ -8,30 +8,37 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Charmonman" rel="stylesheet">
   </head>
 
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Bakesy</a>
+        <a class="navbar-brand" href="/">BAKESY</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarsExample04">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <%= link_to "Home", root_path, class: "nav-link" %>
-            </li>
             <li class="nav-item">
-              <%= link_to "Merchants", users_path, class: "nav-link" %>
+              <%= link_to "Home", root_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to "All Products", products_path, class: "nav-link" %>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop Products by Category</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Category</a>
+              <div class="dropdown-menu" >
                 <% @categories.each do |category| %>
                   <%= link_to "#{category.category}", category_path(category.id), class: "dropdown-item" %>
+                <% end %>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Merchant</a>
+              <div class="dropdown-menu" >
+                <% @users.each do |user| %>
+                  <%= link_to "#{user.username}", merchant_path(user.id), class: "dropdown-item" %>
                 <% end %>
               </div>
             </li>

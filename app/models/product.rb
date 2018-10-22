@@ -11,7 +11,7 @@ class Product < ApplicationRecord
   has_many :order_items
 
   def self.by_category(id)
-    all_products = Product.all
+    all_products = Product.all.where(active: true)
     category_products = []
 
     all_products.each do |product|
@@ -20,6 +20,18 @@ class Product < ApplicationRecord
       end
     end
     return category_products
+  end
+
+  def self.by_merchant(id)
+    all_products = Product.all.where(active: true)
+    merchant_products = []
+
+    all_products.each do |product|
+      if product.user.id == id
+        merchant_products << product
+      end
+    end
+    return merchant_products
   end
 
 
