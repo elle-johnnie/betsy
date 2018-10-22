@@ -1,5 +1,45 @@
 <p id="notice"><%= notice %></p>
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 col-sm-6">
+        <div class="product-grid6">
+          <div class="product-image6">
+            <%=link_to image_tag("#{@product.image}", alt: "#{@product.description}"), product_path(@product.id) %></a>
+          </div>
+          <div class="product-content">
+            <h3 class="title"><%= @product.prod_name %></h3>
+          <div class="price">$<%= @product.price %>
+            <sub><%= @product.inv_qty %> in stock</sub>
+          </div>
+          </div>
+                <!-- <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star disable"></li>
+                    <li class="fa fa-star disable"></li>
+                </ul> -->
+          <ul class="social">
+            <%= form_with model: @order_item do |f| %>
+              <%= f.label :qty %>
+              <%= f.select :qty, (1..@product.inv_qty).to_a %>
+
+              <%= f.hidden_field :product_id, :value => @product.id %>
+
+              <%= f.submit "Add to cart", class: "btn btn-primary" %>
+            <% end %>
+            <!-- <a href="/order_items/cart_direct/<%#=@product.id%>" data-tip="Add to Cart" data-method="post"><i class="fa fa-shopping-cart"></i></a></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="buttonContainer"><%= link_to "Write A Review", new_product_review_path(@product), class: "button" %></div>
+  </div>
+
 <p>
   <strong>Category:</strong>
   <% @product.categories.each do |cat| %>
@@ -36,21 +76,38 @@
   <%= f.submit "Add to cart", class: "btn btn-primary" %>
 <% end %>
 
-<%= link_to 'Back', products_path %>
+<%= link_to 'Back', products_path, class: "btn btn-success" %>
 
 
-<button type="button" class="btn btn-warning"><%=link_to "Write a Review", new_product_review_path(@product)%></button>
+
 <div class="reviews">
 <h2>Reviews</h2>
- <section class="rating">
+ <section class="rating">Average Rating:
    <% @product.avg_rating.round.times do %>
     <img src="https://cdn4.iconfinder.com/data/icons/pretty_office_3/256/Star-Full.png" alt="rating star" height="25" width="25">
 <% end %>
 </section>
-  <% @product.reviews.each do |review|  %>
-  <p>Rating: <%= review.rating %></p>
-  <p><%= review.description  %></p>
-  <% end %>
 
 
+<div class="table-responsive-md">
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Rating</th>
+      <th scope="col">Review</th>
+      <th scope="col">Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @product.reviews.each do |review| %>
+      <td><%= review.rating%></td>
+      <td> <%= review.description%></td>
+      <td><%= link_to 'Edit', edit_review_path(review) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>
 </div>

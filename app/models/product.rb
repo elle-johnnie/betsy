@@ -23,17 +23,17 @@ class Product < ApplicationRecord
   end
 
 
-  def avg_rating
-    average_rating = self.reviews.reduce(0) { |sum, review| sum + review.rating }
-    return average_rating
-  end
-
   # def avg_rating
-  #   total = 0
-  #   self.reviews.each do |review|
-  #     total += review.rating
-  #   end
-  #   return total/reviews.count.to_f
+  #   average_rating = self.reviews.reduce(0) { |sum, review| sum + review.rating }
+  #   return average_rating
   # end
+
+  def avg_rating
+    total = 0
+    self.reviews.each do |review|
+      total += review.rating
+    end
+    return total/reviews.count
+  end
 
 end

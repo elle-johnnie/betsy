@@ -20,15 +20,8 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
-    # @review = Review.new
-    #post route to /review only
-
-    # can't find post route for this method
-    # if params[:product_id]
      @product = Product.find(params[:product_id])
      @review = Review.new(product: @product)
-    # end
-
   end
 
   # GET /reviews/1/edit
@@ -37,19 +30,16 @@ class ReviewsController < ApplicationController
 
   # POST /reviews
   def create
-    #@product = Product.find_by(id: params[:product_id])
-    # @reviews = @product.Reviews.new
-    # @review = Review.new(review_params)
-
     @product = Product.find(params[:product_id])
     @review = @product.reviews.build(review_params)
     @review.product = @product
-    @review.save
-    redirect_to @product
+    if @review.save
+      redirect_to @product
+    else
+      flash.now[:warning] = "Please enter all fields"
+      render :new
+    end
 
-
-    # @product = Product.find_by(id: params[:product_id])
-    # @review = @product.reviews.build(params[:review])
 
     # respond_to do |format|
     #   if @review.save

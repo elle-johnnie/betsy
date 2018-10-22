@@ -32,6 +32,7 @@ class OrdersController < ApplicationController
 
       @order.errors.messages.each do |field, msg|
         flash.now[field] = messages
+        end
       end
 
       render :new
