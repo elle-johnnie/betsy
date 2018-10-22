@@ -1,10 +1,8 @@
 class OrderItem < ApplicationRecord
-  #validations - n/a
-  #relationships
+  validates :qty, numericality: { only_integer: true }
+
   belongs_to :product
   belongs_to :order
-
-
 
 
 
