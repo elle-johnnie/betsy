@@ -5,7 +5,7 @@ class OrderItem < ApplicationRecord
   belongs_to :order
   belongs_to :order_status
 
-  before_create :set_order_status
+  # before_save :set_order_status
 
   def subtotal
     return self.product.price * qty

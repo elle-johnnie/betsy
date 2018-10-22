@@ -15,4 +15,22 @@ class User < ApplicationRecord
     return new_user
   end
 
+  def find_orders
+    sold = []
+    self.products.each do |product|
+      if !product.order_items.empty?
+        sold << product
+      end
+    end
+
+    # OrderItem.all.each do |item|
+    #  if self.products.include? item.product_id
+    #     sold << item
+    #   end
+    # end
+    # binding.pry
+    return sold
+  end
+
+
 end
