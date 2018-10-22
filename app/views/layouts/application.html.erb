@@ -53,9 +53,9 @@
                 <%= link_to "Log out", logout_path, method: "delete"   %></li>
             <% else %>
               <li class="nav-item app-header__nav_item">
-                <%= link_to "login with github", "/auth/github" , class: "right temp-ghub-link" %>
-              <li class="right"><%= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %></i>
-                </a></li>
+                <%= link_to "login with github", "/auth/github" , class: "btn btn_primary right" %>
+<!--              <li class="right"><%#= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %></i>-->
+<!--                </a></li>-->
             <% end %>
             <li class="nav-item app-header__nav_item">
               <a href="/carts/<%=session[:order_id]%>"><i class="fa fa-shopping-cart"></i></a></li>
