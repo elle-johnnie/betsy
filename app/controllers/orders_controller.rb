@@ -1,3 +1,4 @@
+
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
@@ -6,13 +7,12 @@ class OrdersController < ApplicationController
     @orders = Order.all
   end
 
-  # GET /orders/1
-  # must figure out how to pass cart to here
-  #<td><%#= link_to "Checkout", new_order_path(@order_items.ids), class: "btn btn-primary" %></td>
-
+  # show Confirmation Page
   def show
     @order = Order.find_by(id: session[:order_id])
     @order_items = Order.find_by(id: session[:order_id]).order_items
+    # clear shopping cart after it Confirmation page has been shown
+    session[:order_id] = nil
   end
 
   # GET /orders/new
@@ -31,9 +31,9 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if @order.save
+      @order.place_order
       flash[:success] = 'Order was successfully created.'
       redirect_to order_path(@order.id)
-
     else
       flash.now[:warning] = 'Order not created'
 
@@ -74,6 +74,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:status, :cust_name, :cust_email, :mailing_address, :cc_name, :cc_digit, :cc_expiration, :cc_cvv, :cc_zip)
+      params.require(:order).permit(:status, :cust_name, :cust_email, :mailing_address, :cc_name, :cc_digit, :cc_expiration, :cc_cvv, :cc_zip, :user_id)
     end
 end

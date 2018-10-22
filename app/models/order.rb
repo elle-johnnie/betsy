@@ -1,4 +1,3 @@
-require 'pry'
 class Order < ApplicationRecord
   #validations
 
@@ -26,10 +25,9 @@ class Order < ApplicationRecord
       product.save
     end
 
-    self.status = "paid"
-    order.save 
-
-    # clears current cart ()
+    self.status = "Paid"
+    self.save
+    # clears current cart () erase order_id
 
   end
 
