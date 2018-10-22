@@ -1,5 +1,3 @@
-require 'pry'
-
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
@@ -11,12 +9,13 @@ class ProductsController < ApplicationController
   # GET /products/1
 
   def show
-    @order_item = current_order.order_items.find_by(product_id: params[:id])
+    @order = current_order
+    @order_item = @order.order_items.find_by(product_id: params[:id])
 
     if @order_item.nil?
       @order_item = current_order.order_items.new
     end
-  
+
   end
 
   # GET /products/new
@@ -58,6 +57,11 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
     end
+  end
+
+  def category
+    @category = Category.find_by(id: params[:id])
+    @products = Product.by_category(params[:id])
   end
 
   private

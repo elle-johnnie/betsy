@@ -1,5 +1,3 @@
-require 'pry'
-
 class OrderItemsController < ApplicationController
 
   def create
@@ -7,7 +5,7 @@ class OrderItemsController < ApplicationController
     # check if item is in stock
 
     @order_item = @order.order_items.new(order_item_params)
-    binding.pry
+    @order_item.save
     @order.save
     session[:order_id] = @order.id
 
@@ -22,7 +20,16 @@ class OrderItemsController < ApplicationController
     @order.save
 
     redirect_to cart_path(@order.id)
+  end
 
+  def cart_direct
+    @order = current_order
+    @order_item = @order.order_items.new(product_id: params[:id], qty: 1)
+    @order_item.save
+    @order.save
+    session[:order_id] = @order.id
+
+    redirect_to cart_path(@order.id)
   end
 
   def destroy
@@ -38,7 +45,7 @@ class OrderItemsController < ApplicationController
 
   def order_item_params
 
-    params.require(:order_item).permit(:qty, product_ids: [])
+    params.require(:order_item).permit(:product_id, :qty)
 
   end
 end
