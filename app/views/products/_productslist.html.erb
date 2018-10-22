@@ -8,7 +8,7 @@
               <%=link_to image_tag("#{product.image}", alt: "#{product.description}"), product_path(product.id) %></a>
             </div>
             <div class="product-content">
-              <h3 class="title"><%= product.prod_name %></h3>
+              <h4 class="title"><%= product.prod_name %></h3>
             <div class="price">$<%= product.price %>
               <sub><%= product.inv_qty %> in stock</sub>
             </div>

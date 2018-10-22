@@ -4,6 +4,16 @@
 //
 // Base styles
 
+.products {
+  padding-bottom: 1rem;
+}
+
+.category {
+  object-position: center; /* Center the image within the element */
+  width: 100%;
+  height: auto;
+}
+
 .parent {
   display: flex;
   flex-wrap: wrap;
@@ -59,7 +69,7 @@
 
 #myCarousel {
   margin: auto;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 /* Since positioning the image, we need to help out the caption */
@@ -85,10 +95,6 @@
 .carousel-item img {
   object-position: center; /* Center the image within the element */
   width: 100%;
-}
-
-h4 {
-  font-family: 'Alegreya Sans SC', sans-serif;
 }
 
 .rounded-circle {
