@@ -10,6 +10,19 @@
   <%= @order.date_of_order %>
 </p>
 
+<p>
+  <strong>Total Price:</strong>
+  <%= @order.total_price %>
+</p>
+
+<p>
+  <strong>Item Description:</strong>
+  <%# link_to 'Description', product_path(@order) %>
+</p>
+
+<p>
+  <strong>Item quantity:</strong>
+</p>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
