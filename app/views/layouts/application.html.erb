@@ -7,6 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Charmonman" rel="stylesheet">
@@ -52,33 +53,17 @@
                 <%= link_to "Log out", logout_path, method: "delete"   %></li>
             <% else %>
               <li class="nav-item app-header__nav_item">
-
                 <%= link_to "login with github", "/auth/github" , class: "right temp-ghub-link" %>
-                <li class="right"><%= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %></i>
-                </li>
-
-                <li class="right"><%= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %></li>
-
+              <li class="right"><%= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %></i>
+                </a></li>
             <% end %>
             <li class="nav-item app-header__nav_item">
               <a href="/carts/<%=session[:order_id]%>"><i class="fa fa-shopping-cart"></i></a></li>
           </ul>
-          <!-- <ul class="nav navbar-nav navbar-right">
-
-
-          <%#= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %>
-
-             <li class="right"><a href="#"><i class="fas fa-sign-in-alt"></i></a></li>
-         </ul> -->
         </div>
       </nav>
 
   <body>
-    <section class="flash">
-      <% flash.each do |name, message| %>
-        <div class"<%=name %>"><%=message%></div>
-      <%end%>
-    </section>
     <%= yield %>
   </body>
 
