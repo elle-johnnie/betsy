@@ -33,12 +33,11 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.user_id = session[:user_id]
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @product.save(product_params)
+      flash[:notice] = "#{@product.prod_name} was successfully created."
+      redirect_to users_show_path
+    else
+      render :new
     end
   end
 

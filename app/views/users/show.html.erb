@@ -59,8 +59,54 @@
   </tbody>
 </table>
 
+
 <%#= link_to 'Edit', edit_user_path(@user) %> |
 <%#= link_to 'Back', users_path %>
+
+
+<%# view all orders that belong to this%>
+<table class="show_table table">
+  <tr>
+    <th>ORDER #</th>
+    <th>ITEM</th>
+    <th>PRICE</th>
+    <th>QUANTITY</th>
+    <th>SUBTOTAL</th>
+    <th>STATUS</th>
+    <th>      </th>
+  </tr>
+
+  <tbody>
+  <%# need to use orderitem table to find all occurences where product_id matches the
+  merchant's products%>
+  <% sold = @user.find_orders %>
+
+  <% if sold.empty? %>
+    <%= "No Products Have Sold" %>
+  <% else %>
+    <% sold.each do |product| %>
+      <tr>
+
+        <% or_item = OrderItem.find_by(product_id: product.id) %>
+        <td> <%= or_item.id %></td>
+        <td> <%= link_to "#{product.prod_name}", edit_product_path(product.id)%></td>
+        <td> <%= format_price(product.price)%></td>
+        <td> <%= or_item.qty %></td>
+        <td> <%= format_price(product.price * or_item.qty)  %></td>
+        <% if or_item.order_status%>
+          <td>PENDING</td>
+          <td><%# link_to "RETIRE", product_status_path(product), class: "btn btn-warning ", method: :patch%></td>
+        <% else %>
+          <td>SHIPPED</td>
+          <td><%# link_to "ACTIVATE", product_status_path(product), class: "btn btn-success", method: :patch%></td>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+<%# view order fulfillment%>
+<%= link_to 'Back', root_path %>
 
 
 
