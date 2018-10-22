@@ -1,49 +1,15 @@
 <p id="notice"><%= notice %></p>
-
+<h1> Confirmation Page </h1>
 <p>
   <strong>Status:</strong>
   <%= @order.status %>
 </p>
 
 <p>
-  <strong>Cust name:</strong>
-  <%= @order.cust_name %>
+  <strong>Date the order was placed:</strong>
+  <%= @order.date_of_order %>
 </p>
 
-<p>
-  <strong>Cust email:</strong>
-  <%= @order.cust_email %>
-</p>
-
-<p>
-  <strong>Mailing address:</strong>
-  <%= @order.mailing_address %>
-</p>
-
-<p>
-  <strong>Cc name:</strong>
-  <%= @order.cc_name %>
-</p>
-
-<p>
-  <strong>Cc digit:</strong>
-  <%= @order.cc_digit %>
-</p>
-
-<p>
-  <strong>Cc expiration:</strong>
-  <%= @order.cc_expiration %>
-</p>
-
-<p>
-  <strong>Cc cvv:</strong>
-  <%= @order.cc_cvv %>
-</p>
-
-<p>
-  <strong>Cc zip:</strong>
-  <%= @order.cc_zip %>
-</p>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
