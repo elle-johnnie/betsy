@@ -2,12 +2,10 @@ class Order < ApplicationRecord
   #validations
 
   #relationships
-  # has_and_belongs_to_many :products
 
-  belongs_to :order_status
   has_many :order_items
 
-  before_create :set_order_status
+
 
 
   def total_price
@@ -32,9 +30,9 @@ class Order < ApplicationRecord
 
   private
 
-    def set_order_status
-      self.order_status_id = 1
-    end
+    # def set_order_status
+    #   self.order_status_id = 1
+    # end
 
 
 end
