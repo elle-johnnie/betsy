@@ -3,7 +3,15 @@ class ReviewsController < ApplicationController
 
   # GET /reviews
   def index
-    @reviews = Review.all
+    if params[:product_id]
+      # This is the nested route, /author/:author_id/books/new
+      product = Product.find_by(id: params[:product_id])
+      @reviews = product.reviews.new
+
+    else
+      @reviews = Review.all
+    end
+
   end
 
   # GET /reviews/1
@@ -12,7 +20,8 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
-    @review = Review.new
+     @product = Product.find(params[:product_id])
+     @review = Review.new(product: @product)
   end
 
   # GET /reviews/1/edit
@@ -21,16 +30,26 @@ class ReviewsController < ApplicationController
 
   # POST /reviews
   def create
-    @review = Review.new(review_params)
-
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    @product = Product.find(params[:product_id])
+    @review = @product.reviews.build(review_params)
+    @review.product = @product
+    if @review.save
+      redirect_to @product
+    else
+      flash.now[:warning] = "Please enter all fields"
+      render :new
     end
+
+
+    # respond_to do |format|
+    #   if @review.save
+    #     format.html { redirect_to @review, notice: 'Review was successfully created.' }
+    #   else
+    #     format.html { render :new }
+    #   end
+    # end
   end
+
 
   # PATCH/PUT /reviews/1
   # PATCH/PUT /reviews/1.json
@@ -43,6 +62,7 @@ class ReviewsController < ApplicationController
       end
     end
   end
+
 
   # DELETE /reviews/1
   # DELETE /reviews/1.json

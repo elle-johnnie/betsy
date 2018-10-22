@@ -16,6 +16,9 @@ class ProductsController < ApplicationController
       @order_item = current_order.order_items.new
     end
 
+    @product = Product.find(params[:id])
+    @reviews = Review.where(product_id: @product)
+
   end
 
   # GET /products/new
@@ -64,6 +67,7 @@ class ProductsController < ApplicationController
     @products = Product.by_category(params[:id])
   end
 
+
   def status
     if @product.active
       @product.update(active: false)
@@ -74,6 +78,13 @@ class ProductsController < ApplicationController
       flash[:warning] = "Product could not updated."
       redirect_back(fallback_location: products_path)
     end
+  end
+
+
+  def merchant
+    @user = User.find_by(id: params[:id])
+    @products = Product.by_merchant(params[:id].to_i)
+
   end
 
   private

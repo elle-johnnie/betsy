@@ -7,7 +7,11 @@ class OrdersController < ApplicationController
   end
 
   # GET /orders/1
+  # must figure out how to pass cart to here
+  #<td><%#= link_to "Checkout", new_order_path(@order_items.ids), class: "btn btn-primary" %></td>
+
   def show
+    @order = Order.find_by(id: session[:order_id]).order_items
   end
 
   # GET /orders/new
@@ -20,6 +24,8 @@ class OrdersController < ApplicationController
   end
 
   # POST /orders
+  # must change database
+  # flash notices do not workx
   def create
     @order = Order.new(order_params)
 
@@ -32,11 +38,12 @@ class OrdersController < ApplicationController
 
       @order.errors.messages.each do |field, msg|
         flash.now[field] = messages
-      end
-
+        end
+        
       render :new
     end
   end
+
 
   # PATCH/PUT /orders/1
   def update
