@@ -7,7 +7,11 @@ class OrdersController < ApplicationController
   end
 
   # GET /orders/1
+  # must figure out how to pass cart to here
+  #<td><%#= link_to "Checkout", new_order_path(@order_items.ids), class: "btn btn-primary" %></td>
+
   def show
+    @order = Order.find_by(id:20).order_items
   end
 
   # GET /orders/new
