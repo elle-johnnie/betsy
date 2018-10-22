@@ -17,10 +17,17 @@ class Order < ApplicationRecord
   end
 
   def place_order
-    # self.products.each decrease inventory
-      # find qty in OrdersProducts by order_id & product_id
+    #decrease inventory
+    self.order_items do |order_item|
+      product = Product.find_by(id: order_item.product_id)
+      quantity = product.inv_qty
+      quantity -= 1
+      product = quantity
+      product.save
+    end
 
-    # self.order = "paid"
+    self.status = "paid"
+    order.save 
 
     # clears current cart ()
 
