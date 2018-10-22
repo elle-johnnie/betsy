@@ -20,6 +20,8 @@ class OrdersController < ApplicationController
   end
 
   # POST /orders
+  # must change database
+  # flash notices do not workx
   def create
     @order = Order.new(order_params)
 
