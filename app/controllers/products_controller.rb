@@ -16,17 +16,8 @@ class ProductsController < ApplicationController
       @order_item = current_order.order_items.new
     end
 
-    @product.user_id = session[:user_id]
-    @session_user = @product.user_id
     @product = Product.find(params[:id])
-    # @reviews = Review.where(product_id: @product)
-
     @reviews = Review.where(product_id: @product)
-      # if @product.user_id == @session_user
-      #   flash.now[:warning] = "You may not review your own products"
-      #   redirect_to products_path
-      # end
-
   end
 
   # GET /products/new

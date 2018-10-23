@@ -33,7 +33,12 @@ class ReviewsController < ApplicationController
     @product = Product.find(params[:product_id])
     @review = @product.reviews.build(review_params)
     @review.product = @product
-    if @review.save
+
+    if @product.user_id == session[:user_id]
+      flash[:warning] = "You can't review your own Product"
+      redirect_to products_path
+    elsif
+      @review.save
       redirect_to @product
     else
       flash.now[:warning] = "Please enter all fields"
