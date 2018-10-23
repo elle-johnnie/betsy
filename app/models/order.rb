@@ -1,3 +1,4 @@
+require 'pry'
 class Order < ApplicationRecord
   #validations
 
@@ -17,18 +18,16 @@ class Order < ApplicationRecord
 
   def place_order
     #decrease inventory
+    binding.pry
     self.order_items do |order_item|
       product = Product.find_by(id: order_item.product_id)
       quantity = product.inv_qty
       quantity -= 1
-      product = quantity
+      product.inv_qty = quantity
       product.save
     end
-
     self.status = "Paid"
     self.save
-    # clears current cart () erase order_id
-
   end
 
   def date_of_order
