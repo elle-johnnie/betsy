@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   # validations
   validates :username, presence: true, uniqueness: true
-  validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+  validates :uid, presence: true, uniqueness: {scope: :provider}
+  validates :email, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+
   # relationships
   has_many :products
   has_many :order_items, through: :products

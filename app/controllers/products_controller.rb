@@ -9,8 +9,7 @@ class ProductsController < ApplicationController
   # GET /products/1
 
   def show
-    @order = current_order
-    @order_item = @order.order_items.find_by(product_id: params[:id])
+    @order_item = @current_order.order_items.find_by(product_id: params[:id])
 
     if @order_item.nil?
       @order_item = current_order.order_items.new
@@ -18,7 +17,6 @@ class ProductsController < ApplicationController
 
     @product = Product.find(params[:id])
     @reviews = Review.where(product_id: @product)
-
   end
 
   # GET /products/new
@@ -35,7 +33,7 @@ class ProductsController < ApplicationController
     @product.user_id = session[:user_id]
     if @product.save(product_params)
       flash[:notice] = "#{@product.prod_name} was successfully created."
-      redirect_to user_path(user_id)
+      redirect_to user_path(session[:user_id])
     else
       render :new
     end

@@ -2,36 +2,44 @@ require "test_helper"
 
 describe Review do
   let(:review) { Review.new }
+  let(:review1) {create(:review)}
+  let(:one) {create(:one)}
 
-  # it "must be valid" do
-  #   value(review).must_be :valid?
-  # end
+  it "must be valid" do
+    expect(review.valid?).must_equal true
+  end
 
   describe "relations" do
 
-    it "has a product" do
-      review = review(:cake1)
-      review.must_respond_to :product
-      review.product.must_be_kind_of Product
+    it "must respond to product" do
+      expect(review).must_respond_to :product
     end
+
   end
 
   describe "validations" do
-    before do
 
-
-    it "allows multiple users to review for a product" do
-      review1 = Review.new(product: cake1)
-      review1.save!
-      review2 = Review.new(product: cake1)
-      review2.valid?.must_equal true
+    it "allows one user to vote for multiple works" do
+      vote1 = Vote.new(user: user1, work: work1)
+      vote1.save!
+      vote2 = Vote.new(user: user1, work: work2)
+      vote2.valid?.must_equal true
     end
 
-    # it "doesn't allow the merchant to leave a review for their own work" do
-    #   review1 = Review.new(product: cake1)
-    #   review1.save!
-    #   review1.errors.messages.must_include :user
-    # end
-  end
+    it "allows multiple users to vote for a work" do
+      vote1 = Vote.new(user: user1, work: work1)
+      vote1.save!
+      vote2 = Vote.new(user: user2, work: work1)
+      vote2.valid?.must_equal true
+    end
 
+    it "doesn't allow the same user to vote for the same work twice" do
+      vote1 = Vote.new(user: user1, work: work1)
+      vote1.save!
+      vote2 = Vote.new(user: user1, work: work1)
+      vote2.valid?.must_equal false
+      vote2.errors.messages.must_include :user
+    end
+  end
+end
 end
