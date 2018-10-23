@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  skip_before_action :require_login
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
   # GET /reviews

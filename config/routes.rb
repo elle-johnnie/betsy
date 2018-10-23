@@ -7,13 +7,9 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
-  get "/auth/:provider/callback", to: "sessions#create"
-
-  # get 'sessions/login', to: "sessions#new" #page for a new session
+  get "/auth/:provider/callback", to: "sessions#create", as: "auth_callback"
   delete "/logout", to: "sessions#destroy", as: "logout"
 
-  # get 'sessions/new', to: "sessions#create" #create a new session login
-  # get 'sessions/destroy', to: "sessions#destroy" #delete a session logout
   resources :reviews
 
   resources :carts, only: [:show]
@@ -29,6 +25,7 @@ Rails.application.routes.draw do
   patch 'products/:id/retire', to: "products#status", as: "product_status"
   get 'products/merchant/:id', to: "products#merchant", as: "merchant"
   resources :products
+
   resources :users
   resources :categories
 

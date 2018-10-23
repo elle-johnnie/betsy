@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :find_user
   before_action :list_categories, :list_merchants
-  # before_action :require_login, except: [:create, :root]
+  before_action :require_login
 
   helper_method :current_order
 

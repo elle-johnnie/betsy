@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  # skip_before_action :require_login, only: :create
+  skip_before_action :require_login, only: [:create]
 
   def create
     auth_hash = request.env['omniauth.auth']
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
         flash.now[:result_text] = "Could not log in"
         flash.now[:messages] = user.errors.messages
         render "login", status: :bad_request
-        redirect_to root_path
+        return
       end
     end
 
@@ -31,6 +31,8 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    @user = nil
+    # session.clear
     flash[:status] = :success
     flash[:result_text] = "Successfully logged out"
 

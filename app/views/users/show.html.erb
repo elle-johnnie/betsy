@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<%= render partial: "/layouts/flash_errs" %>
 
 <p>
   <strong>Uid:</strong>
@@ -89,8 +90,8 @@
                <%= link_to "CONFIRM SHIPPED", ship_item_path(product), class: "btn btn-outline-info btn-sm", method: :patch%></td>
                <% end %>
                <% ord = Order.find(or_item.order.id) %>
-               <% Order.check_order_status(ord) %>
-          <td> <%= ord.status %></td>
+               <%# Order.check_order_status(ord) %>
+<!--          <td> <%#= ord.status %></td>-->
         </tr>
       <% end %>
     <% end %>

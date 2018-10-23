@@ -36,5 +36,11 @@ class User < ApplicationRecord
 
   end
 
+  def authorized?
+    if self.id != 2
+    raise
+    end
+
+  end
 
 end

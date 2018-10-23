@@ -1,4 +1,5 @@
 class OrderItemsController < ApplicationController
+  skip_before_action :require_login, only: [:ship]
   before_action :set_order, only: [:create, :update, :cart_direct]
 
 
