@@ -37,6 +37,8 @@ describe Product do
       product.prod_name = product2.prod_name
       expect(product.valid?).must_equal false
     end
+
+
   end
 
 

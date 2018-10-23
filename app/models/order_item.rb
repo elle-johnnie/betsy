@@ -3,7 +3,7 @@ class OrderItem < ApplicationRecord
   #relationships
   belongs_to :product
   belongs_to :order
-  belongs_to :order_status
+  # belongs_to :order_status
 
   before_save :set_order_status
 

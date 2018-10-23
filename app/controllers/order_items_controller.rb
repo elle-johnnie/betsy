@@ -5,14 +5,19 @@ class OrderItemsController < ApplicationController
     # check if item is in stock
 
     @order_item = @order.order_items.new(order_item_params)
+    @order_item.save
+
     if @order.save
+
       session[:order_id] = @order.id
 
       redirect_to cart_path(@order.id)
 
     else
+
       flash[:warning] = "Item order not placed"
       redirect_to root_path
+
     end
 
   end
