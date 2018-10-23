@@ -8,21 +8,39 @@ class Order < ApplicationRecord
 
   has_many :order_items
 
-
+  def items_in_cart
+    num = 0
+    if self.order_items.empty?
+      return nil
+    else
+      self.order_items.each do |item|
+        num += item.qty
+      end
+    end
+    return num
+  end
 
 
   def total_price
-    order_items.collect { |order_item| order_item.quantity * order_item.unit_price }.sum
-
+    self.order_items.sum do |order_item|
+      product_id = Product.find_by(id: order_item.product_id)
+      order_item.qty * product_id.price
+    end
   end
 
   def place_order
-    # self.products.each decrease inventory
-      # find qty in OrdersProducts by order_id & product_id
+    #decrease inventory
+    self.order_items do |order_item|
+      product = Product.find_by(id: order_item.product_id)
+      quantity = product.inv_qty
+      quantity -= 1
+      product = quantity
+      product.save
+    end
 
-    # self.order = "paid"
-
-    # clears current cart ()
+    self.status = "Paid"
+    self.save
+    # clears current cart () erase order_id
 
   end
 

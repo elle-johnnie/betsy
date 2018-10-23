@@ -49,9 +49,42 @@ p {
   font-weight: bold;
 }
 
+.right-items {
+  height: 40px;
+}
+
+.login {
+  width: 25px;
+  padding-top: .5rem;
+  opacity: .5;
+}
+
+.login:hover {
+  opacity: 1;
+}
+
+.main-cart {
+  padding-left: 1.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.logout {
+  width: 25px;
+  padding-top: .5rem;
+  opacity: .5;
+}
+
+.logout:hover {
+  opacity: 1;
+}
+
 .fa-github-square {
     font-size: 1.75em;
     color: lightgrey;
+    padding-right: .75rem;
+    padding-left: .75rem;
+    padding-top: .5rem;
 }
 
 .fa-github-square:hover {
@@ -70,18 +103,16 @@ p {
 .fa-sign-out-alt {
     font-size: 1.5rem;
     color: lightgrey;
-    padding-left: .5rem;
+    padding-right: .75rem;
+    padding-left: .75rem;
 }
 
 .fa-sign-out-alt:hover {
-    color: white;
+  color: white;
 }
 
 .fa-shopping-cart {
-  font-size: 1.25rem;
-  color: lightgrey;
-  padding-top: .25rem;
-  padding-left: .5rem;
+  color: lightgray;
 }
 
 .fa-shopping-cart:hover {
@@ -89,9 +120,25 @@ p {
 }
 
 .right {
-    padding-right: 13px;
+  padding-right: 13px;
 }
 
+.fa-stack[data-count]:after{
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  content: attr(data-count);
+  font-size: 35%;
+  padding: .6em;
+  border-radius: 999px;
+  line-height: .75em;
+  color: white;
+  text-align: center;
+  min-width: 2em;
+  font-weight: bold;
+  background: #0abab5;
+
+}
 
 .form-group {
   margin-left: 20px;

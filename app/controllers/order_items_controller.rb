@@ -1,17 +1,15 @@
 class OrderItemsController < ApplicationController
 
   def create
-    @order = current_order
-    # check if item is in stock
+    @order_item = @current_order.order_items.new(order_item_params)
+    @order_item.save
+    if @current_order.save
+      session[:order_id] = @current_order.id
 
-    @order_item = @order.order_items.new(order_item_params)
-    if @order.save
-      session[:order_id] = @order.id
-
-      redirect_to cart_path(@order.id)
+      redirect_to cart_path(@current_order.id)
 
     else
-      raise
+
       flash[:warning] = "Item order not placed"
       redirect_to root_path
     end
@@ -19,32 +17,28 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    @order = current_order
-    # check if item is in stock
-    @order_item = @order.order_items.find(params[:id])
+    @order_item = @current_order.order_items.find(params[:id])
     @order_item.update_attributes(order_item_params)
-    @order.save
+    @current_order.save
 
-    redirect_to cart_path(@order.id)
+    redirect_to cart_path(@current_order.id)
   end
 
   def cart_direct
-    @order = current_order
-    @order_item = @order.order_items.new(product_id: params[:id], qty: 1, order_status_id: 1)
+    @order_item = @current_order.order_items.new(product_id: params[:id], qty: 1, order_status_id: 1)
     @order_item.save
-    @order.save
-    session[:order_id] = @order.id
+    @current_order.save
+    session[:order_id] = @current_order.id
 
-    redirect_to cart_path(@order.id)
+    redirect_to cart_path(@current_order.id)
   end
 
   def destroy
-    @order = current_order
-    @order_item = @order.order_items.find(params[:id])
+    @order_item = @current_order.order_items.find(params[:id])
     @order_item.destroy
-    @order_items = @order.order_items
+    @order_items = @current_order.order_items
 
-    redirect_to cart_path(@order.id)
+    redirect_to cart_path(@current_order.id)
   end
 
   private
