@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
     @order_items = Order.find_by(id: session[:order_id]).order_items
     # save order items from the current session to the session that has the personal information
     @order.order_items = @order_items
+    @order.save
     # clear shopping cart after confirmation page has been shown
     session[:order_id] = nil
   end
