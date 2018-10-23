@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+laura:
   uid: 1
   username: Lady Bird
-  email: lbird@ada.
+  email: lbird@ada.com
 
 two:
   uid: 2

@@ -35,18 +35,19 @@ class Order < ApplicationRecord
 
   def place_order
     #decrease inventory
-    self.order_items do |order_item|
-      product = Product.find_by(id: order_item.product_id)
+    self.order_items.each do |order_item|
+      product = order_item.product
+      # get quantity
       quantity = product.inv_qty
-      quantity -= 1
-      product = quantity
-      product.save
+      # substract amount defined in order
+      new_inv_qty = product.inv_qty - order_item.qty
+      product.inv_qty = new_inv_qty
+
+      product.update(inv_qty: new_inv_qty)
+      product.save!
     end
-
     self.status = "Paid"
-    self.save
-    # clears current cart () erase order_id
-
+    self.save!
   end
 
 
