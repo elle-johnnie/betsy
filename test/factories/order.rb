@@ -5,7 +5,7 @@ FactoryBot.define do
     cust_email { Faker::Internet.safe_email}
     mailing_address { Faker::Address.full_address}
     cc_name { Faker::FunnyName.two_word_name}
-    cc_digit { Faker::Finance.credit_card.number(16)}
+    cc_digit { "1" * 16}
     cc_expiration { Faker::Business.credit_card_expiry_date}
     cc_cvv { Faker::Number.number(3)}
     cc_zip { Faker::Number.number(5) }

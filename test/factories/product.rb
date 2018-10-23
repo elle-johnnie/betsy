@@ -7,5 +7,6 @@ FactoryBot.define do
     inv_qty { Faker::Number.between(0, 30)}
     active { Faker::Boolean.boolean}
     image { "image test"}
+    user
   end
 end

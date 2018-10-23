@@ -67,10 +67,15 @@ p {
   color: white;
 }
 
-.fa-shopping-cart {
-  font-size: 1.25rem;
+#navfa {
+  font-size: 1.75em !important;
   color: lightgrey;
-  padding-top: .25rem;
+  padding-top: .20rem;
+  padding-right: .75em;
+}
+
+#navfa:hover {
+  color: #8ff9f6  !important;
 }
 
 .fa-shopping-cart:hover {
@@ -104,4 +109,29 @@ p {
   background-color: #0abab5;
   border: #0abab5;
 
+}
+
+.page-footer {
+  color: #8ff9f6  !important;
+  font-weight: bold;
+  background: #343a40 !important;
+  bottom:0;
+}
+
+.list-unstyled > li > a {
+  list-style: none;
+  color: white;
+}
+
+.list-unstyled > li > a:hover {
+  text-decoration: none;
+  color: #8ff9f6  !important;
+}
+
+.footer-copyright > a {
+  color:white;
+
+}
+#fotp {
+  color: white;
 }

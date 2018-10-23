@@ -76,11 +76,99 @@
   <%= f.submit "Add to cart", class: "btn btn-primary" %>
 <% end %>
 
+<a href="/order_items/cart_direct/<%=@product.id%>">adddfdd</a>
 
 
 <%= link_to 'Back', products_path %>
 
 <%= link_to 'Back', products_path, class: "btn btn-success" %>
+
+<a href="/order_items/cart_direct/<%=@product.id%>" data-tip="Add 1 to Cart" data-method="post"></a>
+
+
+
+<!-- //#### trying bootstrap  -->
+
+<div class="container" id="product-section">
+  <div class="row">
+   <div class="col-md-6">
+     <%=link_to image_tag("#{@product.image}", alt: "#{@product.description}"), product_path(@product.id) %></a>
+   </div>
+   <div class="col-md-6">
+       <div class="row">
+         <div class="col-md-12">
+           <h4><%= @product.prod_name %></h4>
+         </div>
+       </div><!-- end row-->
+       <div class="row">
+        <div class="col-md-12">
+          <% @product.categories.each do |cat| %>
+         <span class="label label-primary"><%= cat.category.capitalize %></span>
+         <% end %>
+         <span class="monospaced"><%@product.id%></span>
+        </div>
+       </div><!-- end row -->
+
+       <div class="row">
+        <div class="col-md-12">
+         <p class="description">
+          Tasting Notes: <%= @product.description %>
+        </div>
+       </div><!-- end row -->
+
+       <div class="row">
+         <div class="col-md-3">
+          <span class="sr-only">Four out of Five Stars</span>
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <span class="label label-success">61</span>
+         </div>
+         <div class="col-md-3">
+          <span class="monospaced">Write a Review</span>
+         </div>
+        </div><!-- end row -->
+
+        <div class="row">
+ <div class="col-md-12 bottom-rule">
+  <h2 class="product-price">$129.00</h2>
+ </div>
+</div><!-- end row -->
+
+<div class="row add-to-cart">
+ <div class="col-md-5 product-qty">
+  <span class="btn btn-default btn-lg btn-qty">
+ </div>
+ <div class="col-md-4">
+  <button class="btn btn-lg btn-brand btn-full-width">
+    ADD TO CART
+  </button>
+ </div>
+</div><!-- end row -->
+
+<div class="row">
+ <div class="col-md-4 text-center">
+  <span class="monospaced">In Stock</span>
+ </div>
+</div><!-- end row -->
+<div class="row">
+ <div class="col-md-12 bottom-rule top-10"></div>
+</div><!-- end row -->
+
+   </div>
+  </div><!-- end row -->
+ </div><!-- end container -->
+
+
+
+
+
+
+
+
+
 
 
 
@@ -93,6 +181,7 @@
     <% end %>
     <% end %>
 </section>
+
 
 
 <div class="table-responsive-md">

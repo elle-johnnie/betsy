@@ -11,7 +11,6 @@ class OrderItemsController < ApplicationController
       redirect_to cart_path(@order.id)
 
     else
-      raise
       flash[:warning] = "Item order not placed"
       redirect_to root_path
     end
@@ -33,6 +32,7 @@ class OrderItemsController < ApplicationController
     @order_item = @order.order_items.new(product_id: params[:id], qty: 1, order_status_id: 1)
     @order_item.save
     @order.save
+
     session[:order_id] = @order.id
 
     redirect_to cart_path(@order.id)

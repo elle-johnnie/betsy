@@ -1,14 +1,15 @@
 class Order < ApplicationRecord
   #validations
-  validates :cc_digit, presence: true, numericality: { only_integer: true, is: 16}
-  validates :cc_expiration, presence: true, numericality: { only_integer: true, greater_than: 2018}
-  # validates :publication_year, presence: true, numericality: { only_integer: true, greater_than: 0,  less_than: 2019}
-  validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+  validates :cust_name, presence: true, format: { with: /[a-zA-Z]/, on: :create}
+  validates :cc_digit, presence: true, format: { with: /\b\d{4}[ -]?\d{4}[ -]?\d{4}[ -]?\d{4}\b/, on: :create}
+  validates :cc_expiration, presence: true
+  validates :cc_cvv, presence: true, format: { with: /[0-9]{3}/, on: :create}
+  validates :cc_zip, presence: true, format: { with: /[0-9]{5}/, on: :create}
+  validates :cust_email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+  validates :mailing_address, presence: true
   #relationships
 
   has_many :order_items
-
-
 
 
   def total_price
