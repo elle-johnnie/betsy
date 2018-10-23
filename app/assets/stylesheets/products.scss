@@ -28,6 +28,7 @@
 
 .reviews > h2 {
   text-align: center;
+  padding-top: 2em;
 }
 
 .table-responsive-md {
@@ -156,6 +157,15 @@ a.button:hover{
   margin-bottom: 3rem;
 }
 
+#seasonal {
+  font-family: 'Charmonman', cursive;
+  font-size: 40px;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   bottom: 3rem;
@@ -179,6 +189,7 @@ a.button:hover{
 .carousel-item img {
   object-position: center; /* Center the image within the element */
   width: 100%;
+  opacity: .75;
 }
 
 .rounded-circle {
@@ -228,6 +239,7 @@ a.button:hover{
     margin-bottom: 1.25rem;
     font-size: 1.25rem;
     line-height: 1.4;
+    color: lightgray;
   }
 
   .featurette-heading {
@@ -243,4 +255,8 @@ a.button:hover{
 
 .products {
   padding-left: 2rem;
+}
+
+#product-section {
+  padding-top: 20px;
 }

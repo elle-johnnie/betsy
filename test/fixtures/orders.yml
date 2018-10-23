@@ -6,10 +6,10 @@ one:
   cust_email: laura@gmail.com
   mailing_address: 1
   cc_name: MyString
-  cc_digit: 1
+  cc_digit: 1111111111111111
   cc_expiration: 2018-10-17
-  cc_cvv: 1
-  cc_zip: 1
+  cc_cvv: 123
+  cc_zip: 98765
 
 two:
   status: MyString

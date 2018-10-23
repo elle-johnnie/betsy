@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   # validations
   validates :prod_name, presence: true, uniqueness: true
+  validates :description, :price, presence: true
   validates :inv_qty, presence: true, numericality: { only_integer: true, greater_than: -1}
   # relationships
   belongs_to :user
@@ -40,12 +41,29 @@ class Product < ApplicationRecord
   #   return average_rating
   # end
 
+
+  # def self.status(product)
+  #   if product.active
+  #     product.update(active: false)
+  #   else
+  #     product.update(active: true)
+  #   end
+  #
+  # end
+
   def avg_rating
     total = 0
-    self.reviews.each do |review|
-      total += review.rating
+    if self.reviews.count > 0
+      self.reviews.each do |review|
+        total += review.rating
+      end
+      avg = total/self.reviews.count
+      return avg
+
+    else
+      return 0
     end
-    return total/reviews.count
   end
+
 
 end

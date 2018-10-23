@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :find_user
-  before_action :list_categories, :list_merchants
+  before_action :list_categories, :list_merchants, :current_order
   # before_action :require_login, except: [:create, :root]
 
   helper_method :current_order
@@ -13,12 +13,11 @@ class ApplicationController < ActionController::Base
     @users = User.all
   end
 
-
   def current_order
     if !session[:order_id].nil?
-      Order.find(session[:order_id])
+      @current_order = Order.find(session[:order_id])
     else
-      Order.new
+      @current_order = Order.new
     end
   end
 

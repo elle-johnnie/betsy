@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :status]
 
   # GET /products
   def index
@@ -9,8 +9,7 @@ class ProductsController < ApplicationController
   # GET /products/1
 
   def show
-    @order = current_order
-    @order_item = @order.order_items.find_by(product_id: params[:id])
+    @order_item = @current_order.order_items.find_by(product_id: params[:id])
 
     # setting up space, creating a blank row, not filling out 
     if @order_item.nil?
@@ -19,7 +18,6 @@ class ProductsController < ApplicationController
 
     @product = Product.find(params[:id])
     @reviews = Review.where(product_id: @product)
-
   end
 
   # GET /products/new
@@ -28,19 +26,17 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /products
   def create
     @product = Product.new(product_params)
-
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    @product.user_id = session[:user_id]
+    if @product.save(product_params)
+      flash[:notice] = "#{@product.prod_name} was successfully created."
+      redirect_to user_path(session[:user_id])
+    else
+      render :new
     end
   end
 
@@ -48,9 +44,10 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        flash[:notice] = "#{@product.prod_name} was successfully updated."
+        redirect_to product_path
       else
-        format.html { render :edit }
+        render :edit
       end
     end
   end
@@ -67,6 +64,20 @@ class ProductsController < ApplicationController
     @category = Category.find_by(id: params[:id])
     @products = Product.by_category(params[:id])
   end
+
+
+  def status
+    if @product.active
+      @product.update(active: false)
+      flash[:notice] = "#{@product.prod_name} status successfully updated."
+      redirect_back(fallback_location: root_path)
+    else
+      @product.update(active: true)
+      flash[:warning] = "Product could not updated."
+      redirect_back(fallback_location: products_path)
+    end
+  end
+
 
   def merchant
     @user = User.find_by(id: params[:id])

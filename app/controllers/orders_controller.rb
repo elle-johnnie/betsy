@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
       flash.now[:warning] = 'Order not created'
 
       @order.errors.messages.each do |field, msg|
-        flash.now[field] = messages
+        flash.now[field] = msg
         end
 
       render :new
