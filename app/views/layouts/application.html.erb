@@ -43,26 +43,23 @@
                 <% end %>
               </div>
             </li>
+            <li class="nav-item">
+              <% if session[:user_id] %>
+                <%= link_to "Account Info: #{session[:username]}", user_path(session[:user_id]), class: "nav-link" %>
+              <% end %>
+            </li>
           </ul>
-          <ul class="nav app-header__user-nav-container">
+          <ul class="nav app-header__user-nav-container right-items">
             <% if session[:user_id] %>
-              <li class="nav-item app-header__nav_item">
-               <%= link_to "Account Info: #{session[:username]}", user_path(session[:user_id]), class: "btn btn-primary" %>
-              </li>
-              <li class="nav-item app-header__nav_item">
-                <%= link_to raw('<i class="fa fa-sign-out-alt"></i>'), logout_path, method: "delete"   %></li>
+              <li class="nav-item">
+                <%= link_to image_tag("sign-out-alt-solid.svg", class: "logout"), logout_path, method: "delete" %></li>
             <% else %>
-              <li class="nav-item app-header__nav_item">
-
-                <%= link_to "login with github", "/auth/github" , class: "btn btn_primary right" %>
-<!--              <li class="right"><%#= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %></i>-->
-<!--                </a></li>-->
-
-                <%= link_to raw('<i class="fab fa-github-square"></i>'), "/auth/github" %></li>
-
+              <li class="nav-item">
+                <%= link_to image_tag("github-square-brands.svg", class: "login"), "/auth/github" %></li>
             <% end %>
-            <li class="nav-item app-header__nav_item">
-              <a href="/carts/<%=session[:order_id]%>"><i class="fa fa-shopping-cart"></i></a></li>
+              <li class="nav-item">
+                <a href="/carts/<%=session[:order_id]%>"><span class="fa-stack fa-2x has-badge" data-count="<%= @current_order.items_in_cart %>"><i class="fa fa-shopping-cart fa-stack main-cart"></i></span></a>
+              </li>
           </ul>
         </div>
       </nav>

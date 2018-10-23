@@ -5,7 +5,17 @@ class Order < ApplicationRecord
 
   has_many :order_items
 
-
+  def items_in_cart
+    num = 0
+    if self.order_items.empty?
+      return nil
+    else
+      self.order_items.each do |item|
+        num += item.qty
+      end
+    end
+    return num
+  end
 
 
   def total_price
