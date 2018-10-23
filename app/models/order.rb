@@ -2,10 +2,7 @@ class Order < ApplicationRecord
   #validations
 
   #relationships
-
   has_many :order_items
-
-
 
 
   def total_price
@@ -20,20 +17,33 @@ class Order < ApplicationRecord
     self.order_items do |order_item|
       product = Product.find_by(id: order_item.product_id)
       quantity = product.inv_qty
-      quantity -= 1
+      quantity -= 1 # needs to reduce by qty purchased
       product = quantity
       product.save
     end
 
     self.status = "Paid"
     self.save
+    # order is not getting updated
+    raise
     # clears current cart () erase order_id
-
   end
 
 
   def date_of_order
     return self.created_at.strftime("%B %d, %Y")
+  end
+
+  def check_order_status(order)
+    if order.order_items.all? {|item| item.shipped}
+      order.status = "Complete"
+      raise
+      order.save
+    end
+  end
+
+  def destroy
+    # method to cancel order
   end
 
   private

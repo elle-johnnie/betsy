@@ -1,6 +1,7 @@
 
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :check_status, only: [:show]
 
   # GET /orders
   def index
@@ -29,7 +30,7 @@ class OrdersController < ApplicationController
   # flash notices do not workx
   def create
     @order = Order.new(order_params)
-
+    # @order.status = "Pending"
     if @order.save
       @order.place_order
       flash[:success] = 'Order was successfully created.'
@@ -75,5 +76,9 @@ class OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(:status, :cust_name, :cust_email, :mailing_address, :cc_name, :cc_digit, :cc_expiration, :cc_cvv, :cc_zip, :user_id)
+    end
+
+    def check_status
+      Order.check_order_status(@order)
     end
 end

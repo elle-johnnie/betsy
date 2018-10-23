@@ -19,12 +19,8 @@
 
 <section class="merchant-actions">
 <%= link_to 'List a Product', new_product_path, class: "sell-link btn btn-info" %> |
-
 <%= link_to 'View Categories', categories_path, class: "btn btn-info" %>
 </section>
-
-
-
 
 <table class="show_table table">
   <tr>
@@ -61,8 +57,7 @@
 
 
 
-<%# need to use orderitem table to find all occurences where product_id matches the
-  merchant's products%>
+
 <table class="show_table table">
   <tr>
     <th>ORDER #</th>
@@ -70,48 +65,37 @@
     <th>PRICE</th>
     <th>QUANTITY</th>
     <th>SUBTOTAL</th>
-    <th>STATUS</th>
-    <th>      </th>
+    <th>ITEM STATUS</th>
+    <th>ORDER STATUS</th>
   </tr>
 
   <tbody>
-
-
-  <% sold = @user.find_orders %>
-
-  <% if sold.empty? %>
-    <%= "No Products Have Sold" %>
-  <% else %>
-    <% sold.each do |product| %>
-      <tr>
-
-        <% or_item = OrderItem.find_by(product_id: product.id) %>
-        <td> <%= or_item.id %></td>
-        <td> <%= link_to "#{product.prod_name}", edit_product_path(product.id)%></td>
-        <td> <%= format_price(product.price)%></td>
-        <td> <%= or_item.qty %></td>
-        <td> <%= format_price(product.price * or_item.qty)  %></td>
-        <% if or_item.order_status%>
-          <td>PENDING</td>
-          <td><%# link_to "RETIRE", product_status_path(product), class: "btn btn-warning ", method: :patch%></td>
-        <% else %>
-          <td>SHIPPED</td>
-          <td><%# link_to "ACTIVATE", product_status_path(product), class: "btn btn-success", method: :patch%></td>
-          </tr>
-        <% end %>
+    <% sold = @user.find_orders %>
+    <% if sold.empty? %>
+      <%= "No Products Have Sold" %>
+    <% else %>
+      <% sold.each do |product| %>
+        <tr>
+          <% or_item = OrderItem.find_by(product_id: product.id) %>
+          <td> <%= or_item.order.id %></td>
+          <td> <%= link_to "#{product.prod_name}", edit_product_path(product.id)%></td>
+          <td> <%= format_price(product.price)%></td>
+          <td> <%= or_item.qty %></td>
+          <td> <%= format_price(product.price * or_item.qty)  %></td>
+               <% if or_item.shipped %>
+                  <td>SHIPPED</td>
+               <% else %>
+                  <td> PAID
+               <%= link_to "CONFIRM SHIPPED", ship_item_path(product), class: "btn btn-outline-info btn-sm", method: :patch%></td>
+               <% end %>
+               <% ord = Order.find(or_item.order.id) %>
+               <% Order.check_order_status(ord) %>
+          <td> <%= ord.status %></td>
+        </tr>
+      <% end %>
     <% end %>
-  <% end %>
   </tbody>
 </table>
 
 <%# view order fulfillment%>
 <%= link_to 'Back', root_path %>
-
-
-
-
-
-
-
-
-<%# view order fulfillment%>
