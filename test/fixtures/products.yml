@@ -6,17 +6,19 @@ cake1:
   description: yum
   price: 15.5
   inv_qty: 5
+  user: laura
 
 cake2:
 
   prod_name: chocolate goodness
   description: the best
   price: 19.5
-  inv_qty: 0
+  inv_qty: 5
+  user: laura
 
 
 cake3:
-  
+
   prod_name: vanilla plains
   description: real vanilla
   price: 20.5
