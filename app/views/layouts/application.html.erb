@@ -13,7 +13,8 @@
     <link href="https://fonts.googleapis.com/css?family=Charmonman" rel="stylesheet">
   </head>
 
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
+  <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark">
         <a class="navbar-brand" href="/">BAKESY</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -64,9 +65,97 @@
         </div>
       </nav>
 
+
   <body>
     <%= yield %>
   </body>
 
+  <!-- Footer -->
+  <footer class="page-footer font-small blue pt-4">
+
+      <!-- Footer Links -->
+      <div class="container-fluid text-center text-md-left">
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-md-6 mt-md-0 mt-3">
+
+            <!-- Content -->
+            <h5 class="text-uppercase">Bakesy</h5>
+            <p id="fotp">Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+
+          </div>
+          <!-- Grid column -->
+
+          <hr class="clearfix w-100 d-md-none pb-3">
+
+          <!-- Grid column -->
+          <div class="col-md-3 mb-md-0 mb-3">
+
+              <!-- Links -->
+              <h5 class="text-uppercase"></h5>
+
+              <ul class="list-unstyled">
+                <li>
+                  <%= link_to "Home", root_path%>
+                </li>
+                <li>
+                  <%= link_to "All Products", products_path %>
+                </li>
+                <li>
+                  <%= link_to "Login with Github", "/auth/github" %>
+                </li>
+                <li>
+                  <a href="/carts/<%=session[:order_id]%>">Shopping Cart</a>
+                </li>
+              </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 mb-md-0 mb-3">
+
+              <!-- Links -->
+              <h5 class="text-uppercase"></h5>
+
+              <ul class="list-unstyled">
+                <li>
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Merchant</a>
+                  <div class="dropdown-menu" >
+                    <% @users.each do |user| %>
+                      <%= link_to "#{user.username}", merchant_path(user.id), class: "dropdown-item" %>
+                    <% end %>
+                  </div>
+                </li>
+                <li>
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Category</a>
+                  <div class="dropdown-menu" >
+                    <% @categories.each do |category| %>
+                      <%= link_to "#{category.category}", category_path(category.id), class: "dropdown-item" %>
+                    <% end %>
+                  </div>
+                </li>
+              </ul>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </div>
+      <!-- Footer Links -->
+
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">© 2018 Copyright:
+        <a href="https://mdbootstrap.com/bootstrap-tutorial/"> Sugar~n~Spice.com</a>
+      </div>
+      <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
 
 </html>

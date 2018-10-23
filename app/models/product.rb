@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   # validations
   validates :prod_name, presence: true, uniqueness: true
+  validates :description, :price, presence: true
   validates :inv_qty, presence: true, numericality: { only_integer: true, greater_than: -1}
   # relationships
   belongs_to :user

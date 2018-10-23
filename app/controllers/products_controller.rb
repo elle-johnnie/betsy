@@ -17,7 +17,6 @@ class ProductsController < ApplicationController
 
     @product = Product.find(params[:id])
     @reviews = Review.where(product_id: @product)
-
   end
 
   # GET /products/new
@@ -34,7 +33,7 @@ class ProductsController < ApplicationController
     @product.user_id = session[:user_id]
     if @product.save(product_params)
       flash[:notice] = "#{@product.prod_name} was successfully created."
-      redirect_to root_path
+      redirect_to user_path(session[:user_id])
     else
       render :new
     end
