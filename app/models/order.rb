@@ -11,7 +11,9 @@ class Order < ApplicationRecord
       return nil
     else
       self.order_items.each do |item|
-        num += item.qty
+        if item.qty != nil
+          num += item.qty
+        end
       end
     end
     return num

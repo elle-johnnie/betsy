@@ -9,8 +9,7 @@ class ProductsController < ApplicationController
   # GET /products/1
 
   def show
-    @order = current_order
-    @order_item = @order.order_items.find_by(product_id: params[:id])
+    @order_item = @current_order.order_items.find_by(product_id: params[:id])
 
     if @order_item.nil?
       @order_item = current_order.order_items.new
