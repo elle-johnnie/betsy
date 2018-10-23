@@ -1,4 +1,3 @@
-require 'pry'
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
@@ -9,14 +8,14 @@ class OrdersController < ApplicationController
 
   # show Confirmation Page
   def show
-    # session id is not the same as current_order id - their difference is by 1
+    # session id is not the same as current order id - their difference is 1
     # get current order that has customer info with @order
-    @order.place_order # decrease inventory and change status to paid
     # order items are in the current session
     @order_items = Order.find_by(id: session[:order_id]).order_items
     # save order items from the current session to the session that has the personal information
     @order.order_items = @order_items
     @order.save
+    @order.place_order # decrease inventory and change status to paid
     # clear shopping cart after confirmation page has been shown
     session[:order_id] = nil
   end
