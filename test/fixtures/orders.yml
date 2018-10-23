@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  status: MyString
+  status: pending
   cust_name: MyString
-  cust_email: MyString
-  mailing_address: 1
+  cust_email: MyString@yahoo.com
+  mailing_address: 123 Broadway St.
   cc_name: MyString
-  cc_digit: 1
+  cc_digit: 1111111111111111
   cc_expiration: 2018-10-17
-  cc_cvv: 1
-  cc_zip: 1
+  cc_cvv: 123
+  cc_zip: 98765
 
 two:
   status: MyString
