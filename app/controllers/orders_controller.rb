@@ -14,7 +14,6 @@ class OrdersController < ApplicationController
     @order_items = Order.find_by(id: session[:order_id]).order_items
     # clear shopping cart after it Confirmation page has been shown
     session[:order_id] = nil
-    binding.pry
   end
 
   # GET /orders/new

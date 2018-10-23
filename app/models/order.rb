@@ -18,11 +18,16 @@ class Order < ApplicationRecord
 
   def place_order
     #decrease inventory
-    binding.pry
+
     self.order_items do |order_item|
-      product = Product.find_by(id: order_item.product_id)
+      product_id = order_item.product_id
+      order_quantity = order_item.qty
+      product = Product.find_by(id: product_id)
+      # get quantity
       quantity = product.inv_qty
-      quantity -= 1
+      # substract amount defined in order
+      quantity -= order_quantity
+      # save quantity in product
       product.inv_qty = quantity
       product.save
     end
