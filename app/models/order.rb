@@ -1,4 +1,3 @@
-require 'pry'
 class Order < ApplicationRecord
   #validations
 
@@ -28,7 +27,6 @@ class Order < ApplicationRecord
 
       product.update(inv_qty: new_inv_qty)
       product.save!
-      binding.pry
     end
     self.status = "Paid"
     self.save!
