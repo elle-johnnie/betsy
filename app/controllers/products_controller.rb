@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
     @order = current_order
     @order_item = @order.order_items.find_by(product_id: params[:id])
 
+    # setting up space, creating a blank row, not filling out items 
     if @order_item.nil?
       @order_item = current_order.order_items.new
     end
@@ -70,7 +71,7 @@ class ProductsController < ApplicationController
   def merchant
     @user = User.find_by(id: params[:id])
     @products = Product.by_merchant(params[:id].to_i)
-  
+
   end
 
   private

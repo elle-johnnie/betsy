@@ -9,10 +9,8 @@ class OrdersController < ApplicationController
 
   # show Confirmation Page
   def show
-    @order = Order.find_by(id: session[:order_id])
-    @order.place_order
     @order_items = Order.find_by(id: session[:order_id]).order_items
-    # clear shopping cart after it Confirmation page has been shown
+    # clear shopping cart after confirmation page has been shown
     session[:order_id] = nil
   end
 
@@ -30,8 +28,9 @@ class OrdersController < ApplicationController
   # flash notices do not have color
   def create
     @order = Order.new(order_params)
-
+    # it successfully grabs and saves all fields put in the form
     if @order.save
+      @order.save
       flash[:success] = 'Order was successfully created.'
       redirect_to order_path(@order.id)
     else
