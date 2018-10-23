@@ -48,12 +48,12 @@ p {
 }
 
 .right-items {
-  height: 50px;
+  height: 40px;
 }
 
 .login {
-  width: 35px;
-  padding-top: .6rem;
+  width: 25px;
+  padding-top: .5rem;
   opacity: .5;
 }
 
@@ -63,12 +63,13 @@ p {
 
 .main-cart {
   padding-left: 1.5rem;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .logout {
-  width: 35px;
-  padding-top: .6rem;
+  width: 25px;
+  padding-top: .5rem;
   opacity: .5;
 }
 
@@ -123,9 +124,9 @@ p {
 .fa-stack[data-count]:after{
   position: absolute;
   right: 0%;
-  top: 5%;
+  top: 0%;
   content: attr(data-count);
-  font-size: 40%;
+  font-size: 35%;
   padding: .6em;
   border-radius: 999px;
   line-height: .75em;
