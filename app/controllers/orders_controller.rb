@@ -9,7 +9,13 @@ class OrdersController < ApplicationController
 
   # show Confirmation Page
   def show
+    # session id is not the same as current_order id - their difference is by 1
+    # get current order that has customer info with @order
+    @order.place_order # decrease inventory and change status to paid
+    # order items are in the current session
     @order_items = Order.find_by(id: session[:order_id]).order_items
+    # save order items from the current session to the session that has the personal information
+    @order.order_items = @order_items
     # clear shopping cart after confirmation page has been shown
     session[:order_id] = nil
   end
