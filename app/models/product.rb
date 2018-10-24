@@ -36,34 +36,13 @@ class Product < ApplicationRecord
   end
 
 
-  # def avg_rating
-  #   average_rating = self.reviews.reduce(0) { |sum, review| sum + review.rating }
-  #   return average_rating
-  # end
-
-
-  # def self.status(product)
-  #   if product.active
-  #     product.update(active: false)
-  #   else
-  #     product.update(active: true)
-  #   end
-  #
-  # end
-
   def avg_rating
-    total = 0
-    if self.reviews.count > 0
-      self.reviews.each do |review|
-        total += review.rating
-      end
-      avg = total/self.reviews.count
-      return avg
+    reviews = self.reviews
+    if reviews.count > 0
+      total = reviews.reduce(0) { |sum, review| sum + review.rating }
+      avg = total/reviews.count
 
-    else
-      return 0
+      return avg
     end
   end
-
-
 end

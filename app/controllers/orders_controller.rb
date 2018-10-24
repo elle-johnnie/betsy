@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
+  skip_before_action :require_login
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :check_status, only: [:show]
 
   # GET /orders
   def index
@@ -34,9 +36,7 @@ class OrdersController < ApplicationController
   # flash notices do not have color
   def create
     @order = Order.new(order_params)
-    # it successfully grabs and saves all fields put in the form
     if @order.save
-      @order.save
       flash[:success] = 'Order was successfully created.'
       redirect_to order_path(@order.id)
     else
@@ -72,13 +72,18 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_params
-      params.require(:order).permit(:status, :cust_name, :cust_email, :mailing_address, :cc_name, :cc_digit, :cc_expiration, :cc_cvv, :cc_zip, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def order_params
+    params.require(:order).permit(:status, :cust_name, :cust_email, :mailing_address, :cc_name, :cc_digit, :cc_expiration, :cc_cvv, :cc_zip, :user_id)
+  end
+
+  def check_status
+    Order.check_order_status(@order)
+  end
 end

@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::Base
   before_action :find_user
-  before_action :list_categories, :list_merchants, :current_order
+
+  #before_action :list_categories, :list_merchants, :current_order
   # before_action :require_login, except: [:create, :root]
+
+  # before_action :list_categories, :list_merchants
+  before_action :require_login
+
 
   helper_method :current_order
 
@@ -26,19 +31,19 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    def find_user
-      if session[:user_id]
-        @login_user ||= User.find(session[:user_id]) if session[:user_id]
-      end
+  def find_user
+    if session[:user_id]
+      @login_user ||= User.find(session[:user_id]) if session[:user_id]
     end
+  end
 
 
-    def require_login
-      if session[:user_id].nil?
-        flash[:status] = :failure
-        flash[:result_text] = "You must be logged in to view this section"
-        redirect_to root_path
-      end
+  def require_login
+    if session[:user_id].nil?
+      flash[:status] = :failure
+      flash[:result_text] = "You must be logged in to view this section"
+      redirect_to root_path
     end
+  end
 
 end
