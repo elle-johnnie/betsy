@@ -8,21 +8,24 @@ class OrdersController < ApplicationController
     @orders = Order.all
   end
 
-  # show Confirmation Page
-  def show
-    # session id is not the same as current order id - their difference is 1
-    # get current order that has customer info with @order
-    # order items are in the current session
-    @order_items = Order.find_by(id: session[:order_id]).order_items
-    if order_items.nil?
+  def confirm_order
+    if @order_items.nil?
+      flash[:warning] = "You have zero items in your cart"
       redirect_to products_path
+    else
+      @order_items = Order.find_by(id: session[:order_id]).order_items
+      # save order items from the current session to the session that has the personal information
+      @order.order_items = @order_items
+      @order.save
+      @order.place_order # decrease inventory and change status to paid
+      # clear shopping cart after confirmation page has been shown
+      session[:order_id] = nil
+      # show Confirmation Page
     end
-    # save order items from the current session to the session that has the personal information
-    @order.order_items = @order_items
-    @order.save
-    @order.place_order # decrease inventory and change status to paid
-    # clear shopping cart after confirmation page has been shown
-    session[:order_id] = nil
+  end
+
+  def show
+      @order_items = Order.find_by(id: session[:order_id]).order_items
   end
 
   # GET /orders/new
