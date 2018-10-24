@@ -15,7 +15,7 @@
     <tr>
       <td><%= link_to "#{order_item.product.prod_name}", product_path(order_item.product.id) %></td>
       <td><%= order_item.qty %></td>
-      <td>$<%= format_price(order_item.subtotal) %></td>
+      <td><%= format_price(order_item.subtotal) %></td>
     </tr>
     <% end %>
   </tbody>
