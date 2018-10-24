@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   #validations
   validates :cust_name, presence: true, format: { with: /[a-zA-Z]/ }, on: :place_order
-  validates :cc_digit, presence: true, format: { with: /\b\d{4}[ -]?\d{4}[ -]?\d{4}[ -]?\d{4}\b/ }, on: :place_order
+  validates :cc_digit, presence: true, format: { with: /\b\d{4}[ -]?\d{4}[ -]?\d{4}[ -]?\d{4}\b/, maxlength: 16 }, on: :place_order
   validates :cc_expiration, presence: true, on: :place_order
   validates :cc_cvv, presence: true, format: { with: /[0-9]{3}/ }, on: :place_order
   validates :cc_zip, presence: true, format: { with: /[0-9]{5}/ }, on: :place_order
@@ -52,13 +52,13 @@ class Order < ApplicationRecord
     return self.created_at.strftime("%B %d, %Y")
   end
 
-  def check_order_status(order)
-    if order.order_items.all? {|item| item.shipped}
-      order.status = "Complete"
-      raise
-      order.save
-    end
-  end
+  # def check_order_status(order)
+  #   if order.order_items.all? {|item| item.shipped}
+  #     order.status = "Complete"
+  #     raise
+  #     order.save
+  #   end
+  # end
 
   def destroy
     # method to cancel order

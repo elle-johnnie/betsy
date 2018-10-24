@@ -18,6 +18,19 @@ describe Order do
       end
     end
 
+    describe "total_price" do
+
+      it "gets the correct total price when the order has items" do
+        order = orders(:one)
+        price_first_item = order.order_items.first.product.price * order.order_items.first.qty
+        price_last_item = order.order_items.last.product.price * order.order_items.last.qty
+        total_price = price_first_item + price_last_item
+
+        order.total_price
+
+        expect(order.total_price).must_equal total_price
+      end
+    end
 
 describe "validation" do
   let(:user) { user(:one) }
@@ -26,6 +39,10 @@ describe "validation" do
       order = create(:order)
   describe "validation" do
     let(:order)  { build(:order) }
+
+    it "must be valid with all parameters" do
+      expect(order.valid?).must_equal true
+    end
 
     it "must be invalid without a customer name " do
       order.cust_name = nil

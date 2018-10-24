@@ -3,6 +3,7 @@
 one:
   rating: 1
   description: MyString
+  product: cake1
 
 two:
   rating: 1
