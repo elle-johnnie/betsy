@@ -2,14 +2,14 @@ require "test_helper"
 
 describe OrderItemsController do
 
-  let (:product) { products(:cake1) }
+  let (:product1) { products(:cake1) }
+  let (:product2) { products(:cake3) }
 
   let (:order_item_hash1) {
     {
       order_item: {
-        product_id: products(:cake3),
-        qty: 5,
-        shipped: true
+        product_id: product1.id,
+        qty: 5
       }
     }
   }
@@ -17,14 +17,50 @@ describe OrderItemsController do
   let (:order_item_hash2) {
     {
       order_item: {
-        product_id: product.id,
-        qty: 3,
-        shipped: true
+        product_id: product2.id,
+        qty: 3
+      }
+    }
+  }
+
+  let (:exceeds_inventory) {
+    {
+      order_item: {
+        product_id: product2.id,
+        qty: 5
+      }
+    }
+  }
+
+  let (:update_order_item1) {
+    {
+      order_item: {
+        product_id: product1.id,
+        qty: 3
       }
     }
   }
 
   describe 'create' do
+
+    it 'can create a new order line item when order does not already exist' do
+
+      orders_before = Order.count
+
+      expect {
+        post order_items_path, params: order_item_hash1
+      }.must_change 'OrderItem.count', 1
+
+      orders_after = Order.count
+      order_id = Order.last.id
+
+      must_respond_with :redirect
+      must_redirect_to cart_path(order_id)
+
+      expect(orders_after).must_equal orders_before + 1
+      expect(OrderItem.last.product_id).must_equal product1.id
+      expect(OrderItem.last.order_id).must_equal order_id
+    end
 
     it 'can create a new order line item to existing order' do
 
@@ -36,14 +72,20 @@ describe OrderItemsController do
       }.must_change 'OrderItem.count', 1
 
       must_respond_with :redirect
-      expect(OrderItem.last.product_id).must_equal product.id
+      must_redirect_to cart_path(order_id)
+      expect(OrderItem.last.product_id).must_equal product2.id
       expect(OrderItem.last.order_id).must_equal order_id
     end
 
-    it 'can create a new order line item when order does not already exist' do
-    end
-
     it 'can not add a line order item if item is out of stock' do
+
+      expect {
+        post order_items_path, params: exceeds_inventory
+      }.wont_change 'OrderItem.count'
+
+      must_respond_with :redirect
+      must_redirect_to product_path(product2.id)
+
     end
 
   end
@@ -51,6 +93,20 @@ describe OrderItemsController do
   describe 'update' do
 
     it 'can update an existing order line item with valid data' do
+      post order_items_path, params: order_item_hash1
+      order_id = Order.last.id
+      order_item_id = OrderItem.last.id
+      before_qty = OrderItem.find_by(id: order_item_id).qty
+
+      expect {
+        patch order_item_path(order_item_id), params: update_order_item1
+      }.wont_change 'OrderItem.count'
+
+      after_qty = OrderItem.find_by(id: order_item_id).qty
+
+      must_respond_with :redirect
+      must_redirect_to cart_path(order_id)
+
     end
 
     it 'will not update an existing order line item with invalid data' do

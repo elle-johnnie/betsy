@@ -4,26 +4,27 @@ class OrderItemsController < ApplicationController
 
 
   def create
-    @order_item = @current_order.order_items.new(order_item_params)
-    @current_order.save
-
-    if @order_item.save
-      session[:order_id] = @current_order.id
-      redirect_to cart_path(@current_order.id)
+    product = Product.find_by(id: params[:order_item][:product_id])
+    if params[:order_item][:qty].to_i > product.inv_qty
+      flash[:warning] = "Quantity selected exceeds amount availabe in inventory"
+      redirect_to product_path(product.id)
     else
-      flash[:warning] = "Item order not placed"
-      redirect_to root_path
+      @order_item = @current_order.order_items.new(order_item_params)
+      @current_order.save
+
+      if @order_item.save
+        session[:order_id] = @current_order.id
+        redirect_to cart_path(@current_order.id)
+      else
+        flash[:warning] = "Item order not placed"
+        redirect_to root_path
+      end
+
     end
   end
 
   def update
-    # TODO DETERMINE WHICH INSTANCE IS NEEDED
-    # @CURRENT_ORDER OR @ORDER???????????????????
     @order_item = @current_order.order_items.find(params[:id])
-
-    # @order = current_order <- moved to controller filter
-    # check if item is in stock
-    # @order_item = @order.order_items.find(params[:id])
 
     @order_item.update_attributes(order_item_params)
     @current_order.save
