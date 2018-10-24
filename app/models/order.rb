@@ -14,7 +14,7 @@ class Order < ApplicationRecord
   def items_in_cart
     num = 0
     if self.order_items.empty?
-      return nil
+      return 0
     else
       self.order_items.each do |item|
         if item.qty != nil
