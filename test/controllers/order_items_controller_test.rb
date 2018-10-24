@@ -26,8 +26,8 @@ describe OrderItemsController do
   let (:exceeds_inventory) {
     {
       order_item: {
-        product_id: product2.id,
-        qty: 5
+        product_id: product1.id,
+        qty: 8
       }
     }
   }
@@ -37,6 +37,15 @@ describe OrderItemsController do
       order_item: {
         product_id: product1.id,
         qty: 3
+      }
+    }
+  }
+
+  let (:invalid_data) {
+    {
+      order_item: {
+        product_id: product1.id,
+        qty: nil
       }
     }
   }
@@ -77,14 +86,14 @@ describe OrderItemsController do
       expect(OrderItem.last.order_id).must_equal order_id
     end
 
-    it 'can not add a line order item if item is out of stock' do
+    it 'can not add a line order item if quantity exceeds inventory' do
 
       expect {
         post order_items_path, params: exceeds_inventory
       }.wont_change 'OrderItem.count'
 
       must_respond_with :redirect
-      must_redirect_to product_path(product2.id)
+      must_redirect_to product_path(product1.id)
 
     end
 
@@ -100,7 +109,6 @@ describe OrderItemsController do
     end
 
     it 'can update an existing order line item with valid data' do
-<<<<<<< HEAD
 
       expect {
         patch order_item_path(@order_item_id), params: update_order_item1
@@ -110,37 +118,51 @@ describe OrderItemsController do
 
       must_respond_with :redirect
       must_redirect_to cart_path(@order_id)
-=======
-      post order_items_path, params: order_item_hash1
-      order_id = Order.last.id
-      order_item_id = OrderItem.last.id
-      before_qty = OrderItem.find_by(id: order_item_id).qty
-
-      expect {
-        patch order_item_path(order_item_id), params: update_order_item1
-      }.wont_change 'OrderItem.count'
-
-      after_qty = OrderItem.find_by(id: order_item_id).qty
-
-      must_respond_with :redirect
-      must_redirect_to cart_path(order_id)
->>>>>>> testing
 
     end
 
     it 'will not update an existing order line item with invalid data' do
 
+      before_qty = OrderItem.find_by(id: @order_item_id).qty
+
+      expect {
+        patch order_item_path(@order_item_id), params: invalid_data
+      }.wont_change 'OrderItem.count'
+
+      after_qty = OrderItem.find_by(id: @order_item_id).qty
+
+      expect(after_qty).must_equal before_qty
+
+      must_respond_with :redirect
+      must_redirect_to root_path
     end
 
-    it 'will render not_found when a line order item does not exist to update' do
+    it 'will redirect when a line order item does not exist to update' do
+
+      expect {
+        patch order_item_path(-1), params: update_order_item1
+      }.wont_change 'OrderItem.count'
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+
     end
 
     it 'will will not update existing order line item when qty exceeds inventory count' do
-    end
 
-    it 'can not add a line order item if item is out of stock' do
-    end
+      before_qty = OrderItem.find_by(id: @order_item_id).qty
 
+      expect {
+        patch order_item_path(@order_item_id), params: exceeds_inventory
+      }.wont_change 'OrderItem.count'
+
+      after_qty = OrderItem.find_by(id: @order_item_id).qty
+
+      expect(after_qty).must_equal before_qty
+
+      must_respond_with :redirect
+      must_redirect_to product_path(product1.id)
+    end
   end
 
   describe 'destroy' do

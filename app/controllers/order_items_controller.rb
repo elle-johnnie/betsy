@@ -19,25 +19,33 @@ class OrderItemsController < ApplicationController
         flash[:warning] = "Item order not placed"
         redirect_to root_path
       end
-
     end
   end
 
   def update
-    @order_item = @current_order.order_items.find(params[:id])
+    product = Product.find_by(id: params[:order_item][:product_id])
+    if params[:order_item][:qty].to_i > product.inv_qty
+      flash[:warning] = "Quantity selected exceeds amount availabe in inventory"
+      redirect_to product_path(product.id)
+    else
+      @order_item = @current_order.order_items.find_by(id: params[:id])
+      if @order_item.nil?
+        flash[:warning] = "Order item not found"
+        redirect_to root_path
+      else
+        @order_item.update_attributes(order_item_params)
+        @current_order.save
 
-    @order_item.update_attributes(order_item_params)
-    @current_order.save
-
-    redirect_to cart_path(@current_order.id)
+        if @order_item.save
+          redirect_to cart_path(@current_order.id)
+        else
+          flash[:warning] = "Item order not updated"
+          redirect_to root_path
+        end
+      end
+    end
   end
-#
-# #   def cart_direct
-# #     # TODO DETERMINE WHICH INSTANCE IS NEEDED
-# #     # @CURRENT_ORDER OR @ORDER???????????????????
-#     @order_item = @current_order.order_items.new(product_id: params[:id], qty: 1, order_status_id: 1)
-# #     redirect_back(fallback_location: cart_path(@order.id))
-# #   end
+
 
   def cart_direct
     # @order = current_order <- moved to controller filter
