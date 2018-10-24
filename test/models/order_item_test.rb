@@ -25,6 +25,7 @@ describe OrderItem do
       another_order_item = order_items(:line2)
 
       expect(order_item).must_be :valid?
+
       expect(another_order_item).must_be :valid?
     end
 
@@ -35,15 +36,6 @@ describe OrderItem do
 
       expect(valid).must_equal false
       expect(order_item.errors.messages).must_include :qty
-    end
-
-    it 'must have shipped status' do
-      order_item.shipped = nil
-
-      valid = order_item.save
-
-      expect(valid).must_equal false
-      expect(order_item.errors.messages).must_include :shipped
     end
   end
 
