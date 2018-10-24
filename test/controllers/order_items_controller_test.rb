@@ -100,6 +100,7 @@ describe OrderItemsController do
     end
 
     it 'can update an existing order line item with valid data' do
+<<<<<<< HEAD
 
       expect {
         patch order_item_path(@order_item_id), params: update_order_item1
@@ -109,6 +110,21 @@ describe OrderItemsController do
 
       must_respond_with :redirect
       must_redirect_to cart_path(@order_id)
+=======
+      post order_items_path, params: order_item_hash1
+      order_id = Order.last.id
+      order_item_id = OrderItem.last.id
+      before_qty = OrderItem.find_by(id: order_item_id).qty
+
+      expect {
+        patch order_item_path(order_item_id), params: update_order_item1
+      }.wont_change 'OrderItem.count'
+
+      after_qty = OrderItem.find_by(id: order_item_id).qty
+
+      must_respond_with :redirect
+      must_redirect_to cart_path(order_id)
+>>>>>>> testing
 
     end
 
