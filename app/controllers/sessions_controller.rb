@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :require_login
+  skip_before_action :require_login, except: :destroy
 
   def create
     auth_hash = request.env['omniauth.auth']
@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
     @user = nil
     # session.clear
     flash[:status] = :success
-    flash[:result_text] = "Successfully logged out"
+    flash[:result_text] = "Goodbye #{session[:username]}!"
 
     redirect_to root_path
   end

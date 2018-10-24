@@ -44,9 +44,7 @@ class Order < ApplicationRecord
       product.update(inv_qty: new_inv_qty)
       product.save!
     end
-    self.status = "Paid"
-    self.save!
-
+    self.update(status: "Paid")
   end
 
 
