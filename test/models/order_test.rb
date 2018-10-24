@@ -6,6 +6,10 @@ describe Order do
   describe "validation" do
     let(:order)  { build(:order) }
 
+    it "must be valid with all parameters" do
+      expect(order.valid?).must_equal true
+    end
+
     it "must be invalid without a customer name " do
       order.cust_name = nil
 
