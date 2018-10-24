@@ -2,10 +2,11 @@
 
 
 laura:
-  uid: 1
-  username: Lady Bird
-  email: lbird@ada.com
   provider: github
+  uid: 13371338
+  email: lbird@ada.com
+  username: Lady Bird
+
 
 ada:
   provider: github
