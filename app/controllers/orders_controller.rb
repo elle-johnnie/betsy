@@ -9,21 +9,10 @@ class OrdersController < ApplicationController
   end
 
   def confirm_order
-    if @order_items.nil?
-      flash[:warning] = "You have zero items in your cart"
-      redirect_to products_path
-    else
-      @order.update(order_params)
-      @order.place_order # decrease inventory and change status to paid
-      # show confirmation page
-      render :show
-      session[:order_id] = nil
-    end
   end
 
   def show
-      @order_items = Order.find_by(id: session[:order_id]).order_items
-      @order = Order.find_by(id: session[:order_id])
+      @order = @current_order
   end
 
   # GET /orders/new
@@ -57,12 +46,16 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1
   def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @current_order.order_items.nil?
+      flash[:warning] = "You have zero items in your cart"
+      redirect_to products_path
+    else
+      @current_order.update(order_params)
+      @current_order.place_order # decrease inventory and change status to paid
+      # show confirmation page
+      render :show
+      session[:order_id] = nil
+
     end
   end
 
