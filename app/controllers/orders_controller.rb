@@ -13,6 +13,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+    # show view used when calling rendering in update - do not remove html show page
   end
 
   # GET /orders/new
@@ -53,7 +54,7 @@ class OrdersController < ApplicationController
       @current_order.update(order_params)
       @current_order.place_order # decrease inventory and change status to paid
       # show confirmation page
-      @order = @current_order # needed for rendering information, otherwise customer info is nil
+      @order = @current_order # needed for rendering order information in show
       render :show
       session[:order_id] = nil
 
