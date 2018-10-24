@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  order_id: 1
-  product_id: 1
-  qty: 1
-  shipped: false
+line_one:
+  order: one
+  product: cake1
+  qty: 2
+  shipped: true
 
-two:
-  order_id: 1
-  product_id: 1
+line_two:
+  order: one
+  product: cake3
   qty: 1
   shipped: false

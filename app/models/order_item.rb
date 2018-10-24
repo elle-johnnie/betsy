@@ -1,5 +1,6 @@
 class OrderItem < ApplicationRecord
-  validates :qty, numericality: { only_integer: true }
+  validates :qty, presence: true, numericality: { only_integer: true }
+  validates :shipped, presence: true
 
   belongs_to :product
   belongs_to :order

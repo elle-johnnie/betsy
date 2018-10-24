@@ -1,25 +1,15 @@
 class OrderItemsController < ApplicationController
 
   def create
-    @order = current_order
-    # check if item is in stock
+    @order_item = @current_order.order_items.new(order_item_params)
 
-    @order_item = @order.order_items.new(order_item_params)
-    @order_item.save
-
-    if @order.save
-
-      session[:order_id] = @order.id
-
+    if @order_item.save
+      session[:order_id] = @current_order.id
       redirect_to cart_path(@current_order.id)
-
     else
-
       flash[:warning] = "Item order not placed"
       redirect_to root_path
-
     end
-
   end
 
   def update
