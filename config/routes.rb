@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   resources :order_items, only: [:create, :update, :destroy]
 
   resources :reviews
+  
   resources :orders
+  patch 'order/confirm_order/:id', to: "order#confirm_order", as: "confirm_order"
 
   get 'products/category/:id', to: "products#category", as: "category"
   patch 'products/:id/retire', to: "products#status", as: "product_status"
