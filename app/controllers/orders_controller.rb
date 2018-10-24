@@ -13,9 +13,10 @@ class OrdersController < ApplicationController
     # session id is not the same as current order id - their difference is 1
     # get current order that has customer info with @order
     # order items are in the current session
-    @order_items = Order.find_by(id: session[:order_id]).order_items
+    #@order_items = Order.find_by(id: session[:order_id]).order_items
     # save order items from the current session to the session that has the personal information
-    @order.order_items = @order_items
+    #@order.order_items = @order_items
+    @order_items = @order.order_items
     @order.save
     @order.place_order # decrease inventory and change status to paid
     # clear shopping cart after confirmation page has been shown
@@ -24,7 +25,6 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order = Order.new
   end
 
   # GET /orders/1/edit
@@ -35,7 +35,8 @@ class OrdersController < ApplicationController
   # must change database
   # flash notices do not have color
   def create
-    @order = Order.new(order_params)
+    @order = @current_order.update(order_params)
+    # it successfully grabs and saves all fields put in the form
     if @order.save
       flash[:success] = 'Order was successfully created.'
       redirect_to order_path(@order.id)
