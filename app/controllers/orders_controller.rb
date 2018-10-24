@@ -9,28 +9,14 @@ class OrdersController < ApplicationController
   end
 
   def confirm_order
-    if @order_items.nil?
-      flash[:warning] = "You have zero items in your cart"
-      redirect_to products_path
-    else
-      @order_items = Order.find_by(id: session[:order_id]).order_items
-      # save order items from the current session to the session that has the personal information
-      @order.order_items = @order_items
-      @order.save
-      @order.place_order # decrease inventory and change status to paid
-      # clear shopping cart after confirmation page has been shown
-      session[:order_id] = nil
-      # show Confirmation Page
-    end
   end
 
   def show
-      @order_items = Order.find_by(id: session[:order_id]).order_items
+      @order = @current_order
   end
 
   # GET /orders/new
   def new
-    @order = Order.new
   end
 
   # GET /orders/1/edit
@@ -41,7 +27,8 @@ class OrdersController < ApplicationController
   # must change database
   # flash notices do not have color
   def create
-    @order = Order.new(order_params)
+    @order = @current_order.update(order_params)
+    # it successfully grabs and saves all fields put in the form
     if @order.save
       flash[:success] = 'Order was successfully created.'
       redirect_to order_path(@order.id)
@@ -59,12 +46,16 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1
   def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @current_order.order_items.nil?
+      flash[:warning] = "You have zero items in your cart"
+      redirect_to products_path
+    else
+      @current_order.update(order_params)
+      @current_order.place_order # decrease inventory and change status to paid
+      # show confirmation page
+      render :show
+      session[:order_id] = nil
+
     end
   end
 
