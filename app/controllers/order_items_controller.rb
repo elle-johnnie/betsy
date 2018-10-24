@@ -48,25 +48,22 @@ class OrderItemsController < ApplicationController
 
 
   def cart_direct
-    # @order = current_order <- moved to controller filter
-    @order_item = @current_order.order_items.new(product_id: params[:id], qty: 1, shipped: false)
-    @order_item.save
+    product = Product.find_by(id: params[:id])
+    if product.inv_qty == 0
+      flash[:warning] = "Product is out of stock"
+      redirect_to products_path
+    else
+      @order_item = @current_order.order_items.new(product_id: params[:id], qty: 1, shipped: false)
+      @order_item.save
+      @current_order.save
 
-    @current_order.save
-
-    session[:order_id] = @current_order.id
-
-    redirect_to cart_path(@current_order.id)
+      session[:order_id] = @current_order.id
+      redirect_to cart_path(@current_order.id)
+    end
   end
 
   def destroy
-    # TODO DETERMINE WHICH INSTANCE IS NEEDED
-    #     # @CURRENT_ORDER OR @ORDER???????????????????
     @order_item = @current_order.order_items.find(params[:id])
-
-    # @order = current_order <- moved to controller filter
-    # @order_item = @order.order_items.find(params[:id])
-
     @order_item.destroy
     @order_items = @current_order.order_items
 
