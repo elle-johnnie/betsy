@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   skip_before_action :require_login
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action :check_status, only: [:show]
+  # before_action :check_status, only: [:show]
 
   # GET /orders
   def index
@@ -14,6 +14,9 @@ class OrdersController < ApplicationController
     # get current order that has customer info with @order
     # order items are in the current session
     @order_items = Order.find_by(id: session[:order_id]).order_items
+    if order_items.nil?
+      redirect_to products_path
+    end
     # save order items from the current session to the session that has the personal information
     @order.order_items = @order_items
     @order.save
