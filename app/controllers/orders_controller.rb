@@ -1,6 +1,7 @@
-
 class OrdersController < ApplicationController
+  skip_before_action :require_login
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :check_status, only: [:show]
 
   # GET /orders
   def index
@@ -9,9 +10,15 @@ class OrdersController < ApplicationController
 
   # show Confirmation Page
   def show
-    @order = Order.find_by(id: session[:order_id])
+    # session id is not the same as current order id - their difference is 1
+    # get current order that has customer info with @order
+    # order items are in the current session
     @order_items = Order.find_by(id: session[:order_id]).order_items
-    # clear shopping cart after it Confirmation page has been shown
+    # save order items from the current session to the session that has the personal information
+    @order.order_items = @order_items
+    @order.save
+    @order.place_order # decrease inventory and change status to paid
+    # clear shopping cart after confirmation page has been shown
     session[:order_id] = nil
   end
 
@@ -26,12 +33,10 @@ class OrdersController < ApplicationController
 
   # POST /orders
   # must change database
-  # flash notices do not workx
+  # flash notices do not have color
   def create
     @order = Order.new(order_params)
-
     if @order.save
-      @order.place_order
       flash[:success] = 'Order was successfully created.'
       redirect_to order_path(@order.id)
     else
@@ -67,13 +72,18 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_params
-      params.require(:order).permit(:status, :cust_name, :cust_email, :mailing_address, :cc_name, :cc_digit, :cc_expiration, :cc_cvv, :cc_zip, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def order_params
+    params.require(:order).permit(:status, :cust_name, :cust_email, :mailing_address, :cc_name, :cc_digit, :cc_expiration, :cc_cvv, :cc_zip, :user_id)
+  end
+
+  def check_status
+    Order.check_order_status(@order)
+  end
 end

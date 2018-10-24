@@ -2,9 +2,9 @@
 
 one:
   status: pending
-  cust_name: MyString
-  cust_email: MyString@yahoo.com
-  mailing_address: 123 Broadway St.
+  cust_name: Laura
+  cust_email: laura@gmail.com
+  mailing_address: 1
   cc_name: MyString
   cc_digit: 1111111111111111
   cc_expiration: 2018-10-17
