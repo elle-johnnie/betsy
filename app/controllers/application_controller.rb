@@ -1,9 +1,6 @@
 class ApplicationController < ActionController::Base
 
-
   before_action :list_categories, :list_merchants, :current_order
-
-
   # before_action :list_categories, :list_merchants
   before_action :require_login, except: [:current_order, :render_404, :find_user]
   before_action :find_user
@@ -24,6 +21,8 @@ class ApplicationController < ActionController::Base
     else
       @current_order = Order.new
     end
+
+    return @current_order
   end
 
   def render_404
