@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  skip_before_action :require_login, only: [:index, :show]
+  # skip_before_action :require_login, except: [:create, :update, :edit]
   # GET /category
   def index
     @categories = Category.all

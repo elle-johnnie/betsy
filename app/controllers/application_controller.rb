@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
-  before_action :find_user
 
-  #before_action :list_categories, :list_merchants, :current_order
-  # before_action :require_login, except: [:create, :root]
+
+  before_action :list_categories, :list_merchants, :current_order
+
 
   # before_action :list_categories, :list_merchants
-  before_action :require_login
-
+  before_action :require_login, except: [:current_order, :render_404, :find_user]
+  before_action :find_user
 
   helper_method :current_order
 
@@ -40,8 +40,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if session[:user_id].nil?
-      flash[:status] = :failure
-      flash[:result_text] = "You must be logged in to view this section"
+      flash[:error] = "You must be logged in to view this section"
       redirect_to root_path
     end
   end
