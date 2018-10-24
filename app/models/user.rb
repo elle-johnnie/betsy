@@ -26,21 +26,15 @@ class User < ApplicationRecord
       end
     end
 
-    # OrderItem.all.each do |item|
-    #  if self.products.include? item.product_id
-    #     sold << item
-    #   end
-    # end
-    # binding.pry
     return sold
   end
 
 
   def revenue
-    @pending = self.orders.where(status: 1)
-    @paid = self.orders.where(status: 2)
-    @shipped = self.orders.where(status: 3)
-    @completed = self.orders.where(status: 4)
+    @pending = self.orders.where(status: "Pending")
+    @paid = self.orders.where(status: "Paid")
+    @shipped = self.orders.where(status: "Complete")
+    @completed = self.orders.where(status: "Cancelled")
 
   end
 

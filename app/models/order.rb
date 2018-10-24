@@ -8,8 +8,8 @@ class Order < ApplicationRecord
   validates :cust_email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }, on: :create
   validates :mailing_address, presence: true, on: :create
   #relationships
-
   has_many :order_items
+
 
   def items_in_cart
     num = 0
@@ -25,7 +25,6 @@ class Order < ApplicationRecord
     return num
   end
 
-
   def total_price
     self.order_items.sum do |order_item|
       product_id = Product.find_by(id: order_item.product_id)
@@ -35,23 +34,36 @@ class Order < ApplicationRecord
 
   def place_order
     #decrease inventory
-    self.order_items do |order_item|
-      product = Product.find_by(id: order_item.product_id)
+    self.order_items.each do |order_item|
+      product = order_item.product
+      # get quantity
       quantity = product.inv_qty
-      quantity -= 1
-      product = quantity
-      product.save
+      # substract amount defined in order
+      new_inv_qty = quantity - order_item.qty
+      product.inv_qty = new_inv_qty
+      product.update(inv_qty: new_inv_qty)
+      product.save!
     end
-
     self.status = "Paid"
-    self.save
-    # clears current cart () erase order_id
+    self.save!
 
   end
 
 
   def date_of_order
     return self.created_at.strftime("%B %d, %Y")
+  end
+
+  def check_order_status(order)
+    if order.order_items.all? {|item| item.shipped}
+      order.status = "Complete"
+      raise
+      order.save
+    end
+  end
+
+  def destroy
+    # method to cancel order
   end
 
   private

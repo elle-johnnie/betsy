@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
+  skip_before_action :require_login, only: [:index, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy, :status]
+  before_action :require_login, only: [:edit, :update, :create, :status]
 
   # GET /products
   def index
@@ -9,9 +11,9 @@ class ProductsController < ApplicationController
   # GET /products/1
 
   def show
-    @order = current_order
-    @order_item = @order.order_items.find_by(product_id: params[:id])
+    @order_item = @current_order.order_items.find_by(product_id: params[:id])
 
+    # setting up space, creating a blank row, not filling out 
     if @order_item.nil?
       @order_item = current_order.order_items.new
     end
@@ -86,13 +88,14 @@ class ProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def product_params
-      params.require(:product).permit(:prod_name, :description, :price, :inv_qty, category_ids: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def product_params
+    params.require(:product).permit(:prod_name, :description, :price, :inv_qty, category_ids: [])
+  end
 end

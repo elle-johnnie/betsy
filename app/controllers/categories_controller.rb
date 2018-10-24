@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  # skip_before_action :require_login, except: [:create, :update, :edit]
   # GET /category
   def index
     @categories = Category.all
@@ -23,7 +24,7 @@ class CategoriesController < ApplicationController
 
     if @category.save
       flash[:success] = 'Category was successfully created.'
-      redirect_to categories_pathgit
+      redirect_to categories_path
     else
       flash.now[:warning] = 'Category not created'
       @category.errors.messages.each do |field, msg|
