@@ -1,7 +1,7 @@
 require "test_helper"
 
 describe OrderItem do
-  let(:order_item) { order_items(:line_one) }
+  let(:order_item) { order_items(:line1) }
 
   describe 'relationships' do
     it 'must belong to a product' do
@@ -22,7 +22,7 @@ describe OrderItem do
 
   describe 'validations' do
     it 'must be valid with all fields' do
-      another_order_item = order_items(:line_two)
+      another_order_item = order_items(:line2)
 
       expect(order_item).must_be :valid?
       expect(another_order_item).must_be :valid?

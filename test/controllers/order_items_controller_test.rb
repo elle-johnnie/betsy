@@ -2,15 +2,23 @@ require "test_helper"
 
 describe OrderItemsController do
 
-  let (:order) { orders(:one) }
   let (:product) { products(:cake1) }
 
-  let (:order_item_on_existing_order) {
+  let (:order_item_hash1) {
     {
       order_item: {
-        order_id: order.id,
-        product_id: product.id,
+        product_id: products(:cake3),
         qty: 5,
+        shipped: true
+      }
+    }
+  }
+
+  let (:order_item_hash2) {
+    {
+      order_item: {
+        product_id: product.id,
+        qty: 3,
         shipped: true
       }
     }
@@ -18,14 +26,18 @@ describe OrderItemsController do
 
   describe 'create' do
 
-    it 'can create a new order line item when order already exists' do
+    it 'can create a new order line item to existing order' do
+
+      post order_items_path, params: order_item_hash1
+      order_id = Order.last.id
 
       expect {
-        post order_items_path, params: order_item_on_existing_order
+        post order_items_path, params: order_item_hash2
       }.must_change 'OrderItem.count', 1
 
       must_respond_with :redirect
-      expect(OrderItem.last.order_id).must_equal order.id
+      expect(OrderItem.last.product_id).must_equal product.id
+      expect(OrderItem.last.order_id).must_equal order_id
     end
 
     it 'can create a new order line item when order does not already exist' do
