@@ -1,3 +1,4 @@
+require 'pry'
 class OrdersController < ApplicationController
   skip_before_action :require_login
   before_action :set_order, only: [:show, :edit, :update, :destroy]
@@ -12,7 +13,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-      @order = @current_order
   end
 
   # GET /orders/new
@@ -53,6 +53,7 @@ class OrdersController < ApplicationController
       @current_order.update(order_params)
       @current_order.place_order # decrease inventory and change status to paid
       # show confirmation page
+      @order = @current_order # needed for rendering information, otherwise customer info is nil
       render :show
       session[:order_id] = nil
 
