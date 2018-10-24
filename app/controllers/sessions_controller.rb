@@ -6,18 +6,16 @@ class SessionsController < ApplicationController
     user = User.find_by(uid: auth_hash[:uid], provider: 'github')
     if user
       # User was found in the database
-      flash[:status] = :success
-      flash[:result_text] = "Successfully logged in as existing user #{user.username}"
+      flash[:success] = "Successfully logged in as #{user.username}"
     else
       # User doesn't match anything in the DB
       user = User.new_user(auth_hash)
       # Attempt to create a new user
       if user.save
-        flash[:status] = :success
-        flash[:result_text] = "Successfully created new user #{user.username} with ID #{user.id}"
+        flash[:success] = "Successfully created new user #{user.username} with ID #{user.id}"
       else
-        flash.now[:status] = :failure
-        flash.now[:result_text] = "Could not log in"
+
+        flash.now[:warning] = "Could not log in"
         flash.now[:messages] = user.errors.messages
         render "login", status: :bad_request
         return
@@ -33,8 +31,7 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     @user = nil
     # session.clear
-    flash[:status] = :success
-    flash[:result_text] = "Goodbye #{session[:username]}!"
+    flash[:notice] = "Goodbye #{session[:username]}!"
 
     redirect_to root_path
   end
