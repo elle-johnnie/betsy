@@ -49,6 +49,7 @@
  </div>
 </div><!-- end row -->
 
+<%if @product.inv_qty > 0 %>
 <div class="row add-to-cart">
  <div class="col-md-5 product-qty">
   <%= form_with model: @order_item do |f| %>
@@ -62,10 +63,15 @@
   <% end %>
  </div>
 </div><!-- end row -->
+<%end%>
 
 <div class="row">
  <div class="col-md-4 text-center">
-  <span class="monospaced">In Stock</span>
+   <%if @product.inv_qty > 0 %>
+    <span class="monospaced">In Stock</span>
+   <%else %>
+    <span class="monospaced">Out of Stock</span>
+   <%end%>
  </div>
 </div><!-- end row -->
 <div class="row">
