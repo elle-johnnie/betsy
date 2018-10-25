@@ -18,25 +18,36 @@ class User < ApplicationRecord
   end
 
 
-  def find_orders
-    sold = []
+  def find_ordered_items
+    ordered_items = []
     self.products.each do |product|
-      if !product.order_items.empty?
-        sold << product
+      unless product.order_items.empty?
+        product.order_items.each do |ord_item|
+        ordered_items << ord_item
+        end
+      end
+    end
+    return ordered_items
+  end
+
+
+  def revenue(status_filter)
+    rev = 0
+    if status_filter == "Total"
+      self.order_items.each do |item|
+        rev += item.subtotal
+      end
+      return rev
+    else
+      self.order_items.each do |item|
+        if item.order.status == status_filter
+          rev += item.subtotal
+        end
       end
     end
 
-    return sold
+    return rev
   end
-
-
-  def revenue
-    @pending = self.orders.where(status: "Pending")
-    @paid = self.orders.where(status: "Paid")
-    @shipped = self.orders.where(status: "Complete")
-    @completed = self.orders.where(status: "Cancelled")
-
-  end
-
-
 end
+
+

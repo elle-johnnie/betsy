@@ -25,7 +25,6 @@
       <% else %>
         <td><span>Out of Stock </span></td>
       <%end%>
-
       <td><%= format_price(order_item.subtotal) %></td>
       <td><%= link_to "Remove", order_item_path(order_item.id), method: :delete, class: "btn btn-outline-danger" %></td>
     </tr>

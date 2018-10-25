@@ -1,67 +1,75 @@
 class OrderItemsController < ApplicationController
   skip_before_action :require_login
-  before_action :set_order, only: [:create, :update, :cart_direct]
+  # before_action :set_order, only: [:ship]
 
 
   def create
-    # check if item is in stock
-    @order_item = @order.order_items.new(order_item_params)
-    if @order.save
-      session[:order_id] = @order.id
-      # TODO DETERMINE WHICH REDIRECT IS NEEDED
-      # @CURRENT_ORDER OR @ORDER???????????????????
-      redirect_to cart_path(@current_order.id)
-      # redirect_to cart_path(@order.id)
-    else
-      flash[:warning] = "Item order not placed"
-      redirect_to root_path
-
+    product = Product.find_by(id: params[:order_item][:product_id])
+    if params[:order_item][:qty].to_i > product.inv_qty
+      flash[:warning] = "Quantity selected exceeds amount availabe in inventory"
+      redirect_to product_path(product.id)
+    elsif @current_order.nil?
+      @current_order = Order.new
+      @current_order.save
     end
 
+    @order_item = @current_order.order_items.new(order_item_params)
+    @order_item.save
+    @current_order.save
+    @current_order.update(status: "Pending")
+    session[:order_id] = @current_order.id
+    redirect_to cart_path(@current_order.id)
+    # else
+    #   flash[:warning] = "Item order not placed"
+    #   redirect_to root_path
+  #   # end
   end
 
   def update
-    # TODO DETERMINE WHICH INSTANCE IS NEEDED
-    # @CURRENT_ORDER OR @ORDER???????????????????
-    @order_item = @current_order.order_items.find(params[:id])
+    product = Product.find_by(id: params[:order_item][:product_id])
+    if params[:order_item][:qty].to_i > product.inv_qty
+      flash[:warning] = "Quantity selected exceeds amount available in inventory"
+      redirect_to product_path(product.id)
+    else
+      @order_item = @current_order.order_items.find_by(id: params[:id])
+      if @order_item.nil?
+        flash[:warning] = "Order item not found"
+        redirect_to root_path
+      else
+        @order_item.update_attributes(order_item_params)
+        @current_order.save
 
-    # @order = current_order <- moved to controller filter
-    # check if item is in stock
-    # @order_item = @order.order_items.find(params[:id])
-
-    @order_item.update_attributes(order_item_params)
-    @current_order.save
-
-    redirect_to cart_path(@current_order.id)
+        if @order_item.save
+          redirect_to cart_path(@current_order.id)
+        else
+          flash[:warning] = "Item order not updated"
+          redirect_to root_path
+        end
+      end
+    end
   end
-#
-# #   def cart_direct
-# #     # TODO DETERMINE WHICH INSTANCE IS NEEDED
-# #     # @CURRENT_ORDER OR @ORDER???????????????????
-#     @order_item = @current_order.order_items.new(product_id: params[:id], qty: 1, order_status_id: 1)
-# #     redirect_back(fallback_location: cart_path(@order.id))
-# #   end
+
 
   def cart_direct
-    # @order = current_order <- moved to controller filter
+    product = Product.find_by(id: params[:id])
+    if product.inv_qty == 0
+      flash[:warning] = "Product is out of stock"
+      redirect_to products_path
+    elsif @current_order.nil?
+      @current_order = Order.new
+      @current_order.save
+    end
+      
     @order_item = @current_order.order_items.new(product_id: params[:id], qty: 1, shipped: false)
     @order_item.save
-
     @current_order.save
 
     session[:order_id] = @current_order.id
-
     redirect_to cart_path(@current_order.id)
   end
 
   def destroy
-    # TODO DETERMINE WHICH INSTANCE IS NEEDED
-    #     # @CURRENT_ORDER OR @ORDER???????????????????
     @order_item = @current_order.order_items.find(params[:id])
-
-    # @order = current_order <- moved to controller filter
-    # @order_item = @order.order_items.find(params[:id])
-
     @order_item.destroy
     @order_items = @current_order.order_items
 
@@ -70,8 +78,8 @@ class OrderItemsController < ApplicationController
 
   def ship
     @order_item = OrderItem.find_by(product_id: params[:id])
-    @order_item.shipped = true
-    Order.check_order_status(@current_order)
+    @order_item.update(shipped: true)
+    @order_item.order.check_order_status
     if @order_item.save
       flash[:success] = 'Item(s) have been marked as shipped'
       redirect_back(fallback_location: root_path)
@@ -88,8 +96,8 @@ class OrderItemsController < ApplicationController
     params.require(:order_item).permit(:product_id, :qty, :shipped)
   end
 
-  def set_order
-    @order = current_order
-  end
+  # def set_order
+  #   @order = current_order
+  # end
 
 end

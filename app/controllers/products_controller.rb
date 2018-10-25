@@ -5,26 +5,32 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all
+    if params[:user_id]
+      @products = @login_user.products
+    else
+      @products = Product.all
+    end
+
   end
 
   # GET /products/1
 
   def show
-    @order_item = @current_order.order_items.find_by(product_id: params[:id])
-
-    # setting up space, creating a blank row, not filling out 
-    if @order_item.nil?
-      @order_item = current_order.order_items.new
-    end
-
-    @product = Product.find(params[:id])
+    # @product = Product.find(params[:id])
+    @order_item = OrderItem.new
     @reviews = Review.where(product_id: @product)
   end
 
   # GET /products/new
   def new
-    @product = Product.new
+
+    if params[:user_id]
+      # nested route: /user/user_id/products/new
+      user = User.find_by(id: params[:user_id])
+      @product = user.products.new
+    else
+      @product = Product.new
+    end
   end
 
   # GET /products/1/edit
@@ -35,7 +41,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.user_id = session[:user_id]
     if @product.save(product_params)
-      flash[:notice] = "#{@product.prod_name} was successfully created."
+      flash[:notice] = "#{@product.prod_name} was added to your inventory."
       redirect_to user_path(session[:user_id])
     else
       render :new
@@ -44,15 +50,14 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1
   def update
-    respond_to do |format|
-      if @product.update(product_params)
-        flash[:notice] = "#{@product.prod_name} was successfully updated."
-        redirect_to product_path
-      else
-        render :edit
-      end
+    if @product.update(product_params)
+      flash[:notice] = "#{@product.prod_name} was successfully updated."
+      redirect_to product_path
+    else
+      render :edit
     end
   end
+
 
   # DELETE /products/1
   def destroy
@@ -84,7 +89,6 @@ class ProductsController < ApplicationController
   def merchant
     @user = User.find_by(id: params[:id])
     @products = Product.by_merchant(params[:id].to_i)
-
   end
 
   private

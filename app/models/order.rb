@@ -12,17 +12,17 @@ class Order < ApplicationRecord
 
 
   def items_in_cart
-    num = 0
+    num_in_cart = 0
     if self.order_items.empty?
-      return nil
+      return 0
     else
       self.order_items.each do |item|
         if item.qty != nil
-          num += item.qty
+          num_in_cart += item.qty
         end
       end
     end
-    return num
+    return num_in_cart
   end
 
   def total_price
@@ -55,13 +55,20 @@ class Order < ApplicationRecord
     return self.created_at.strftime("%B %d, %Y")
   end
 
-  # def check_order_status(order)
-  #   if order.order_items.all? {|item| item.shipped}
-  #     order.status = "Complete"
-  #     raise
-  #     order.save
-  #   end
-  # end
+  def check_order_status
+    @order = self
+    all_shipped = true
+    @order.order_items.each do |item|
+      if !item.shipped
+        all_shipped = false
+      end
+    end
+    if all_shipped
+      @order.update(status: "Complete")
+    end
+
+    return @order
+  end
 
   def destroy
     # method to cancel order
