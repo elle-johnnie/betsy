@@ -18,8 +18,6 @@ Rails.application.routes.draw do
   post "order_items/cart_direct/:id", to: "order_items#cart_direct", as: "quick_shop"
   resources :order_items, only: [:create, :update, :destroy]
 
-  resources :reviews
-  
   resources :orders
   patch 'order/confirm_order/:id', to: "order#confirm_order", as: "confirm_order"
 
@@ -29,6 +27,13 @@ Rails.application.routes.draw do
   resources :products
 
   resources :users
+
+  resources :users do
+    resources :products, only: [:index, :new, :show, :create, :update]
+  end
+
+
+
   resources :categories
 
 end
