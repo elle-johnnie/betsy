@@ -42,6 +42,9 @@ class Order < ApplicationRecord
       new_inv_qty = quantity - order_item.qty
       product.inv_qty = new_inv_qty
       product.update(inv_qty: new_inv_qty)
+      if product.inv_qty <= 0
+        product.update(active:false)
+      end
       product.save!
     end
     self.update(status: "Paid")
