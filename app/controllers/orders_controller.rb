@@ -59,7 +59,6 @@ class OrdersController < ApplicationController
       render :confirmation
       session[:order_id] = nil
     else
-      binding.pry
       flash.now[:warning] = 'Order was not not created'
       @current_order.errors.messages.each do |field, msg|
         flash.now[field] = msg
