@@ -10,13 +10,13 @@ class OrderItemsController < ApplicationController
       redirect_to product_path(product.id)
     elsif @current_order.nil?
       @current_order = Order.new
-      # @current_order.save
+      @current_order.save
     end
 
     @order_item = @current_order.order_items.new(order_item_params)
     @order_item.save
     @current_order.save
-
+    @current_order.update(status: "Pending")
     session[:order_id] = @current_order.id
     redirect_to cart_path(@current_order.id)
     # else

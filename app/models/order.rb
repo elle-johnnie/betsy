@@ -60,7 +60,6 @@ class Order < ApplicationRecord
         all_shipped = false
       end
     end
-    binding.pry
     if all_shipped
       @order.update(status: "Complete")
     end

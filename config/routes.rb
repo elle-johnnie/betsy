@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :products, only: [:index, :show, :new]
-      resources :orders, only: [:index, :show]
+      # resources :orders, only: [:index, :show]
   end
 
 

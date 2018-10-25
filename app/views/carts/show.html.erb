@@ -14,7 +14,7 @@
     <% @order_items.each do |order_item| %>
     <tr>
       <td><%= link_to "#{order_item.product.prod_name}", product_path(order_item.product.id) %></td>
-      <td><%= order_item.product.price %></td>
+      <td><%= format_price(order_item.product.price) %></td>
 
       <%= form_with model: order_item do |f| %>
       <td><%= f.select :qty, (1..order_item.product.inv_qty).to_a %>

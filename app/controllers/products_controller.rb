@@ -5,8 +5,7 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    # if user logged in then get just their products
-    if session[:user_id]
+    if params[:user_id]
       @products = @login_user.products
     else
       @products = Product.all
@@ -17,23 +16,8 @@ class ProductsController < ApplicationController
   # GET /products/1
 
   def show
-    @product = Product.find(params[:id])
-    # if @login_user
-    #   @products = @login_user.products
-    # end
-    #
-    # if @current_order.order_items.find_by(product_id: params[:id]).nil?
-    # @order_item = OrderItem.new
-    # else
-    #   @order_item = @current_order.order_items.find_by(product_id: params[:id])
-    # end
-    #
-    # # setting up space, creating a blank row, not filling out
-    # if @order_item.nil?
-    #   @order_item = current_order.order_items.new
-    # end
-
     # @product = Product.find(params[:id])
+    @order_item = OrderItem.new
     @reviews = Review.where(product_id: @product)
   end
 

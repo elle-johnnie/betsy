@@ -18,15 +18,16 @@ class User < ApplicationRecord
   end
 
 
-  def find_orders
-    sold = []
+  def find_ordered_items
+    ordered_items = []
     self.products.each do |product|
-      if !product.order_items.empty?
-        sold << product
+      unless product.order_items.empty?
+        product.order_items.each do |ord_item|
+        ordered_items << ord_item
+        end
       end
     end
-
-    return sold
+    return ordered_items
   end
 
 
