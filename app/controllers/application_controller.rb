@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     if !session[:order_id].nil?
       @current_order = Order.find(session[:order_id])
     else
-      @current_order = Order.new
+      @current_order = Order.new(status: "Pending")
     end
 
     return @current_order

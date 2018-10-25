@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   skip_before_action :require_login
+  skip_before_action :current_order, only: :update
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   # before_action :check_status, only: [:show]
 
@@ -27,7 +28,10 @@ class OrdersController < ApplicationController
   # must change database
   # flash notices do not have color
   def create
+
     @order = @current_order.update(order_params)
+    @order.status = "Pending"
+
     # it successfully grabs and saves all fields put in the form
     if @order.save
       flash[:success] = 'Order was successfully created.'
@@ -46,6 +50,7 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1
   def update
+    @current_order = Order.find(session[:order_id])
     if @current_order.order_items.nil?
       flash[:warning] = "You have zero items in your cart"
       redirect_to products_path
@@ -79,8 +84,8 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:status, :cust_name, :cust_email, :mailing_address, :cc_name, :cc_digit, :cc_expiration, :cc_cvv, :cc_zip, :user_id)
   end
-
-  def check_status
-    Order.check_order_status(@order)
-  end
+  #
+  # def check_status
+  #   Order.check_order_status(@order)
+  # end
 end
