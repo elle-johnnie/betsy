@@ -7,7 +7,7 @@ line1:
   shipped: false
 
 line2:
-  order: one
+  order: two
   product: cake2
   qty: 2
   shipped: false
