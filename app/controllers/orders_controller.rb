@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
     @orders = Order.all
   end
 
-  def confirm_order
+  def confirmation
   end
 
   def show
@@ -55,7 +55,7 @@ class OrdersController < ApplicationController
       @current_order.place_order # decrease inventory and change status to paid
       # show confirmation page
       @order = @current_order # needed for rendering order information in show
-      render :show
+      render :confirmation
       session[:order_id] = nil
 
     end
