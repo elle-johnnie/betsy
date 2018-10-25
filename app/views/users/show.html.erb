@@ -80,7 +80,7 @@
       <% sold.each do |product| %>
         <tr>
           <% or_item = OrderItem.find_by(product_id: product.id) %>
-          <td> <%= link_to "#{or_item.order.id}", edit_order_path(or_item.order.id) %></td>
+          <td> <%= link_to "#{or_item.order.id}", order_path(or_item.order.id) %></td>
           <td> <%= link_to "#{product.prod_name}", edit_product_path(product.id)%></td>
           <td> <%= format_price(product.price)%></td>
           <td> <%= or_item.qty %></td>
