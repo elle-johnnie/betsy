@@ -50,14 +50,21 @@ class OrdersController < ApplicationController
     if @current_order.order_items.nil?
       flash[:warning] = "You have zero items in your cart"
       redirect_to products_path
-    else
-      @current_order.update(order_params)
+    elsif @current_order.update(order_params)
+      flash.now[:success] = "Order was accepted"
       @current_order.place_order # decrease inventory and change status to paid
+      @current_order.save
       # show confirmation page
-      @order = @current_order # needed for rendering order information in show
+      @order = @current_order # needed for rendering order information in confirmation page
       render :confirmation
       session[:order_id] = nil
-
+    else
+      binding.pry
+      flash.now[:warning] = 'Order was not not created'
+      @current_order.errors.messages.each do |field, msg|
+        flash.now[field] = msg
+      end
+      render :edit
     end
   end
 
