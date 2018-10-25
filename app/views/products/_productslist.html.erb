@@ -6,8 +6,7 @@
           <div class="col-md-3 col-sm-6">
               <div class="product-grid6">
                 <div class="product-image6">
-                  <img src="<%=product.image%>">
-                  <%#=link_to image_tag("#{product.image}", alt: "#{product.description}"), product_path(product.id) %>
+                  <%=link_to image_tag("#{product.image}", alt: "#{product.description}"), product_path(product.id) %>
                 </div>
                 <div class="product-content">
                   <h3 class="title"><%= product.prod_name %></h3>
