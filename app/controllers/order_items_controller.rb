@@ -1,6 +1,6 @@
 class OrderItemsController < ApplicationController
   skip_before_action :require_login
-  before_action :set_order, only: [:create, :update, :cart_direct]
+  # before_action :set_order, only: [:create, :update, :cart_direct]
 
 
   def create
@@ -9,16 +9,22 @@ class OrderItemsController < ApplicationController
       flash[:warning] = "Quantity selected exceeds amount availabe in inventory"
       redirect_to product_path(product.id)
     else
+
+      if @current_order.nil?
+        @current_order = Order.new
+        @current_order.save
+      end
+
       @order_item = @current_order.order_items.new(order_item_params)
+      @order_item.save
       @current_order.save
 
-      if @order_item.save
-        session[:order_id] = @current_order.id
-        redirect_to cart_path(@current_order.id)
-      else
-        flash[:warning] = "Item order not placed"
-        redirect_to root_path
-      end
+      session[:order_id] = @current_order.id
+      redirect_to cart_path(@current_order.id)
+      # else
+      #   flash[:warning] = "Item order not placed"
+      #   redirect_to root_path
+    #   # end
     end
   end
 
@@ -53,6 +59,11 @@ class OrderItemsController < ApplicationController
       flash[:warning] = "Product is out of stock"
       redirect_to products_path
     else
+      if @current_order.nil?
+        @current_order = Order.new
+        @current_order.save
+      end
+      
       @order_item = @current_order.order_items.new(product_id: params[:id], qty: 1, shipped: false)
       @order_item.save
       @current_order.save
@@ -90,8 +101,8 @@ class OrderItemsController < ApplicationController
     params.require(:order_item).permit(:product_id, :qty, :shipped)
   end
 
-  def set_order
-    @order = current_order
-  end
+  # def set_order
+  #   @order = current_order
+  # end
 
 end
