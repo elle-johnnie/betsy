@@ -26,6 +26,13 @@ class OrdersController < ApplicationController
 
   def show
       @order_items = Order.find_by(id: session[:order_id]).order_items
+      # @order_items = Order.find_by(id: session[:order_id]).order_items
+      # # save order items from the current session to the session that has the personal information
+      # @order.order_items = @order_items
+      # @order.save
+      # @order.place_order # decrease inventory and change status to paid
+      # # clear shopping cart after confirmation page has been shown
+      # session[:order_id] = nil
   end
 
   # GET /orders/new
