@@ -2,6 +2,23 @@ require "test_helper"
 
 describe Order do
 
+    describe "items_in_cart" do
+
+      it "returns the total quantity of items in cart" do
+        order = orders(:one)
+        number = order.items_in_cart
+
+        expect(number).must_equal 4
+      end
+
+      it "returns 0 when no items in cart" do
+        order = orders(:three)
+        number = order.items_in_cart
+
+        expect(number).must_equal 0
+      end
+    end
+
     describe "place order" do
 
       it "reduces inventory quantity by order item quantity" do
