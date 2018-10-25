@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     render_404 unless @user
 
     # @order = current_order
+<<<<<<< HEAD
     @order_item = @current_order.order_items.find_by(product_id: params[:id])
 
     if @order_item.nil?
@@ -14,6 +15,15 @@ class UsersController < ApplicationController
     end
 
     @products = Product.where(user_id: @user)
+=======
+    # @order_item = @order.order_items.find_by(product_id: params[:id])
+    #
+    # if @order_item.nil?
+    #   @order_item = current_order.order_items.new
+    # end
+    #
+    # @products = Product.where(user_id: @user)
+>>>>>>> 870aa01bc0f2b3889213ded4a33a7994375d857a
   end
 
   # GET /users/new

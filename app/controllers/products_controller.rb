@@ -5,41 +5,55 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all
+    if params[:user_id]
+      @products = @login_user.products
+    else
+      @products = Product.all
+    end
+
   end
 
   # GET /products/1
 
   def show
-    # if @current_order.order_items.find_by(product_id: params[:id]).nil?
-      @order_item = OrderItem.new
-    # else
-    #   @order_item = @current_order.order_items.find_by(product_id: params[:id])
-    # end
-    #
-    # # setting up space, creating a blank row, not filling out
-    # if @order_item.nil?
-    #   @order_item = current_order.order_items.new
-    # end
-
     # @product = Product.find(params[:id])
+    @order_item = OrderItem.new
     @reviews = Review.where(product_id: @product)
   end
 
   # GET /products/new
   def new
-    @product = Product.new
+    if session[:user_id].nil?
+      redirect_to root_path
+      flash[:danger] = "You must log in to access this feature"
+    end
+
+    if params[:user_id]
+      # nested route: /user/user_id/products/new
+      user = User.find_by(id: params[:user_id])
+      @product = user.products.new
+    else
+      @product = Product.new
+    end
   end
 
   # GET /products/1/edit
-  def edit; end
+  def edit
+    if @product.user_id != session[:user_id]
+      flash[:danger] = "You don't have access to edit this product."
+      redirect_to product_path(@product.id)
+    end
+  end
 
   # POST /products
   def create
     @product = Product.new(product_params)
     @product.user_id = session[:user_id]
+
+    return redirect_to root_path if session[:user_id].nil?
+
     if @product.save(product_params)
-      flash[:notice] = "#{@product.prod_name} was successfully created."
+      flash[:notice] = "#{@product.prod_name} was added to your inventory."
       redirect_to user_path(session[:user_id])
     else
       render :new
@@ -48,15 +62,17 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1
   def update
-    respond_to do |format|
+    # respond_to do |format|
       if @product.update(product_params)
         flash[:notice] = "#{@product.prod_name} was successfully updated."
         redirect_to product_path
       else
+        flash[:warning] = "Edit was unsuccessful"
         render :edit
       end
-    end
+    # end
   end
+
 
   # DELETE /products/1
   def destroy
@@ -68,6 +84,10 @@ class ProductsController < ApplicationController
 
   def category
     @category = Category.find_by(id: params[:id])
+    if @category.nil?
+      flash[:warning] = "Category is invalid"
+      redirect_to root_path
+    end
     @products = Product.by_category(params[:id])
   end
 
@@ -87,15 +107,22 @@ class ProductsController < ApplicationController
 
   def merchant
     @user = User.find_by(id: params[:id])
+    if @user.nil?
+      flash[:warning] = "User is invalid"
+      redirect_to root_path
+    end
     @products = Product.by_merchant(params[:id].to_i)
-
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_product
+    begin
     @product = Product.find(params[:id])
+    rescue
+      render :not_found, status: :not_found
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

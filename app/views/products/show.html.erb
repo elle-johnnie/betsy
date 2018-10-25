@@ -1,107 +1,9 @@
 <%= render partial: "/layouts/flash_errs" %>
-
-<p id="notice"><%= notice %></p>
-
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-md-3 col-sm-6">
-        <div class="product-grid6">
-          <div class="product-image6">
-            <%#=link_to image_tag("#{@product.image}", alt: "#{@product.description}"), product_path(@product.id) %></a>
-          </div>
-          <div class="product-content">
-            <h3 class="title"><%#= @product.prod_name %></h3>
-          <div class="price">$<%#= @product.price %>
-            <sub><%#= @product.inv_qty %> in stock</sub>
-          </div>
-          </div>
-                <!-- <ul class="rating">
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star disable"></li>
-                    <li class="fa fa-star disable"></li>
-                </ul> -->
-          <!-- <ul class="social"> -->
-            <%#= form_with model: @order_item do |f| %>
-              <%#= f.label :qty %>
-              <%#= f.select :qty, (1..@product.inv_qty).to_a %>
-
-              <%#= f.hidden_field :product_id, :value => @product.id %>
-
-              <%#= f.submit "Add to cart", class: "btn btn-primary" %>
-            <%# end %>
-            <!-- <a href="/order_items/cart_direct/<%#=@product.id%>" data-tip="Add to Cart" data-method="post"><i class="fa fa-shopping-cart"></i></a></li> -->
-          <!-- </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- <div class="buttonContainer"><%#= link_to "Write A Review", new_product_review_path(@product), class: "button" %></div>
-  </div> -->
-<!--
-<p>
-  <strong>Category:</strong> -->
-  <%# @product.categories.each do |cat| %>
-  <!-- <%#= cat.category.capitalize %><br> -->
-    <%# end %>
-<!-- </p> -->
-
-<!-- <p>
-  <strong>Prod name:</strong>
-  <%#= @product.prod_name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%#= @product.description %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%#= @product.price %>
-</p>
-
-<p>
-  <strong>Inv qty:</strong>
-  <%#= @product.inv_qty %>
-</p> -->
-
-<%#= form_with model: @order_item do |f| %>
-  <%#= f.label :qty %>
-  <%#= f.select :qty, (1..@product.inv_qty).to_a %>
-
-<%#= form_with model: @order_item do |f| %>
-  <%#= f.label :qty %>
-  <%#= f.select :qty, (1..@product.inv_qty).to_a %>
-
-  <%#= f.hidden_field :product_id, :value => @product.id %>
-
-  <%#= f.submit "Add to cart", class: "btn btn-primary" %>
-<%# end %>
-  <%#= f.hidden_field :product_id, :value => @product.id %>
-
-  <%#= f.submit "Add to cart", class: "btn btn-primary" %>
-<%# end %>
-
-<!-- <a href="/order_items/cart_direct/<%#=@product.id%>">adddfdd</a> -->
-
-
-<%#= link_to 'Back', products_path %>
-
-<%#= link_to 'Back', products_path, class: "btn btn-success" %>
-
-<!-- <a href="/order_items/cart_direct/<%=@product.id%>" data-tip="Add 1 to Cart" data-method="post"></a> -->
-
-
-
 <!-- //#### trying bootstrap  -->
 
 <div class="container" id="product-section">
   <div class="row">
-   <div class="col-md-6">
+   <div class="col-md-6 col-lg-4">
      <!-- <%#=link_to image_tag("#{@product.image}", alt: "#{@product.description}"), product_path(@product.id) %></a> -->
      <img src="https://31p86334w2bvkz0249eyr0cr-wpengine.netdna-ssl.com/wp-content/uploads/2017/11/pumpkin-chocolate-chip-bundt-cake-2.jpg", height="400" width="300"></a>
    </div>
@@ -128,14 +30,14 @@
        </div><!-- end row -->
 
        <div class="row">
-         <div class="col-md-3">
+         <div class="col-md-3 rating-stars">
            <% if @product.reviews.length >= 1 %>
              <% @product.avg_rating.round.times do %>
              <img src="https://cdn4.iconfinder.com/data/icons/pretty_office_3/256/Star-Full.png" alt="rating star" height="25" width="25">
             <% end %>
             <% end %>
          </div>
-         <div class="col-md-3">
+         <div class="col-md-3 add-review-btn">
           <span><%= link_to "Write A Review", new_product_review_path(@product), class:"btn btn-danger" %>
             </span>
          </div>
@@ -147,6 +49,7 @@
  </div>
 </div><!-- end row -->
 
+<%if @product.inv_qty > 0 %>
 <div class="row add-to-cart">
  <div class="col-md-5 product-qty">
   <%= form_with model: @order_item do |f| %>
@@ -160,10 +63,15 @@
   <% end %>
  </div>
 </div><!-- end row -->
+<%end%>
 
 <div class="row">
  <div class="col-md-4 text-center">
-  <span class="monospaced">In Stock</span>
+   <%if @product.inv_qty > 0 %>
+    <span class="monospaced">In Stock</span>
+   <%else %>
+    <span class="monospaced">Out of Stock</span>
+   <%end%>
  </div>
 </div><!-- end row -->
 <div class="row">

@@ -14,11 +14,10 @@ cake2:
   description: the best
   price: 19.5
   inv_qty: 5
-  user: laura
+  user: grace
 
 
 cake3:
-
   prod_name: vanilla plains
   description: real vanilla
   price: 20.5

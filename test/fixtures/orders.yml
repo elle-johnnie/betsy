@@ -4,21 +4,22 @@ one:
   status: pending
   cust_name: Laura
   cust_email: laura@gmail.com
-  mailing_address: 1
-  cc_name: MyString
+  mailing_address: 123 Front St.
+  cc_name: Laura Liz
   cc_digit: 1111111111111111
   cc_expiration: 2018-10-17
   cc_cvv: 123
   cc_zip: 98765
 
 two:
-  status: MyString
-  cust_name: MyString
-  cust_email: MyString
-  mailing_address: 1
-  cc_name: MyString
-  cc_digit: 1
+  status: pending
+  cust_name: Grace
+  cust_email: grace@gmail.com
+  mailing_address: 123 Front St.
+  cc_name: Laura Liz
+  cc_digit: 1111111111111111
   cc_expiration: 2018-10-17
+<<<<<<< HEAD
   cc_cvv: 1
   cc_zip: 1
 
@@ -30,5 +31,7 @@ three:
   cc_name: MyString
   cc_digit: 1111111111111111
   cc_expiration: 2018-10-17
+=======
+>>>>>>> 870aa01bc0f2b3889213ded4a33a7994375d857a
   cc_cvv: 123
   cc_zip: 98765
