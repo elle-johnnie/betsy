@@ -80,6 +80,10 @@ class ProductsController < ApplicationController
 
   def category
     @category = Category.find_by(id: params[:id])
+    if @category.nil?
+      flash[:warning] = "Category is invalid"
+      redirect_to root_path
+    end
     @products = Product.by_category(params[:id])
   end
 
@@ -99,8 +103,11 @@ class ProductsController < ApplicationController
 
   def merchant
     @user = User.find_by(id: params[:id])
+    if @user.nil?
+      flash[:warning] = "User is invalid"
+      redirect_to root_path
+    end
     @products = Product.by_merchant(params[:id].to_i)
-
   end
 
   private

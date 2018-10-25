@@ -195,6 +195,71 @@ describe ProductsController do
     end
   end
 
+describe "category" do
+
+  it "finds a category for product" do
+    id = Category.first.id
+
+    get category_path(id)
+
+    value(response).must_be :successful?
+  end
+
+  it "redirects to root_path for invalid category" do
+    id = 56
+
+    get category_path(id)
+
+    # value(response).must_be :successful?
+    must_redirect_to root_path
+    expect(flash[:warning]).must_equal "Category is invalid"
+  end
+
+end
+
+describe "category" do
+
+  it "finds a category for product" do
+    id = Category.first.id
+
+    get category_path(id)
+
+    value(response).must_be :successful?
+  end
+
+  it "redirects to root_path for invalid category" do
+    id = 56
+
+    get category_path(id)
+
+    # value(response).must_be :successful?
+    must_redirect_to root_path
+    expect(flash[:warning]).must_equal "Category is invalid"
+  end
+
+end
+
+describe "mechant" do
+
+  it "finds a merchant for a product" do
+    id = User.first.id
+
+    get merchant_path(id)
+
+    value(response).must_be :successful?
+  end
+
+  it "redirects to root_path for invalid category" do
+    id = -56
+
+    get merchant_path(id)
+
+    # value(response).must_be :successful?
+    must_redirect_to root_path
+    expect(flash[:warning]).must_equal "User is invalid"
+  end
+
+end
   # describe "destroy" do
   #
   #   it "can destroy a product with a logged in merchant" do

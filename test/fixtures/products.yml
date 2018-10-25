@@ -18,8 +18,8 @@ cake2:
 
 
 cake3:
-
   prod_name: vanilla plains
   description: real vanilla
   price: 20.5
   inv_qty: 3
+  user: ada
