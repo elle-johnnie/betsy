@@ -41,7 +41,7 @@ describe ProductsController do
       }.must_change "Product.count"
 
       must_redirect_to user_path(session[:user_id])
-      expect(flash[:notice]).must_equal "#{product.prod_name} was successfully created."
+      expect(flash[:notice]).must_equal "#{product.prod_name} was added to your inventory."
     end
 
     it "is an forbidden request if user is not logged in" do
@@ -197,38 +197,6 @@ describe ProductsController do
 
   describe "category" do
 
-    it "finds a category for product" do
-      id = Category.first.id
-
-      get category_path(id)
-
-      value(response).must_be :successful?
-    end
-
-    it "redirects to root_path for invalid category" do
-      id = 56
-
-      get category_path(id)
-
-      # value(response).must_be :successful?
-      must_redirect_to root_path
-      expect(flash[:warning]).must_equal "Category is invalid"
-    end
-
-  end
-
-  describe "category" do
-
-    it "finds a category for product" do
-      id = Category.first.id
-
-      get category_path(id)
-
-      value(response).must_be :successful?
-    end
-
-    describe "category" do
-
       it "finds a category for product" do
         id = Category.first.id
 
@@ -246,8 +214,8 @@ describe ProductsController do
         must_redirect_to root_path
         expect(flash[:warning]).must_equal "Category is invalid"
       end
-
     end
+
 
     describe "merchant" do
 
@@ -291,5 +259,5 @@ describe ProductsController do
       end
 
     end
-  end
+
 end
