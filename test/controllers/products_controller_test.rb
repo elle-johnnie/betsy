@@ -195,97 +195,101 @@ describe ProductsController do
     end
   end
 
-describe "category" do
+  describe "category" do
 
-  it "finds a category for product" do
-    id = Category.first.id
+    it "finds a category for product" do
+      id = Category.first.id
 
-    get category_path(id)
+      get category_path(id)
 
-    value(response).must_be :successful?
+      value(response).must_be :successful?
+    end
+
+    it "redirects to root_path for invalid category" do
+      id = 56
+
+      get category_path(id)
+
+      # value(response).must_be :successful?
+      must_redirect_to root_path
+      expect(flash[:warning]).must_equal "Category is invalid"
+    end
+
   end
 
-  it "redirects to root_path for invalid category" do
-    id = 56
+  describe "category" do
 
-    get category_path(id)
+    it "finds a category for product" do
+      id = Category.first.id
 
-    # value(response).must_be :successful?
-    must_redirect_to root_path
-    expect(flash[:warning]).must_equal "Category is invalid"
+      get category_path(id)
+
+      value(response).must_be :successful?
+    end
+
+    describe "category" do
+
+      it "finds a category for product" do
+        id = Category.first.id
+
+        get category_path(id)
+
+        value(response).must_be :successful?
+      end
+
+      it "redirects to root_path for invalid category" do
+        id = 56
+
+        get category_path(id)
+
+        # value(response).must_be :successful?
+        must_redirect_to root_path
+        expect(flash[:warning]).must_equal "Category is invalid"
+      end
+
+    end
+
+    describe "merchant" do
+
+      it "finds a merchant for a product" do
+        id = User.first.id
+
+        get merchant_path(id)
+
+        value(response).must_be :successful?
+      end
+
+      it "redirects to root_path for invalid category" do
+        id = -56
+
+        get merchant_path(id)
+
+        # value(response).must_be :successful?
+        must_redirect_to root_path
+        expect(flash[:warning]).must_equal "User is invalid"
+      end
+
+    end
+
+    describe "status" do
+
+      it "finds a merchant for a product" do
+        id = Product.first.id
+
+        patch product_status_path(id)
+
+        must_respond_with :redirect
+      end
+
+      it "redirects to root_path for invalid category" do
+        id = -56
+
+        patch product_status_path(id)
+
+        # value(response).must_be :successful?
+        must_respond_with :not_found
+      end
+
+    end
   end
-
-end
-
-describe "category" do
-
-  it "finds a category for product" do
-    id = Category.first.id
-
-    get category_path(id)
-
-    value(response).must_be :successful?
-  end
-
-  it "redirects to root_path for invalid category" do
-    id = 56
-
-    get category_path(id)
-
-    # value(response).must_be :successful?
-    must_redirect_to root_path
-    expect(flash[:warning]).must_equal "Category is invalid"
-  end
-
-end
-
-describe "mechant" do
-
-  it "finds a merchant for a product" do
-    id = User.first.id
-
-    get merchant_path(id)
-
-    value(response).must_be :successful?
-  end
-
-  it "redirects to root_path for invalid category" do
-    id = -56
-
-    get merchant_path(id)
-
-    # value(response).must_be :successful?
-    must_redirect_to root_path
-    expect(flash[:warning]).must_equal "User is invalid"
-  end
-
-end
-  # describe "destroy" do
-  #
-  #   it "can destroy a product with a logged in merchant" do
-  #     user = users(:laura)
-  #     perform_login(user)
-  #
-  #     id = products(:cake1).id
-  #
-  #     expect {
-  #       delete product_path(id)
-  #     }.must_change 'Product.count', -1
-  #
-  #     must_respond_with :redirect
-  #     expect(Product.find_by(id: id)).must_equal nil
-  #   end
-  #
-  # end
-
-    # it "can destroy a book given a vlid id" do
-    #   id = -1
-    #
-    #   expect {
-    #     delete book_path(id)
-    #   }.wont_change 'Book.count'
-    #
-    #   must_respond_with :not_found
-    #   expect(flash[:danger]).must_equal "Cannot find the book #{id}"
-    # end
 end
