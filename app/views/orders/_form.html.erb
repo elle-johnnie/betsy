@@ -1,6 +1,7 @@
 <% render partial: "layouts/form_errors", locals: { error_hash: @order } %>
 
 <%= form_with(model: order, local: true) do |form| %>
+  <%# render partial "/layouts/form_errors", locals: { error_hash: @order}%>
 
 
   <div class="form-group">

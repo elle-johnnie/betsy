@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   # validations
   validates :prod_name, presence: true, uniqueness: true
   validates :description, :price, presence: true
-  validates :inv_qty, presence: true, numericality: { only_integer: true, greater_than: -1}
+  validates :inv_qty, presence: true, numericality: { only_integer: true} # no need to validate inv_qty less than 0 because I am making it inactive
   # relationships
   belongs_to :user
   has_many :reviews
