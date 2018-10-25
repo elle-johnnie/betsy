@@ -59,7 +59,12 @@
                 <%= link_to image_tag("github-square-brands.svg", class: "login"), "/auth/github" %></li>
             <% end %>
               <li class="nav-item">
-                <a href="/carts/<%=session[:order_id]%>"><span class="fa-stack fa-2x has-badge" data-count="<%= @current_order.items_in_cart %>"><i class="fa fa-shopping-cart fa-stack main-cart"></i></span></a>
+                <% if session[:order_id] %>
+                  <a href="/carts/<%=session[:order_id]%>">
+                  <span class="fa-stack fa-2x has-badge" data-count="<%= @current_order.items_in_cart %>"><i class="fa fa-shopping-cart fa-stack main-cart"></i></span></a>
+                <% else %>
+                  <a href="/carts/new"><i class="fa fa-shopping-cart fa-stack main-cart"></i></a>
+                <% end %>
               </li>
           </ul>
         </div>

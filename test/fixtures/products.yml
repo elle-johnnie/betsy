@@ -23,3 +23,10 @@ cake3:
   description: real vanilla
   price: 20.5
   inv_qty: 3
+
+brownie:
+  prod_name: chocolate brownie
+  description: decadent
+  price: 19.5
+  inv_qty: 0
+  user: ada

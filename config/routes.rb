@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :reviews
 
-  resources :carts, only: [:show]
+  resources :carts, only: [:show, :new]
 
   patch 'order_items/:id/ship', to: "order_items#ship", as: "ship_item"
   post "order_items/cart_direct/:id", to: "order_items#cart_direct", as: "quick_shop"

@@ -12,17 +12,17 @@ class Order < ApplicationRecord
 
 
   def items_in_cart
-    num = 0
+    num_in_cart = 0
     if self.order_items.empty?
-      return nil
+      return 0
     else
       self.order_items.each do |item|
         if item.qty != nil
-          num += item.qty
+          num_in_cart += item.qty
         end
       end
     end
-    return num
+    return num_in_cart
   end
 
   def total_price
