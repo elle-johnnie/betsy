@@ -1,3 +1,5 @@
+<% render partial: "layouts/form_errors", locals: { error_hash: @order } %>
+
 <%= form_with(model: order, local: true) do |form| %>
   <%# render partial "/layouts/form_errors", locals: { error_hash: order}%>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
