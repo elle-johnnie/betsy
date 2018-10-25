@@ -1,18 +1,30 @@
 require 'pry'
 class OrdersController < ApplicationController
   skip_before_action :require_login
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:edit, :update, :destroy]
   # before_action :check_status, only: [:show]
 
   # GET /orders
   def index
-    @orders = Order.all
+    @order = Order.find_by(id: params[:id].to_i)
+    @order_items = @order.order_items
+
+    if @order.nil?
+      flash.now[:danger] = "Cannot find the order #{params[:id]}"
+      render :not_found, status: :not_found
+    end
   end
 
   def confirm_order
   end
 
   def show
+    @order = Order.find_by(id: params[:id].to_i)
+
+    if @order.nil?
+      flash.now[:danger] = "Cannot find the order #{params[:id]}"
+      render :not_found, status: :not_found
+    end
     # show view used when calling rendering in update - do not remove html show page
   end
 
@@ -79,7 +91,7 @@ class OrdersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
-    params.require(:order).permit(:status, :cust_name, :cust_email, :mailing_address, :cc_name, :cc_digit, :cc_expiration, :cc_cvv, :cc_zip, :user_id)
+    params.require(:order).permit(:id, :status, :cust_name, :cust_email, :mailing_address, :cc_name, :cc_digit, :cc_expiration, :cc_cvv, :cc_zip, :user_id)
   end
 
   def check_status

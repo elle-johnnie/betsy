@@ -37,6 +37,25 @@ describe OrderItem do
       expect(valid).must_equal false
       expect(order_item.errors.messages).must_include :qty
     end
+
+    it 'must have a quantity greater than 0' do
+      order_item.qty = 0
+
+      valid = order_item.save
+
+      expect(valid).must_equal false
+      expect(order_item.errors.messages).must_include :qty
+    end
+
+    it 'must have a quantity that is an integer' do
+      order_item.qty = 1.5
+
+      valid = order_item.save
+
+      expect(valid).must_equal false
+      expect(order_item.errors.messages).must_include :qty
+    end
+
   end
 
   describe 'subtotal' do

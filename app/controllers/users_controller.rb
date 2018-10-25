@@ -6,8 +6,8 @@ class UsersController < ApplicationController
   def show
     render_404 unless @user
 
-    @order = current_order
-    @order_item = @order.order_items.find_by(product_id: params[:id])
+    # @order = current_order
+    @order_item = @current_order.order_items.find_by(product_id: params[:id])
 
     if @order_item.nil?
       @order_item = current_order.order_items.new

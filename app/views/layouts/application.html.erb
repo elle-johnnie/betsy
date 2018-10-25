@@ -119,7 +119,12 @@
                   <%= link_to "Shopping Cart", new_cart_path %>
                 <% end %>
                 </li>
-                <li>Order Status</li>
+                <li><%= form_tag(orders_path, method: :get) do %>
+                  <!-- <%# label_tag(:id, "Order ID:") %> -->
+                  <%= text_field_tag :id, params[:id], placeholder: "Order ID" %>
+                  <%= submit_tag("Order Details", name: nil) %>
+                <% end %>
+                </li>
               </ul>
 
             </div>

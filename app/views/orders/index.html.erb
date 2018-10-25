@@ -1,43 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Orders</h1>
+<h1>Order #<%=@order.id %> Details</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
+      <th>Item</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
       <th>Status</th>
-      <th>Cust name</th>
-      <th>Cust email</th>
-      <th>Mailing address</th>
-      <th>Cc name</th>
-      <th>Cc digit</th>
-      <th>Cc expiration</th>
-      <th>Cc cvv</th>
-      <th>Cc zip</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.status %></td>
-        <td><%= order.cust_name %></td>
-        <td><%= order.cust_email %></td>
-        <td><%= order.mailing_address %></td>
-        <td><%= order.cc_name %></td>
-        <td><%= order.cc_digit %></td>
-        <td><%= order.cc_expiration %></td>
-        <td><%= order.cc_cvv %></td>
-        <td><%= order.cc_zip %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% @order_items.each do |order_item| %>
+    <tr>
+      <td><%= link_to "#{order_item.product.prod_name}", product_path(order_item.product.id) %></td>
+      <td><%= order_item.product.price %></td>
+      <td><%= order_item.qty %></td>
+      <td><%= order_item.subtotal %></td>
+      <% if order_item.subtotal == true %>
+        <td>Shipped</td>
+      <% else %>
+        <td>Pending</td>
+      <% end %>
+    </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Order', new_order_path %>
