@@ -68,7 +68,21 @@
     <th>PRICE</th>
     <th>QUANTITY</th>
     <th>SUBTOTAL</th>
-    <th>ITEM STATUS</th>
+    <th>
+      <div class="dropdown">
+        <button class="merchant-dropdown" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          ITEM STATUS
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="/merchants/105?sort=all">All</a></li>
+          <li><a href="/merchants/105?sort=pending">Pending</a></li>
+          <li><a href="/merchants/105?sort=paid">Paid</a></li>
+          <li><a href="/merchants/105?sort=complete">Complete</a></li>
+          <li><a href="/merchants/105?sort=cancelled">Cancelled</a></li>
+        </ul>
+      </div>
+    </th>
     <th>ORDER STATUS</th>
   </tr>
 

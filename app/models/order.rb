@@ -75,15 +75,6 @@ class Order < ApplicationRecord
       return self
     end
   end
-  def destroy
-    # method to cancel order
-  end
-
-  private
-
-    # def set_order_status
-    #   self.order_status_id = 1
-    # end
 
 
 end
