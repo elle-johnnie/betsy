@@ -23,6 +23,8 @@
   <%= link_to 'View Categories', categories_path, class: "btn btn-info" %>
 </section>
 
+
+<h2>LISTED BAKES</h2>
 <table class="show_table table">
   <tr>
     <th>NAME</th>
@@ -58,7 +60,7 @@
 
 
 
-
+<h2>ORDER FULFILLMENT</h2>
 <table class="show_table table">
   <tr>
     <th>ORDER #</th>
@@ -78,7 +80,7 @@
       <% sold.each do |product| %>
         <tr>
           <% or_item = OrderItem.find_by(product_id: product.id) %>
-          <td> <%= or_item.order.id %></td>
+          <td> <%= link_to "#{or_item.order.id}", edit_order_path(or_item.order.id) %></td>
           <td> <%= link_to "#{product.prod_name}", edit_product_path(product.id)%></td>
           <td> <%= format_price(product.price)%></td>
           <td> <%= or_item.qty %></td>
@@ -105,8 +107,8 @@
   <tr>
     <th>PENDING</th>
     <th>PAID</th>
-    <th>CANCELLED</th>
     <th>COMPLETE</th>
+    <th>CANCELLED</th>
     <th>TOTAL</th>
   </tr>
 

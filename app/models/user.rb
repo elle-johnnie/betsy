@@ -31,21 +31,22 @@ class User < ApplicationRecord
 
 
   def revenue(status_filter)
-    case status_filter
-      when "Pending"
-        rev = self.orders.where(status: "Pending").order_items.subtotal.sum
-      when "Paid"
-        rev = self.orders.where(status: "Paid").order_items.subtotal.sum
-      when "Completed"
-        rev = self.orders.where(status: "Complete").order_items.subtotal.sum
-      when "Cancelled"
-        rev = self.orders.where(status: "Cancelled").order_items.subtotal.sum
-      when "Total"
-        rev = self.orders.order_items.subtotal.sum - self.orders.where(status: "Cancelled").order_items.subtotal.sum
+    rev = 0
+    if status_filter == "Total"
+      self.order_items.each do |item|
+        rev += item.subtotal
+      end
+      return rev
+    else
+      self.order_items.each do |item|
+        if item.order.status == status_filter
+          rev += item.subtotal
+        end
+      end
     end
 
     return rev
   end
-
-
 end
+
+
