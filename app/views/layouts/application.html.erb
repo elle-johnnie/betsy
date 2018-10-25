@@ -68,11 +68,13 @@
               </li>
           </ul>
         </div>
-      </nav>
+  </nav>
 
 
   <body>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 
   <!-- Footer -->
@@ -102,30 +104,16 @@
               <!-- Links -->
               <h5 class="text-uppercase"></h5>
 
-              <ul class="list-unstyled">
-                <li>
-                  <%= link_to "Home", root_path%>
-                </li>
-                <li>
-                  <%= link_to "All Products", products_path %>
-                </li>
-                <li>
-                  <%= link_to "Login with Github", "/auth/github" %>
-                </li>
-                <li>
+              <nav class="nav flex-column navbar navbar-expand-md navbar-dark bg-dark">
+                <%= link_to "Home", root_path, class: "nav-link" %>
+                <%= link_to "All Products", products_path, class: "nav-link" %>
+                <%= link_to "Login with Github", "/auth/github", class: "nav-link" %>
                 <% if session[:order_id] %>
-                  <%= link_to "Shopping Cart", cart_path(@current_order.id) %>
+                  <%= link_to "Shopping Cart", cart_path(@current_order.id), class: "nav-link" %>
                 <% else %>
-                  <%= link_to "Shopping Cart", new_cart_path %>
+                  <%= link_to "Shopping Cart", new_cart_path, class: "nav-link" %>
                 <% end %>
-                </li>
-                <li><%= form_tag(orders_path, method: :get) do %>
-                  <!-- <%# label_tag(:id, "Order ID:") %> -->
-                  <%= text_field_tag :id, params[:id], placeholder: "Order ID" %>
-                  <%= submit_tag("Order Details", name: nil) %>
-                <% end %>
-                </li>
-              </ul>
+              </nav>
 
             </div>
             <!-- Grid column -->
@@ -136,24 +124,29 @@
               <!-- Links -->
               <h5 class="text-uppercase"></h5>
 
-              <ul class="list-unstyled">
-                <li>
+              <nav class="nav flex-column navbar navbar-expand-md navbar-dark bg-dark">
+                <div class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Merchant</a>
-                  <div class="dropdown-menu" >
-                    <% @users.each do |user| %>
-                      <%= link_to "#{user.username}", merchant_path(user.id), class: "dropdown-item" %>
-                    <% end %>
-                  </div>
-                </li>
-                <li>
+                    <div class="dropdown-menu" >
+                      <% @users.each do |user| %>
+                        <%= link_to "#{user.username}", merchant_path(user.id), class: "dropdown-item" %>
+                        <% end %>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Category</a>
-                  <div class="dropdown-menu" >
-                    <% @categories.each do |category| %>
-                      <%= link_to "#{category.category}", category_path(category.id), class: "dropdown-item" %>
-                    <% end %>
+                    <div class="dropdown-menu" >
+                      <% @categories.each do |category| %>
+                        <%= link_to "#{category.category}", category_path(category.id), class: "dropdown-item" %>
+                        <% end %>
+                      </div>
                   </div>
-                </li>
-              </ul>
+                  <%= form_tag(orders_path, method: :get) do %>
+                    <%= text_field_tag :id, params[:id], placeholder: "Order ID" %>
+                    <%= submit_tag("Search", name: nil) %>
+                  <% end %>
+
+              </nav>
 
             </div>
             <!-- Grid column -->
@@ -165,8 +158,8 @@
       <!-- Footer Links -->
 
       <!-- Copyright -->
-      <div class="footer-copyright text-center py-3">© 2018 Copyright:
-        <a href="https://mdbootstrap.com/bootstrap-tutorial/"> Sugar~n~Spice.com</a>
+      <div class="footer-copyright text-center py-3"><p>© 2018 Copyright:
+        <a href="https://mdbootstrap.com/bootstrap-tutorial/"> Sugar & Spice.com</a></p>
       </div>
       <!-- Copyright -->
 

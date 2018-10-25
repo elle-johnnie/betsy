@@ -19,11 +19,6 @@
 
 
 
-body {
-  padding-bottom: 20px;
-  margin-bottom: 60px;
-}
-
 h1, h2, h3, h4 {
   font-family: 'Alegreya Sans SC', sans-serif;
 }
@@ -47,6 +42,15 @@ p {
 .navbar-brand:hover {
   color: #0abab5  !important;
   font-weight: bold;
+}
+
+.nav-link {
+  color: lightgray;
+  line-height: 12px;
+}
+
+.nav-link:hover {
+  color: white !important;
 }
 
 .right-items {
@@ -192,10 +196,21 @@ p {
   color: #8ff9f6  !important;
 }
 
-.footer-copyright > a {
-  color:white;
-
+.footer-copyright p {
+  color: lightgray;
 }
+
+.footer-copyright a {
+  font-family: 'Alegreya Sans SC', sans-serif;
+  font-size: 16px;
+  color: #8ff9f6;
+  text-decoration: none;
+}
+
+.footer-copyright a:hover {
+  color: white;
+}
+
 #fotp {
   color: white;
 }

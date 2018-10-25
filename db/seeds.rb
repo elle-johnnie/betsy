@@ -144,7 +144,7 @@ puts "#{category_failures.length} category failed to save"
 
 
 Product.all.each do |product|
-  product.categories << Category.all.sample
+  product.categories << Category.first
 end
 
 
