@@ -5,14 +5,25 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all
+    # if user logged in then get just their products
+    if session[:user_id]
+      @products = @login_user.products
+    else
+      @products = Product.all
+    end
+
   end
 
   # GET /products/1
 
   def show
+    @product = Product.find(params[:id])
+    # if @login_user
+    #   @products = @login_user.products
+    # end
+    #
     # if @current_order.order_items.find_by(product_id: params[:id]).nil?
-      @order_item = OrderItem.new
+    # @order_item = OrderItem.new
     # else
     #   @order_item = @current_order.order_items.find_by(product_id: params[:id])
     # end
@@ -28,7 +39,14 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
+
+    if params[:user_id]
+      # nested route: /user/user_id/products/new
+      user = User.find_by(id: params[:user_id])
+      @product = user.products.new
+    else
+      @product = Product.new
+    end
   end
 
   # GET /products/1/edit
@@ -39,7 +57,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.user_id = session[:user_id]
     if @product.save(product_params)
-      flash[:notice] = "#{@product.prod_name} was successfully created."
+      flash[:notice] = "#{@product.prod_name} was added to your inventory."
       redirect_to user_path(session[:user_id])
     else
       render :new
@@ -48,15 +66,14 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1
   def update
-    respond_to do |format|
-      if @product.update(product_params)
-        flash[:notice] = "#{@product.prod_name} was successfully updated."
-        redirect_to product_path
-      else
-        render :edit
-      end
+    if @product.update(product_params)
+      flash[:notice] = "#{@product.prod_name} was successfully updated."
+      redirect_to product_path
+    else
+      render :edit
     end
   end
+
 
   # DELETE /products/1
   def destroy
@@ -88,7 +105,6 @@ class ProductsController < ApplicationController
   def merchant
     @user = User.find_by(id: params[:id])
     @products = Product.by_merchant(params[:id].to_i)
-
   end
 
   private

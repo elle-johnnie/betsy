@@ -30,12 +30,21 @@ class User < ApplicationRecord
   end
 
 
-  def revenue
-    @pending = self.orders.where(status: "Pending")
-    @paid = self.orders.where(status: "Paid")
-    @shipped = self.orders.where(status: "Complete")
-    @completed = self.orders.where(status: "Cancelled")
+  def revenue(status_filter)
+    case status_filter
+      when "Pending"
+        rev = self.orders.where(status: "Pending").order_items.subtotal.sum
+      when "Paid"
+        rev = self.orders.where(status: "Paid").order_items.subtotal.sum
+      when "Completed"
+        rev = self.orders.where(status: "Complete").order_items.subtotal.sum
+      when "Cancelled"
+        rev = self.orders.where(status: "Cancelled").order_items.subtotal.sum
+      when "Total"
+        rev = self.orders.order_items.subtotal.sum - self.orders.where(status: "Cancelled").order_items.subtotal.sum
+    end
 
+    return rev
   end
 
 

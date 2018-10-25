@@ -1,8 +1,7 @@
-<p id="notice"><%= notice %></p>
 <%= render partial: "/layouts/flash_errs" %>
 
 <p>
-  <strong>Uid:</strong>
+  <strong>User ID:</strong>
   <%= @user.uid %>
 </p>
 
@@ -19,8 +18,9 @@
 
 
 <section class="merchant-actions">
-<%= link_to 'List a Product', new_product_path, class: "sell-link btn btn-info" %> |
-<%= link_to 'View Categories', categories_path, class: "btn btn-info" %>
+  <%= link_to 'View Your Bakes', user_products_path(@user), class: "btn btn-info" %>
+  <%= link_to 'List a New Bake', new_user_product_path(@user), class: "sell-link btn btn-info" %> |
+  <%= link_to 'View Categories', categories_path, class: "btn btn-info" %>
 </section>
 
 <table class="show_table table">
@@ -84,19 +84,49 @@
           <td> <%= or_item.qty %></td>
           <td> <%= format_price(product.price * or_item.qty)  %></td>
                <% if or_item.shipped %>
-                  <td>SHIPPED</td>
-               <% else %>
-                  <td> PAID
-               <%= link_to "CONFIRM SHIPPED", ship_item_path(product), class: "btn btn-outline-info btn-sm", method: :patch%></td>
+                   <td>SHIPPED</td>
+               <% elsif !or_item.shipped && or_item.order.status == "Paid"%>
+                   <td> PAID
+                    <%= link_to "CONFIRM SHIPPED", ship_item_path(product), class: "btn btn-outline-info btn-sm", method: :patch%>
+                  </td>
+               <%else %>
+                 <td>PENDING PAYMENT</td>
                <% end %>
-               <% ord = Order.find(or_item.order.id) %>
-               <%# Order.check_order_status(ord) %>
-<!--          <td> <%#= ord.status %></td>-->
+          <% ord = Order.find(or_item.order.id) %>
+          <td><%= ord.status.upcase %></td>
         </tr>
       <% end %>
     <% end %>
   </tbody>
 </table>
+
+<h2>REVENUE</h2>
+<table class="show_table table">
+  <tr>
+    <th>PENDING</th>
+    <th>PAID</th>
+    <th>CANCELLED</th>
+    <th>COMPLETE</th>
+    <th>TOTAL</th>
+  </tr>
+
+  <tbody>
+  <% sold = @user.find_orders %>
+  <% if sold.empty? %>
+    <%= "No Products Have Sold" %>
+  <% else %>
+      <tr>
+        <td> <%= @user.revenue("Pending") %></td>
+        <td> <%= @user.revenue("Paid") %></td>
+        <td> <%= @user.revenue("Complete") %></td>
+        <td> <%= @user.revenue("Cancelled") %></td>
+        <td> <%= @user.revenue("Total") %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
 <%# view order fulfillment%>
 <%= link_to 'Back', root_path %>

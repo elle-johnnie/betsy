@@ -1,5 +1,6 @@
 class Category < ApplicationRecord
   # validations
+  validates :category, presence: true, uniqueness: true
 
   # relationships
 
