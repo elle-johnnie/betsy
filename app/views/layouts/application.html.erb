@@ -113,8 +113,13 @@
                   <%= link_to "Login with Github", "/auth/github" %>
                 </li>
                 <li>
-                  <a href="/carts/<%=session[:order_id]%>">Shopping Cart</a>
+                <% if session[:order_id] %>
+                  <%= link_to "Shopping Cart", cart_path(@current_order.id) %>
+                <% else %>
+                  <%= link_to "Shopping Cart", new_cart_path %>
+                <% end %>
                 </li>
+                <li>Order Status</li>
               </ul>
 
             </div>
