@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   resources :orders
   patch 'order/confirm_order/:id', to: "order#confirm_order", as: "confirm_order"
-
+  patch 'order/:id/cancel', to: "order#cancle_order", as:"cancel_order"
   get 'products/category/:id', to: "products#category", as: "category"
   patch 'products/:id/retire', to: "products#status", as: "product_status"
   get 'products/merchant/:id', to: "products#merchant", as: "merchant"

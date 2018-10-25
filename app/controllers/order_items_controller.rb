@@ -96,8 +96,5 @@ class OrderItemsController < ApplicationController
     params.require(:order_item).permit(:product_id, :qty, :shipped)
   end
 
-  # def set_order
-  #   @order = current_order
-  # end
 
 end

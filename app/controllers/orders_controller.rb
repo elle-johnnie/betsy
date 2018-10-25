@@ -1,6 +1,6 @@
 require 'pry'
 class OrdersController < ApplicationController
-  skip_before_action :require_login
+  skip_before_action :require_login, except: :cancel_order
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   # before_action :check_status, only: [:show]
 
@@ -70,6 +70,17 @@ class OrdersController < ApplicationController
     end
   end
 
+  def cancel_order
+    @order.cancel
+    if @order.save
+      flash[:success] = "Order has been cancelled and revenue adjusted."
+      redirect_back(fallback: root_path)
+    else
+      flash[:warning] = "Permission denied."
+      redirect_to products_path
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -77,12 +88,10 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet
   def order_params
     params.require(:order).permit(:status, :cust_name, :cust_email, :mailing_address, :cc_name, :cc_digit, :cc_expiration, :cc_cvv, :cc_zip, :user_id)
   end
 
-  # def check_status
-  #   Order.check_order_status(@order)
-  # end
+
 end

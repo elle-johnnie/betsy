@@ -67,6 +67,14 @@ class Order < ApplicationRecord
     return @order
   end
 
+  def cancel
+    if @login_user == self.user_id && self.status != "Pending"
+      self.update(status: "Cancelled")
+      self.order_items.subtotal = -self.order_items.subtotal
+
+      return self
+    end
+  end
   def destroy
     # method to cancel order
   end

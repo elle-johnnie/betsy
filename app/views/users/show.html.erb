@@ -94,7 +94,11 @@
                  <td>PENDING PAYMENT</td>
                <% end %>
           <% ord = Order.find(item.order.id) %>
-          <td><%= ord.status.upcase %></td>
+          <%# unless ord.status == "Cancelled" %>
+          <td><%= ord.status.upcase %>
+            <%# link_to 'Cancel This Order Item', cancel_order_item_path(@order_item) %></td>
+            <%# else %>
+          <td><%# ord. %></td>
         </tr>
       <% end %>
     <% end %>

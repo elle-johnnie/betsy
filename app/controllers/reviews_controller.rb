@@ -46,19 +46,10 @@ class ReviewsController < ApplicationController
       render :new
     end
 
-
-    # respond_to do |format|
-    #   if @review.save
-    #     format.html { redirect_to @review, notice: 'Review was successfully created.' }
-    #   else
-    #     format.html { render :new }
-    #   end
-    # end
   end
 
 
   # PATCH/PUT /reviews/1
-  # PATCH/PUT /reviews/1.json
   def update
     respond_to do |format|
       if @review.update(review_params)
@@ -71,7 +62,6 @@ class ReviewsController < ApplicationController
 
 
   # DELETE /reviews/1
-  # DELETE /reviews/1.json
   def destroy
     @review.destroy
     respond_to do |format|
@@ -85,7 +75,7 @@ class ReviewsController < ApplicationController
       @review = Review.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters from the scary internet.
     def review_params
       params.require(:review).permit(:rating, :description)
     end
