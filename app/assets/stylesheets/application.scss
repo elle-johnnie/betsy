@@ -273,11 +273,7 @@ p {
 
 }
 
-.cart {
-  background-image: url("pexels-photo-959079.jpeg");
-  background-size: cover;
 
-}
 
 .cart-details {
   margin: 5rem;
@@ -286,4 +282,11 @@ p {
 .action-btn:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 
+}
+
+.empty-table-txt{
+  color: #fec603;
+  background-color: rgba(119,136,142,0.79);
+  text-align: center;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 40px 0 rgba(0, 0, 0, 0.19);
 }

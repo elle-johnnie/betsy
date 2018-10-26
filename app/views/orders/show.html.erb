@@ -44,10 +44,10 @@
                 <% if item.shipped %>
                   <td>SHIPPED</td>
                 <% elsif !item.shipped && item.order.status == "Paid"%>
-                  <td> PAID<br>
+                  <td>PAID<br>
                     <%= link_to "CONFIRM SHIPPED", ship_item_path(item.product), class: "merchant-btn btn btn-outline-info btn-sm ", method: :patch%>
                   </td>
-                <%else %>
+                <% else %>
                   <td>PENDING PAYMENT</td>
                 <% end %>
                 <% ord = Order.find(item.order.id) %>

@@ -39,7 +39,7 @@
 
     <tbody>
     <% if @user.products.empty? %>
-      <%= "No Products List to Sell" %>
+      <p class="empty-table-txt h3"><%= "No Products Have Been Listed to Sell" %></p>
     <% else %>
       <% @user.products.each do |product| %>
         <tr>
@@ -79,7 +79,7 @@
     <tbody>
       <% ordered_items = @user.find_ordered_items %>
       <% if ordered_items.empty? %>
-        <%= "No Products Have Sold" %>
+      <p class="empty-table-txt h3"><%= "No Products Have Sold" %></p>
       <% else %>
         <% ordered_items.sort_by {|item| item.updated_at }.each do |item| %>
           <tr>
@@ -89,17 +89,20 @@
             <td> <%= format_price(item.product.price)%></td>
             <td> <%= item.qty %></td>
             <td> <%= format_price(item.product.price * item.qty)  %></td>
-                 <% if item.shipped %>
+                 <% if !item.shipped && item.order.status == "Paid"%>
+                      <td>PAID<br>
+                      <%= link_to "CONFIRM SHIPPED", ship_item_path(item.order_id), class: "merchant-btn btn btn-outline-info btn-sm ", method: :patch%></td>
+                 <% elsif item.shipped %>
                      <td>SHIPPED</td>
-                 <% elsif !item.shipped && item.order.status == "Paid"%>
-                     <td> PAID<br>
-                      <%= link_to "CONFIRM SHIPPED", ship_item_path(item.product), class: "merchant-btn btn btn-outline-info btn-sm ", method: :patch%>
-                    </td>
-                 <%else %>
+                 <% else %>
                    <td>PENDING PAYMENT</td>
                  <% end %>
-            <% ord = Order.find(item.order.id) %>
-            <td><%= ord.status.upcase %></td>
+            <% ord = Order.find_by(id: item.order.id) %>
+            <% if ord.status.nil? %>
+              <td>PENDING PAYMENT</td>
+              <% else %>
+             <td><%= ord.status.upcase %></td>
+            <% end %>
           </tr>
         <% end %>
       <% end %>
