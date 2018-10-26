@@ -2,6 +2,7 @@
 <table class = "table">
   <thead>
     <tr>
+      <th></th>
       <th>Item</th>
       <th>Price</th>
       <th>Quantity</th>
@@ -13,8 +14,11 @@
   <tbody>
     <% @order_items.each do |order_item| %>
     <tr>
-      <td><%= link_to "#{order_item.product.prod_name}", product_path(order_item.product.id) %></td>
-      <td><%= order_item.product.price %></td>
+      <td ><div class="center"><img src="https://31p86334w2bvkz0249eyr0cr-wpengine.netdna-ssl.com/wp-content/uploads/2017/11/pumpkin-chocolate-chip-bundt-cake-2.jpg" ></div></td>
+
+      <!-- <td><%#=link_to image_tag("#{order_item.product.image}", alt: "#{order_item.product.description}"), product_url, class: "imgsize"%></td> -->
+      <td><%= link_to "#{order_item.product.prod_name}", product_path(order_item.product.id) %><br><%=order_item.product.description%></td>
+      <td><%= format_price(order_item.product.price) %></td>
       <%if order_item.product.inv_qty > 0 %>
         <%= form_with model: order_item do |f| %>
         <td><%= f.select :qty, (1..order_item.product.inv_qty).to_a %>
@@ -30,6 +34,10 @@
     </tr>
     <% end %>
   </tbody>
-  <td><%= link_to "Checkout", edit_order_path(@current_order.id), class: "btn btn-primary" %></td>
 </table>
   </div>
+
+<div class="d-flex justify-content-between">
+  <%= link_to "Continue Shopping", products_path, class: "btn btn-primary   " %>
+  <%= link_to "Checkout", edit_order_path(@current_order.id), class: "btn btn-primary" %>
+</div>

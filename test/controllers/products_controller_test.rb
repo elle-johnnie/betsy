@@ -241,15 +241,35 @@ describe ProductsController do
 
     describe "status" do
 
-      it "finds a merchant for a product" do
-        id = Product.first.id
+      it "changes an inactive product to active" do
+        user = users(:laura)
+        perform_login(user)
 
-        patch product_status_path(id)
+        product = Product.find_by(prod_name: "a wedding cake")
 
-        must_respond_with :redirect
+        patch product_status_path(product)
+
+        # must_respond_with :redirect
+        expect(product.active).must_equal true
       end
 
-      it "redirects to root_path for invalid category" do
+      it "changes an active product to inactive" do
+        user = users(:laura)
+        perform_login(user)
+
+        product = Product.find_by(prod_name: "a wedding cake")
+        product.active = true
+        product.save
+
+        patch product_status_path(product)
+        product_new = Product.find_by(prod_name: "a wedding cake")
+
+        # must_respond_with :redirect
+        expect(product_new.active).must_equal false
+        expect(flash[:notice]).must_equal "#{product.prod_name} status successfully retired."
+      end
+
+      it "reponds with not found for invalid product" do
         id = -56
 
         patch product_status_path(id)

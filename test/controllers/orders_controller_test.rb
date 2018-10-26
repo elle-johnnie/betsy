@@ -116,7 +116,7 @@ describe OrdersController do
     end
 
     it "does not complete an order with invalid params" do
-      confirm_hash[:order][:cc_name] = nil
+      confirm_hash[:order][:cust_name] = nil
 
       expect {
         post order_items_path, params: order_item_hash
@@ -129,10 +129,10 @@ describe OrdersController do
       }.wont_change "Order.count"
 
       must_respond_with :success
-      # expect(flash.now[:warning]).must_equal 'Order was not not created'
+      expect(flash.now[:warning]).must_equal 'Order was not not created'
     end
 
-    it "error" do
+    it "does not load an invalid order" do
       id = -1
 
       expect {

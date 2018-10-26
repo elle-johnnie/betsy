@@ -95,11 +95,11 @@ class ProductsController < ApplicationController
   def status
     if @product.active
       @product.update(active: false)
-      flash[:notice] = "#{@product.prod_name} status successfully updated."
+      flash[:notice] = "#{@product.prod_name} status successfully retired."
       redirect_back(fallback_location: root_path)
     else
       @product.update(active: true)
-      flash[:warning] = "Product could not updated."
+      flash[:warning] = "#{@product.prod_name} status successfully reactivated"
       redirect_back(fallback_location: products_path)
     end
   end
@@ -127,6 +127,6 @@ class ProductsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
-    params.require(:product).permit(:prod_name, :description, :price, :inv_qty, category_ids: [])
+    params.require(:product).permit(:prod_name, :description, :price, :inv_qty, :active, category_ids: [])
   end
 end
