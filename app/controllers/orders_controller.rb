@@ -15,8 +15,8 @@ class OrdersController < ApplicationController
     end
   end
 
-  def confirmation
-  end
+  # def confirmation
+  # end
 
   def show
     @order = Order.find_by(id: params[:id].to_i)
@@ -29,12 +29,12 @@ class OrdersController < ApplicationController
   end
 
   # GET /orders/new
-  def new
-  end
+  # def new
+  # end
 
   # GET /orders/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /orders
   # must change database
