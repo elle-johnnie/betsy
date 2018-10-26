@@ -54,7 +54,7 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1
   def update
-    if @current_order.order_items.nil?
+    if @current_order.order_items.empty?
       flash[:warning] = "You have zero items in your cart"
       redirect_to products_path
     elsif @current_order.update(order_params)
@@ -75,19 +75,24 @@ class OrdersController < ApplicationController
   end
 
   # DELETE /orders/1
-
-  def destroy
-    @order.destroy
-    respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
-    end
-  end
+  #
+  # def destroy
+  #   @order.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+  #   end
+  # end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_order
-    @order = Order.find(params[:id])
+    begin
+      @order = Order.find(params[:id])
+    rescue
+      flash[:now] = "Order does not exsist"
+      redirect_to order_path
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
