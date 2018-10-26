@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "sessions#create", as: "auth_callback"
   delete "/logout", to: "sessions#destroy", as: "logout"
 
-  resources :reviews
+  resources :reviews, :except => [:show]
 
   resources :carts, only: [:show, :new]
 
@@ -18,15 +18,15 @@ Rails.application.routes.draw do
   post "order_items/cart_direct/:id", to: "order_items#cart_direct", as: "quick_shop"
   resources :order_items, only: [:create, :update, :destroy]
 
-  resources :orders
+  resources :orders, :except => [:index]
   patch 'order/confirm_order/:id', to: "order#confirm_order", as: "confirm_order"
 
   get 'products/category/:id', to: "products#category", as: "category"
   patch 'products/:id/retire', to: "products#status", as: "product_status"
   get 'products/merchant/:id', to: "products#merchant", as: "merchant"
-  resources :products
+  resources :products, :except => [:destroy]
 
-  resources :users
+  resources :users, :except => [:destroy, :index]
 
   resources :users do
     resources :products, only: [:index, :show, :new]
@@ -35,6 +35,6 @@ Rails.application.routes.draw do
 
 
 
-  resources :categories
+  resources :categories, :except => [:destroy]
 
 end
