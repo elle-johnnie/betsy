@@ -1,4 +1,4 @@
-<% render partial: "layouts/form_errors", locals: { error_hash: @product } %>
+<%= render partial: "layouts/form_errors", locals: { error_hash: @product } %>
 
 <%= form_with(model: product, local: true) do |form| %>
   <div class="form-group">

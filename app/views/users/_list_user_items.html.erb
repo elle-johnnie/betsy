@@ -1,0 +1,36 @@
+
+  <% ordered_items = @user.find_ordered_items %>
+  <% if ordered_items.empty? %>
+    <%= "No Products Have Sold" %>
+  <% else %>
+    <% filtered_by_status = [] %>
+    <% ordered_items.each do |ordered_item| %>
+      <% if ordered_item.order.status == selected %>
+        <% filtered_by_status << ordered_item %>
+      <% end %>
+    <% end %>
+    <% filtered_by_status.each do |item| %>
+      <tr>
+        <td> <%= link_to "#{item.order.id}", order_path(item.order.id) %></td>
+        <td> <%= link_to "#{item.product.prod_name}", edit_product_path(item.product.id)%></td>
+        <td> <%= format_price(item.product.price)%></td>
+        <td> <%= item.qty %></td>
+        <td> <%= format_price(item.product.price * item.qty)  %></td>
+        <% if item.shipped %>
+          <td>SHIPPED</td>
+        <% elsif !item.shipped && item.order.status == "Paid"%>
+          <td> PAID
+            <%= link_to "CONFIRM SHIPPED", ship_item_path(item.product), class: "btn btn-outline-info btn-sm", method: :patch%>
+          </td>
+        <%else %>
+          <td>PENDING PAYMENT</td>
+        <% end %>
+        <% ord = Order.find(item.order.id) %>
+        <%# unless ord.status == "Cancelled" %>
+        <td><%= ord.status.upcase %>
+          <%# link_to 'Cancel This Order Item', cancel_order_item_path(@order_item) %></td>
+        <%# else %>
+        <td><%# ord. %></td>
+      </tr>
+    <% end %>
+  <% end %>

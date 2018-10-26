@@ -1,6 +1,6 @@
 <%= form_with(model: review, local: true) do |form| %>
 
- <% render partial: "layouts/form_errors", locals: { error_hash: @review } %>
+ <%= render partial: "layouts/form_errors", locals: { error_hash: @review } %>
 
   <%# if review.errors.any? %>
     <div id="error_explanation">
