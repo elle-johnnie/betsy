@@ -1,35 +1,35 @@
-<h1>Your Cart</h1>
-<table class = "table">
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Subtotal</th>
-      <th>Remove Item</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @order_items.each do |order_item| %>
-    <tr>
-      <td><%= link_to "#{order_item.product.prod_name}", product_path(order_item.product.id) %></td>
-      <td><%= order_item.product.price %></td>
-      <%if order_item.product.inv_qty > 0 %>
-        <%= form_with model: order_item do |f| %>
-        <td><%= f.select :qty, (1..order_item.product.inv_qty).to_a %>
-            <%= f.hidden_field :product_id, :value => order_item.product.id %>
-            <%= f.submit 'Update', class: "btn btn-primary" %>
-          <% end %>
-        </td>
-      <% else %>
-        <td><span>Out of Stock </span></td>
-      <%end%>
-      <td><%= format_price(order_item.subtotal) %></td>
-      <td><%= link_to "Remove", order_item_path(order_item.id), method: :delete, class: "btn btn-outline-danger" %></td>
-    </tr>
-    <% end %>
-  </tbody>
-  <td><%= link_to "Checkout", edit_order_path(@current_order.id), class: "btn btn-primary" %></td>
-</table>
-  </div>
+<main class="main-container">
+  <h1>Your Cart</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+        <th>Remove Item</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order_items.each do |order_item| %>
+      <tr>
+        <td><%= link_to "#{order_item.product.prod_name}", product_path(order_item.product.id) %></td>
+        <td><%= order_item.product.price %></td>
+        <%if order_item.product.inv_qty > 0 %>
+          <%= form_with model: order_item do |f| %>
+          <td><%= f.select :qty, (1..order_item.product.inv_qty).to_a %>
+              <%= f.hidden_field :product_id, :value => order_item.product.id %>
+              <%= f.submit 'Update', class: "btn btn-primary" %>
+            <% end %>
+          </td>
+        <% else %>
+          <td><span>Out of Stock </span></td>
+        <%end%>
+        <td><%= format_price(order_item.subtotal) %></td>
+        <td><%= link_to "Remove", order_item_path(order_item.id), method: :delete, class: "btn btn-outline-danger" %></td>
+      </tr>
+      <% end %>
+    </tbody>
+      <td><%= link_to "Checkout", edit_order_path(@current_order.id), class: "btn btn-primary" %></td>
+  </table>
+</main>
