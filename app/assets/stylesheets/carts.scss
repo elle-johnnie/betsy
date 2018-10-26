@@ -10,3 +10,42 @@ body .cart {
   background-image: url("pexels-photo-959079.jpeg");
 
 }
+
+
+.imgsize {
+  height: 100px;
+  width: 80px;
+}
+
+.center > img {
+  align-items: center;
+  object-position: center;
+  height: 110px;
+  width: 100px;
+  overflow: hidden;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+td > a {
+  color:black;
+}
+
+td > a:hover {
+  color: #ff0065;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.d-flex {
+  padding-top: 1em;
+  border-top: 2px solid lightgrey;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-bottom: 2em;
+}
