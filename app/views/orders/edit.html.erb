@@ -1,10 +1,10 @@
+<h1 class="confirm">Confirm Your Order</h1>
+
 <main class="main-container">
   <%= render partial: "/layouts/flash_errs" %>
 
-  <h1>Editing Order</h1>
-
   <%= render 'form', order: @order %>
 
-  <%# link_to 'Show', @order %>
-  <%# link_to 'Back', orders_path %>
+  <%= link_to 'Back', cart_path, class: "btn btn-danger"%>
+
 </main>

@@ -10,7 +10,7 @@
                 </div>
                 <div class="product-content">
                   <h3 class="title"><%= product.prod_name %></h3>
-                <div class="price">$<%= product.price %>
+                <div class="price"><%= ("$%.2f" %product.price) %>
                   <sub><%= product.inv_qty %> in stock</sub>
                 </div>
                 </div>

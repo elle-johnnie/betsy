@@ -22,6 +22,7 @@ cake3:
   description: real vanilla
   price: 20.5
   inv_qty: 3
+  user: grace
 
 brownie:
   prod_name: chocolate brownie

@@ -57,17 +57,20 @@ class Order < ApplicationRecord
 
   def check_order_status
     @order = self
+
     all_shipped = true
     @order.order_items.each do |item|
       if !item.shipped
         all_shipped = false
       end
     end
+
     if all_shipped
-      @order.update(status: "Complete")
+      @order.status = "Complete"
+      @order.save
     end
 
-    return @order
+
   end
 
   def destroy

@@ -1,42 +1,23 @@
 class UsersController < ApplicationController
-  # skip_before_action :require_login, only: [:create]
+  skip_before_action :require_login, only: [:create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authorized?, only: :show
   # GET /users/1
   def show
     render_404 unless @user
-
-    # @order = current_order
-
-    # @order_item = @current_order.order_items.find_by(product_id: params[:id])
-    #
-    # if @order_item.nil?
-    #   @order_item = current_order.order_items.new
-    # end
-
     @products = Product.where(user_id: @user)
-
-    # @order_item = @order.order_items.find_by(product_id: params[:id])
-    #
-    # if @order_item.nil?
-    #   @order_item = current_order.order_items.new
-    # end
-    #
-    # @products = Product.where(user_id: @user)
-
   end
 
   # GET /users/new
-  def new
-    @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit
-  end
+  # def new
+  #   @user = User.new
+  # end
+  #
+  # # GET /users/1/edit
+  # def edit
+  # end
 
   # POST /users
-  # require login before create??
   def create
     @user = User.new(user_params)
 

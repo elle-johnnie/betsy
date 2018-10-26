@@ -41,7 +41,7 @@ describe ProductsController do
       }.must_change "Product.count"
 
       must_redirect_to user_path(session[:user_id])
-      expect(flash[:notice]).must_equal "#{product.prod_name} was successfully created."
+      expect(flash[:notice]).must_equal "#{product.prod_name} was added to your inventory."
     end
 
     it "is an forbidden request if user is not logged in" do
@@ -197,38 +197,6 @@ describe ProductsController do
 
   describe "category" do
 
-    it "finds a category for product" do
-      id = Category.first.id
-
-      get category_path(id)
-
-      value(response).must_be :successful?
-    end
-
-    it "redirects to root_path for invalid category" do
-      id = 56
-
-      get category_path(id)
-
-      # value(response).must_be :successful?
-      must_redirect_to root_path
-      expect(flash[:warning]).must_equal "Category is invalid"
-    end
-
-  end
-
-  describe "category" do
-
-    it "finds a category for product" do
-      id = Category.first.id
-
-      get category_path(id)
-
-      value(response).must_be :successful?
-    end
-
-    describe "category" do
-
       it "finds a category for product" do
         id = Category.first.id
 
@@ -246,8 +214,8 @@ describe ProductsController do
         must_redirect_to root_path
         expect(flash[:warning]).must_equal "Category is invalid"
       end
-
     end
+
 
     describe "merchant" do
 
@@ -273,18 +241,35 @@ describe ProductsController do
 
     describe "status" do
 
-      it "finds a merchant for a product" do
-        id = Product.first.id
-        before_status = Product.first.active
+      it "changes an inactive product to active" do
+        user = users(:laura)
+        perform_login(user)
 
-        patch product_status_path(id)
-        after_status = Product.first.active
+        product = Product.find_by(prod_name: "a wedding cake")
 
-        must_respond_with :redirect
-        expect(after_status).must_equal false
+        patch product_status_path(product)
+
+        # must_respond_with :redirect
+        expect(product.active).must_equal true
       end
 
-      it "redirects to root_path for invalid category" do
+      it "changes an active product to inactive" do
+        user = users(:laura)
+        perform_login(user)
+
+        product = Product.find_by(prod_name: "a wedding cake")
+        product.active = true
+        product.save
+
+        patch product_status_path(product)
+        product_new = Product.find_by(prod_name: "a wedding cake")
+
+        # must_respond_with :redirect
+        expect(product_new.active).must_equal false
+        expect(flash[:notice]).must_equal "#{product.prod_name} status successfully retired."
+      end
+
+      it "reponds with not found for invalid product" do
         id = -56
 
         patch product_status_path(id)
@@ -294,5 +279,5 @@ describe ProductsController do
       end
 
     end
-  end
+
 end
