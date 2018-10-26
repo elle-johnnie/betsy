@@ -244,7 +244,7 @@ a.button:hover{
     margin-bottom: 1.25rem;
     font-size: 1.25rem;
     line-height: 1.4;
-    color: lightgray;
+    color: white;
   }
 
   .featurette-heading {
@@ -258,10 +258,21 @@ a.button:hover{
   }
 }
 
-.products {
-  padding-left: 2rem;
-}
 
 #product-section {
-  padding-top: 20px;
+  padding-top: 2rem;
+}
+
+.product-img {
+  object-position: center; /* Center the image within the element */
+
+  overflow: hidden;
+}
+
+.product-img-show {
+  object-position: center; /* Center the image within the element */
+  width: 350px;
+  height: 100%;
+  overflow: hidden;
+  padding-left: 2rem;
 }
