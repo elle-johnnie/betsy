@@ -78,7 +78,6 @@ class OrderItemsController < ApplicationController
 
   def ship
     @order_item = OrderItem.find_by(order_id: params[:id])
-    # raise
     @order_item.update(shipped: true)
     @order_item.order.check_order_status
     @order = @order_item.order
