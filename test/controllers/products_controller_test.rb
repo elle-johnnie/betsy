@@ -275,10 +275,13 @@ describe ProductsController do
 
       it "finds a merchant for a product" do
         id = Product.first.id
+        before_status = Product.first.active
 
         patch product_status_path(id)
+        after_status = Product.first.active
 
         must_respond_with :redirect
+        expect(after_status).must_equal false
       end
 
       it "redirects to root_path for invalid category" do
