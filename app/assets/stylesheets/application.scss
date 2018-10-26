@@ -199,3 +199,76 @@ p {
 #fotp {
   color: white;
 }
+
+.merchant {
+  background-image: url("41250510-rough-wooden-used-cutting-board-background-with-vertical-lines-and-cutting-traces.jpg");
+  margin: 0;
+}
+
+.merchant-actions {
+  margin-top: 5rem;
+  margin-bottom: 10rem;
+}
+
+.merchant-card{
+  padding: 3rem;
+  padding-bottom: 5rem;
+  color: #333a40;
+
+}
+
+.merchant-card div, .customer-card div{
+  border-width: 2px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.merchant-prod-list, .merchant-order-list, .merchant-rev-list {
+  margin: 5rem;
+}
+
+.merchant-btn:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+
+.merchant-btn {
+  color: #2E2F30;
+  background-color: #5efef9;
+}
+
+.merchant-btn .btn-retire{
+  background-color: #fec603;
+}
+
+.merchant-card .card-title{
+  background-color: #5efef9;
+}
+
+.merchant table,.merchant-table{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.order-details {
+  background-image: url("pexels-photo-239581.jpeg");
+  margin: 0;
+}
+
+.customer-card {
+  padding: 5rem;
+}
+
+.sm-date {
+  font-size: small;
+}
+
+.back-btn{
+  margin-left: 23rem;
+}
+
+.order-h2{
+  color: #fec603;
+  background-color: rgba(119,136,142,0.79);
+  text-align: center;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 40px 0 rgba(0, 0, 0, 0.19);
+
+}
