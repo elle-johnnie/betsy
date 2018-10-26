@@ -1,4 +1,4 @@
-require 'pry'
+
 class OrdersController < ApplicationController
   skip_before_action :require_login
   before_action :set_order, only: [:edit, :update, :destroy]
