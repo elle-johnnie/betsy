@@ -77,17 +77,18 @@ class OrderItemsController < ApplicationController
   end
 
   def ship
-    @order_item = OrderItem.find_by(product_id: params[:id])
+    @order_item = OrderItem.find_by(order_id: params[:id])
     @order_item.update(shipped: true)
     @order_item.order.check_order_status
+    @order = @order_item.order
+    @order.save
     if @order_item.save
       flash[:success] = 'Item(s) have been marked as shipped'
       redirect_back(fallback_location: root_path)
     else
       flash.now[:warning] = 'Error in shipment status.'
-      render :show
+      # render :show
     end
-
   end
 
   private
@@ -96,8 +97,8 @@ class OrderItemsController < ApplicationController
     params.require(:order_item).permit(:product_id, :qty, :shipped)
   end
 
-  # def set_order
-  #   @order = current_order
-  # end
+  def set_order
+    @order = current_order
+  end
 
 end

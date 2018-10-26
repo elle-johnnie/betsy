@@ -1,7 +1,6 @@
 <% render partial: "layouts/form_errors", locals: { error_hash: @order } %>
 
 <%= form_with(model: order, local: true) do |form| %>
-  <%# render partial "/layouts/form_errors", locals: { error_hash: order}%>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
 <!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script> -->
@@ -82,32 +81,5 @@
             <!-- CREDIT CARD FORM ENDS HERE -->
 
 
-        </div>
 
-        <div class="col-xs-12 col-md-8" style="font-size: 12pt; line-height: 2em;">
-          <div class="form-group">
-            <%= form.label "Name" %>
-            <%= form.text_field :cust_name, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= form.label "Email" %>
-            <%= form.text_field :cust_email, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= form.label :mailing_address %>
-            <%= form.text_field :mailing_address, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= form.label "Zip Code" %>
-            <%= form.number_field :cc_zip, class: "form-control" %>
-          </div>
-
-        </div>
-
-    </div>
-</div>
 <% end %>
-</head>
