@@ -16,8 +16,8 @@ class ReviewsController < ApplicationController
   end
 
   # GET /reviews/1
-  def show
-  end
+  # def show
+  # end
 
   # GET /reviews/new
   def new
@@ -26,8 +26,8 @@ class ReviewsController < ApplicationController
   end
 
   # GET /reviews/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /reviews
   def create
@@ -59,15 +59,15 @@ class ReviewsController < ApplicationController
 
   # PATCH/PUT /reviews/1
   # PATCH/PUT /reviews/1.json
-  def update
-    respond_to do |format|
-      if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @review.update(review_params)
+  #       format.html { redirect_to @review, notice: 'Review was successfully updated.' }
+  #     else
+  #       format.html { render :edit }
+  #     end
+  #   end
+  # end
 
 
   # DELETE /reviews/1

@@ -6,8 +6,8 @@ class CategoriesController < ApplicationController
   end
 
   # GET /category/1
-  def show
-  end
+  # def show
+  # end
 
   # GET /categories/new
   def new
@@ -15,8 +15,8 @@ class CategoriesController < ApplicationController
   end
 
   # GET /categories/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /categories
   def create
@@ -40,4 +40,3 @@ class CategoriesController < ApplicationController
     params.require(:category).permit(:category)
   end
 end
-
